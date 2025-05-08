@@ -1,0 +1,33 @@
+# LaTeX intermediate files
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+*.lof
+*.lot
+*.bbl
+*.blg
+
+# TeXworks
+*.pdfsync
+
+# VSCode LaTeX Workshop
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+
+# Output files
+*.pdf
+*.dvi
+*.ps
+
