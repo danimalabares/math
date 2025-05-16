@@ -27,7 +27,6 @@
 *.ist
 
 # Output files
-*.pdf
 *.dvi
 *.ps
 
