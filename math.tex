@@ -18,7 +18,6 @@
 
 A place to keep track of the things I think I know.
 
-\textbf{Note from May 16.} The part on ag is still very young, recently influenced by Misha's notes \texttt{sergunchik/daniel/other-docs/mag.pdf}. The part on complex geometry is super messy but starting to take shape up to Core concepts subsection and proof of adjunction formula recently posted on Telegram
 \tableofcontents
 \clearpage
 \section{basic math}
@@ -134,53 +133,6 @@ Just to record that the proof is not \textit{just inverse function theorem}. You
 	And all that is some manipulations that you'd have to do if you had to teach a course on smooth manifolds, or doing such course (but at this point of the adventure most likely I won't be doing this course right?).
 \end{enumerate}
 \end{proof}
-
-\subsection{a fact about lie groups and flows}
-
-Not sure where to put this so maybe here for now…
-
-\begin{thing7}{Adjoint representation}\leavevmode
-The \textit{\textbf{adjoint representation}} of a Lie group \(G\) is a map \(\operatorname{Ad}:G \to \mathsf{GL}(\mathfrak{g})\) that represents \(G\) as a group of linear automorphisms of its Lie algebra. It is given by \(G \ni a \mapsto (dC_a)_e\), the differential of the conjugation map \(C_a\).
-\end{thing7}
-
-\subsubsection*{flow of left-invariant is right multiplication}
-
-Now I know what is a flow: the flow is
-\[\varphi^t(p)\]
-For every point of the manifold I get the integral curve of a vector field (of course a priori a flow is just a flow but let me just think it's the flow of a vector field). At every point you get a curve.
-
-Now. The thing with the Lie bracket is that when you differentiate the flow you get to the Lie bracket via a formula that is hard to write. So the easy way to write it is:
-\[[V,W]=\frac{d}{dt}\Big|_{t=0} \varphi^{-t}_{*,\varphi^t(p)}W_{\varphi^t(p)}\]
-and that's it.
-
-
-
-Now I will prove in Portuguese that \textbf{the flow of a left-invariant vector field is right-translation}. First I need a claim.
-
-	\begin{claim}\leavevmode
-	O fluxo \(\varphi\) de um campo invariante à esquerda \(w\) comuta com a traslação à esquerda, i.e.,
-	\[\varphi_t(e)\circ L_h = L_h \circ \varphi_t(e)\qquad \forall t\in \mathbb{R} \forall h \in G.\]
-	\end{claim}
-	\begin{proof}[Prova da afirmação]\leavevmode
-Derivamos de ambos lados. Por um lado,
-\begin{align*}
-\frac{d}{dt}\Big|_{t=0}\varphi_t(e) \circ L_h=\frac{d}{dt}\Big|_{t=0}\varphi_t(h)&=v_h\end{align*}
-Por outro lado,
-\[\frac{d}{dt}\Big|_{t=0}L_h \circ \varphi_t(e)=(L_h)_{*,\varphi_t(e)}\frac{d}{dt}\Big|_{t=0}\varphi_t(e)=(L_h)_{*,e}v_e=v_h.\]
-Por unicidade das soluções de EDOs, acabou.
-	\end{proof}
-Então repare:
-\[\varphi_t(h)=(\varphi_t\circ L_h)(e)=(L_h \circ \varphi_t)(e)=h\varphi_t(e)=R_{\varphi_t(e)}h,\]
-ou seja, qualquer curva integral de \(w\) é simplesmente a curva integral que passa por \(e\) trasladada. \textbf{That's what I wanted to show but there's more:} 
-
-Agora lembre que o colchete de Lie pode ser expressado como
-\[[w,v]_e=\frac{d}{dt}\Big|_{t=0}\Big(\varphi_{-t}\Big)_{*,\varphi_t(e)}v_{\varphi_t(e)}.\]
-(Onde fixamos o parámetro \(-t\) e deixamos livre o outro para ver \(\varphi_{-t}\) como um difeomorfismo de \(G\).)
-
-Juntando com a discussão anterior obtemos
-\[[w,v]_e=\frac{d}{dt}\Big|_{t=0}\Big(R_{\varphi_{-t}(e)}\Big)_{*,\varphi_t(e)}v_{\varphi_t(e)}.\]
-
-
 
 \subsection{super technical: how to show vector fields are smooth}
 
@@ -525,9 +477,11 @@ So we get that if \(\gamma\) minimizes distance, this integral is zero for any v
 		\centering
 		\includegraphics[width=0.3\textwidth]{fig3}
 	\end{figure}
-	so it would be nice to understand that precisely but \(\mathsf{OK}\).
+	so it would be nice to understand that precisely but \(\mathsf{OK}\). \textbf{Understood}: you take a uniformly normal neighbourhood of the point, then you can take radial geodesics spanning from other points in the neighbourhood, and you construct a shorter path around the corner.
 \end{itemize}
 \end{thing8}
+
+\subsection{second variation formula}
 
 
 
@@ -561,6 +515,11 @@ that is,
 differentiate that or \(\overline{J}\) to obtain
 \[A'+A^2+R_{\gamma'}=0\]
 
+\subsection{curvature}
+
+\subsubsection{boch equation}
+
+\subsubsection{killing fields}
 
 
 
@@ -1101,6 +1060,8 @@ where \(dz_i=dx_i + \sqrt{-1}dy_i\). It is the volume form of the hermitian mani
 
 \subsection{hessian metric and kahler metric}
 
+The Kähler form is the differential of a plurisubharmonic function \(\psi\). that is \(\omega=d d^c \psi=\sqrt{-1} \partial \partial \psi\).
+
 The point is: \textit{\textbf{hessian metric}} is one that whose local components can be given by the second partial derivatives of some function (I guess local function of course). \textit{\textbf{kahler metric}} is one that is somehow a hessian metric but in the complex case (?) what? so: why is the fundamental closed if the metric can be locally expressed like that?
 
 \begin{exercise}\leavevmode
@@ -1129,7 +1090,7 @@ So the task is to express \( \omega_{i \bar{j}} \) in terms of \( g_{i \bar{j}} 
 
 \bigskip
 
-Also, recall why the metric has no \( dz^i dz^j \) terms:
+\textbf{Why the metric has no \( dz^i dz^j \) terms} by ChatGPT:
 
 A general complexified metric looks like:
 \[
@@ -1157,6 +1118,47 @@ It measures the number of "holes" in the curve. For singular curves, the \emph{a
 p_a(C) := 1 - \chi(\mathcal{O}_C) = g(\widetilde{C}) + \delta,
 \]
 where \( \widetilde{C} \) is the normalization and \( \delta \) accounts for singularity contributions.
+
+\subsubsection*{genus in huybrechts}
+\begin{defn}[\cite{huc}, p. 234]\leavevmode
+The \textit{\textbf{arithmetic genus}} of a compact complex manifold \(X\) of dimension \(n\) is
+\[\boxed{p_a(X):=(-1)^n (\chi(\mathcal{O}_X)-1)}\]
+\end{defn}
+
+\begin{defn}[\cite{huk} chpt. 1, sec. 1, p.18]\leavevmode
+	Consider a \textit{possibly singular curve \(C \subset X\) in a smooth surface \(X\)}. A priori, \(C\) is allowed to be singular, reducible, non-reduced, etc. The \textit{\textbf{arithmetic genus}} of \(C\) is by definition
+	\[\boxed{p_a(C):= 1 - \chi(C, \mathcal{O}_C)}\]
+\end{defn}
+
+And then \cite{huk} says:
+\begin{quotation}
+For an arbitrary reduced curve \(C\) the \textit{\textbf{geometric genus}} is by definition the genus of the normalization \(\nu:\tilde{C} \to C\). Thus, \[\boxed{p_a(C)=g(C)+h^{0}(\delta)}\]
+where \(\delta=\nu_*(\mathcal{O}_{\tilde{C}}/\mathcal{O}_C\) ``is concentrated in the singular points of \(C\)" (what is \(\delta\) right?).
+\end{quotation}
+
+\subsubsection*{genus in harshorne}
+\begin{defn}[\cite{hart}, p.180]\leavevmode
+\(X\) nonsingular projective variety, \textit{\textbf{geometric genus}} of \(X\) is \(p_g:=\dim_k\Gamma(X,\omega_X)\), where \(\omega_X=\Lambda^{n}(\Omega_{X/k})\) is the canonical sheaf/bundle.
+\end{defn}
+
+\begin{defn}[p. 54]\leavevmode
+The hilbert polynomial \(P_Y\) of a projective variety  \(Y\) is the polynomial whose coefficients are the dimensions of every summand in the graded decomposition \(\bigoplus S^i\) of \(\mathcal{O}_X\) (using that \(Y\) is projective).
+
+The \textit{\textbf{arithmetic genus}} of \(Y\) is \(p_a(Y):=(-1)^{r}(P_Y(0)-1).\)
+\end{defn}
+
+\begin{remark}\leavevmode
+	In the case of a projective nonsingular \textit{curve}, the arithmetic genus and the geometric genus coincide (by Serre duality). This may not be true in dimension \(\geq 2\).
+\end{remark}
+
+\begin{thing4}{Proposition IV.1.1}\label{prop:IV.1.1}\leavevmode
+If \(X\) is a curve, then
+\[p_a(X)=p_g(X)=\dim_kH^{1}(X,\mathcal{O}_X),\]
+so we call this number simply the \textit{\textbf{genus}} of \(X\) and denote it by \(g\).
+\end{thing4}
+
+
+
 
 \subsubsection{euler characteristic.}
 The Euler characteristic of a sheaf \( \mathcal{F} \) on \( C \) is
@@ -1201,10 +1203,18 @@ For a curve \( C \subset M \), the \emph{self-intersection} is \( C \cdot C = \d
 \[
 2p_a(C) - 2 = C \cdot (C + K_M).
 \]
+Also see \cite{beu} defs. I.2, I.3.
+
+Here's some \cite{lec}. Recall (?) that the \textit{\textbf{fundamental class}} of a manifold is the homology class of a triangulation of the manifold (triangulation exists), which is a top-dimensional simplicial chain. No really, for compact oriented manifolds the top homology group is a cyclic group and the fundamental class is an element that generates \(H_n(M|x,R)\cong R\) for all \(x\) (thm. 3.26 \cite{hat} as indicated in \cite{lec}, p. 165).
+
+Then for any line bundle on  \(M\) you can think of its Chern class, which is a 2-cochain and, if you are a Riemann surface, a real-2-dimension manifold, your fundamental class is a 2-chain and you can do
+\[\left<c(L),[M]\right>\overset{\operatorname{def}}{=}c(L)([M]):=\operatorname{deg}L.\]
+(Which is probably just the integral of the first Chern class of \(L\)!)
+
 
 \subsubsection{riemann-roch for curves}
+	\[\boxed{h^0(L)-h^0(K-L)=\operatorname{deg}L-g+1}\]
 
-\[\boxed{h^{0}(L)=\operatorname{deg}L-g+1}\]
 where:
 \begin{itemize}
 \item \(h^0(L)=\dim H^{0}(X,L)=\) dimension of the vector space of sections of the line bundle which is finite-dimensional because we are complex and in smooth world it is not finite-dimensional.
@@ -1213,11 +1223,14 @@ where:
 \end{itemize}
 So that's why this is just so hard to grasp. Of course this is the first setting in which dani came to understand this, the I don't use the word divisor but hey, isn't it all just so cusiously the same.
 
-Right so a comment from \href{https://en.wikipedia.org/wiki/Riemann%E2%80%93Roch_theorem}{wiki}: it's not that way really. Really its
+Right so a comment from \href{https://en.wikipedia.org/wiki/Riemann%E2%80%93Roch_theorem}{wiki}. Sometimes we see the easier formula
 	\[\boxed{h^0(L)-h^0(K-L)=\operatorname{deg}L-g+1}\]
-	but as as it happens, ``as long as \(L\) has degree at least \(2g-1\), the correction term is zero, so that" you get the other formula over there.
+	As as it happens, ``as long as \(L\) has degree at least \(2g-1\), the correction term is zero, so that" you get this other formula.
 
-And that's why \(\operatorname{deg}K=2g-2\):
+\subsubsection*{degree of canonical bundle is 2g-2}
+This is repeated in proof of adjunction formula v411 but anyway…
+
+That's why \(\operatorname{deg}K=2g-2\):
 \[h^0(K)-h^0(K-K)=h^0(K)-h^0(\mathcal{O}_X)=\operatorname{deg}K-g+1\]
 so \(h^0(\mathcal{O}_X)=1\) what's \(h^0(K)\)? By serre duality,
 \[h^1(\mathcal{O}_X)=h^0(K_X)\]
@@ -1225,11 +1238,36 @@ wait why? Yes because serre duality says hey consider \(H^q(X,\mathcal{E})\) and
 
 Right so you get that \(h^0(K_X)=g\).
 
-\subsection{Final resolution: Adjunction formula from Hartshorne V.1.5}
+\subsubsection{riemann-roch for surfaces}
 
-I have finally figured out two other statements that go by the name \textit{Adjunction formula}.
+\subsubsection{riemann-roch-hirzebruch}
 
-Here’s one: Hartshorne, Proposition 1.5, Chapter V.
+\subsubsection{riemann-roch-grothendieck}
+
+
+\subsection{adjunction formula}
+
+\subsubsection{adjunction formula v0}
+
+Adjunction formula v0 is just
+
+\[
+\omega_C \cong \omega_X|_C \otimes N^*
+\]
+
+which is valid for any smooth hypersurface on a smooth complex manifold and can be derived easily from the holomorphic tangent bundle sequence explained with more detail in the next subsubsection.
+
+That formula may be equivalently written as
+\[K_C=K_X + C\]
+or even
+\[K_C = (K_X+C)|_{C}\]
+The detailed explanation of what are these things is also in the next subsubsection.
+
+\subsubsection{adjunction formula for smooth curves on surfaces}
+
+I have finally figured out two other statements that go by the name Adjunction formula.
+
+This one is Hartshorne proposition 1.5, chapter V:
 
 \begin{quote}
 If \( C \) is a nonsingular curve of genus \( g \) on the surface \( X \), and if \( K \) is the canonical divisor on \( X \), then
@@ -1238,85 +1276,80 @@ If \( C \) is a nonsingular curve of genus \( g \) on the surface \( X \), and i
 \]
 \end{quote}
 
-\subsubsection*{Proof}
+\textbf{Proof:}
 
-Today I won’t use Hartshorne’s original construction, because it involves some algebraic objects (namely, the ideal sheaf) that I unfortunately still don’t fully grasp. But there’s a way around this using smooth ideas.
+Today I won’t use all of Hartshorne’s construction because it involves some algebraic objects (namely ideal sheaf) that unfortunately I still don’t grasp. But there’s a way around this using smooth ideas. We can use (like in the above explanation above of other Adjunction formulas) the exact sequence:
 
-We consider the short exact sequence of holomorphic tangent bundles:
 \[
-0 \to T_C \to T_X|_C \to N \to 0
+0 \to T'_C \to T'_X|_C \to T'_X / T'_C \to 0
 \]
-where the rightmost term is the \emph{normal bundle}. Dualizing, and then taking determinants, gives:
+
+where the prime (') means holomorphic tangent bundle. The one on the right is called the normal bundle. So we take the dual of this sequence and then take determinant. This gives:
+
 \[
 \omega_C \otimes \det N \cong \omega_X|_C
 \]
-Since \( N \) is a line bundle, we can rewrite this as:
+
+(we get canonical bundles because we took holomorphic tangent bundles). That’s equivalent to:
+
 \[
 \omega_C \cong \omega_X|_C \otimes N^*
 \]
 
-To prove Hartshorne’s adjunction formula, we take degrees on both sides.
+because \( N \) is a line bundle, so \( \det \) does nothing.
 
-\paragraph{(LHS.)} For the curve \( C \), the Riemann–Roch theorem reads:
+Now to prove Hartshorne’s Adjunction formula I want to take degrees. On the LHS I use Riemann–Roch for curves, and on the RHS I use the definition of degree as the integral of the Chern class.
+
+(LHS.) Riemann–Roch for the curve \( C \) reads:
+
 \[
-h^0(K_C) - h^0(K_C - K_C) = \deg K_C - g + 1
-\]
-But:
-\[
-h^0(K_C - K_C) = h^0(\mathcal{O}_C) = 1
-\]
-(since holomorphic functions on a projective curve are constant), and by Serre duality:
-\[
-H^1(\mathcal{O}_C)^\vee \cong H^0(K_C)
-\quad \Rightarrow \quad
-h^0(K_C) = g
-\]
-So:
-\[
-\deg K_C = 2g - 2
+h^0(K) - h^0(K - K) = \deg(K) - g + 1
 \]
 
-\paragraph{(RHS.)} We compute the degree of \( \omega_X \otimes N^* \) restricted to \( C \). This is a line bundle on \( C \), so its degree is the integral of its first Chern class over \( C \), i.e., the intersection pairing:
+First notice that:
+
 \[
-\deg (\omega_X \otimes N^*)|_C = C \cdot K_X + C \cdot C
-= C \cdot (K_X + C)
+h^0(K - K) = h^0(\mathcal{O}_C) = 1
 \]
 
-So we get:
+because holomorphic functions on a projective curve are constant.
+
+And what’s \( h^0(K) \)? We use Serre duality. Serre duality says: consider \( H^q(\mathcal{E}) \) and \( H^{n - q}(X, \mathcal{E}^* \otimes K) \), put dual in either of the two, they are isomorphic. So choose \( \mathcal{E} = \mathcal{O}_X \) and \( q = 1 \). We get:
+
 \[
-2g - 2 = C \cdot (C + K_X)
+H^1(\mathcal{O}_X) \cong H^0(K_C)^*
 \]
 
-with a caveat…
+OK, but what’s \( H^1(\mathcal{O}_X) \)? It’s the genus… by definition. So we conclude:
 
-\subsubsection*{The geometry of the conormal bundle}
-
-Why is \( N^* \cong \mathcal{O}_X(C)|_C \), the line bundle associated to the divisor \( C \)?
-
-This is known as \textit{Adjunction Formula I} in Griffiths–Harris, p.145–146. Here’s how they argue:
-
-The conormal bundle \( N^* \) consists of 1-forms that vanish on \( T_C \), the holomorphic tangent bundle of \( C \).
-
-Meanwhile, the line bundle \( \mathcal{O}_X(C) \) is defined using local equations: on open sets \( U_\alpha \), the curve \( C \) is given as the vanishing locus of holomorphic functions \( f_\alpha \), and the transition functions are:
 \[
-g_{\alpha\beta} = \frac{f_\alpha}{f_\beta}
+\deg(K_C) = 2g - 2
 \]
 
-Now:
+(RHS.) As I said above, I want to compute the degree of \( \omega_X \otimes N^* \) thinking this: it’s a line bundle, determined by its first Chern class, and its degree over \( C \) is the integral of this Chern class over \( C \). But hey, that’s just the definition of the intersection pairing:
+
 \[
-df_\alpha = d(g_{\alpha\beta} f_\beta) = f_\beta \, dg_{\alpha\beta} + g_{\alpha\beta} \, df_\beta
-\]
-and along \( C \), where \( f_\beta = 0 \), this reduces to:
-\[
-df_\alpha = g_{\alpha\beta} \, df_\beta
+C \cdot (C + K)
 \]
 
-So the transition functions of \( N^* \) coincide with those of \( \mathcal{O}_X(C) \), meaning:
+With the caveat that: why is the conormal bundle the associated line bundle to the curve \( C \)?
+
+This statement is actually called Adjunction Formula I in Griffiths–Harris, p. 145–146.
+
+The argument is as follows: by definition above, the conormal bundle \( N^* \) consists of 1-forms that vanish on the holomorphic tangent bundle of \( C \).
+
+Also by definition, the line bundle associated to \( C \) is given by the transition functions that are quotients of locally defining functions of \( C \); the latter are functions \( f_\alpha \) that vanish on \( C \cap U_\alpha \), and the transition functions are \( g_{\alpha\beta} = f_\alpha / f_\beta \).
+
+So GH notice that:
+
 \[
-N^* \cong \mathcal{O}_X(C)|_C
+df_\alpha = d(g_{\alpha\beta} f_\beta) = f_\beta \, dg_{\alpha\beta} + g_{\alpha\beta} \, d f_\beta = g_{\alpha\beta} \, d f_\beta
 \]
 
-\emph{(Remark: Griffiths–Harris interpret this computation as showing that \( N^* \otimes \mathcal{O}_X(C)|_C \) is trivial.)}
+which tells me that the transition functions of \( N^* \) coincide with those of \( \mathcal{O}(C) \), the associated line bundle to \( C \).
+
+(Remark: GH interpret this last equation as showing that the bundle \( N^* \otimes \mathcal{O}(C) \) is trivial.)
+
 
 \subsubsection*{addendum: a Gauss–Bonnet echo}
 
@@ -1335,8 +1368,117 @@ So:
 \[
 c_1(K_C) = -\frac{1}{2\pi} \cdot \text{Gaussian curvature} \cdot \text{area form}
 \]
+\subsubsection{adjunction formula for singular curves on surfaces also holds}
+
+Looks like in \cite{huk} p. 18, the adjunction formula for \textbf{nonsingular}  curves in surfaces discussed above holds for any curve \(C\) on a surface \(X\). The secret is that there's an exact sequence
+\[\begin{tikzcd}0\arrow[r]&\mathcal{O}(-C)\arrow[r]&\mathcal{O}_X\arrow[r]&\mathcal{O}_C\arrow[r]&0\end{tikzcd}\]
+where \(\mathcal{O}(-C)\) is the \textit{\textbf{ideal sheaf}}, which is at the same time (1) the sheaf of regular functions in \(\mathcal{O}_X\) that vanish on \(C\) (which is why have the first arrow, it's an inclusion); and (2) the dual sheaf of the associated line bundle to \(C\). Also notice that the structure sheaf \(\mathcal{O}_C\) turns out to be the cokernel sheaf of the inclusion \(\mathcal{O}(-C) \hookrightarrow  \mathcal{O}_X\).
+
+Save these claims, the argument by Huybrechts works as follows:
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+\item Recall that \(p_a(C):=1-\chi(\mathcal{O}_C)\).
+\item The exact sequence above gives \[\chi(\mathcal{O}_X)=\chi(\mathcal{O}(-C))+\chi(\mathcal{O}_C)\]
+	that is,
+	\[-\chi(\mathcal{O}_C)=\chi(\mathcal{O}(-C))-\chi(\mathcal{O}_X)\]
+which is to say
+\[p_a(C)=1+\chi(\mathcal{O}(-C))-\chi(\mathcal{O}_X)\]
+\item Riemann-Roch for line bundles on surfaces reads
+	\[\boxed{\chi(L)=\chi(O_X)+\frac{(L.L \otimes \omega_X^*)}{2}}\]
+substitute for \(L=\mathcal{O}(-C)\):
+\[\chi(\mathcal{O}(-C))=\chi(\mathcal{O}_X)+\frac{(\mathcal{O}(-C).\mathcal{O}(-C)\otimes \omega_X^*)}{2}\]
+\item Put it all together:
+	\[p_a(C)=1+\chi(\mathcal{O}_X)+\frac{(\mathcal{O}(-C).\mathcal{O}(-C)\otimes \omega_X^*)}{2}-\chi(\mathcal{O}_X)\]
+\item To finish just check that
+	\[(\mathcal{O}(-C).\mathcal{O}(-C) \otimes \omega)=(C.K+C)\]
+but hey, intersection form is linear with respect to taking dual, i.e. multiplying by -1, right? And isn't it true that
+\begin{enumerate}
+\item \(\mathcal{O}(-C)=-\mathcal{O}(C)\).
+\item \(-(\mathcal{O}(-C) \otimes \omega^*)=\mathcal{O}(C) \otimes \omega\)
+\end{enumerate}
+\end{enumerate}
+
+\begin{defn}[\cite{hart}]\leavevmode
+We are not responsible for the effects of reading these definitions. Ideal sheaf is just the sheaf of functions that vanish on the subvariety.
+\begin{itemize}
+\item \textbf{(p. 65)} Given a continuous map \(f:X \to Y\) of topological spaces and a sheaf \(\mathcal{F}\) on \(X\), the \textit{\textbf{direct image sheaf}} \(f_*\mathcal{F}\) on \(Y\) is defined by \(f_*\mathcal{F}(V):=\mathcal{F}(f^{-1}(V))\) for any open set \(V \subseteq Y\).
+
+\item \textbf{(p. 63)} The \textit{\textbf{kernel}} of a map of sheaves \(\varphi: \mathcal{F} \to \mathcal{G}\) is given by \(U \mapsto  \ker(\varphi(U))\).
+
+\item \textbf{(p. 115)} Let \(Y\) be a closed subscheme of a scheme \(X\), and let \(i:Y \to X\) be the inclusion morphisn. The \textit{\textbf{ideal sheaf}} of \(Y\) is the kernel of the morphism \(i^\sharp:\mathcal{O}_X \to i_*\mathcal{O}_Y\).
+\end{itemize}
+\end{defn}
+
+\subsubsection{sergey}
+
+\begin{quotation}
+	Today evening (17h) we discussed the \emph{adjunction formula}, written sometimes as 
+\[ K_D = K_X + D \quad \text{or} \quad K_Y = (K_X + Y)|_Y. \]
+
+The formulation and proof are relatively straightforward for smooth hypersurfaces in smooth total spaces (manifold case). Some objects featured in the discussion include: tangent or cotangent bundles, conormal sheaf or normal bundle, and determinants of vector bundles.
+
+We also discussed how to define determinants for complexes of vector bundles, and how to define determinants of coherent sheaves on smooth projective varieties by taking their resolution. More generally, the determinant is well-defined for objects of the bounded derived category of vector bundles, and behaves well in triangles.
+
+This all follows from the formula for determinants of finite-dimensional vector spaces in a short exact sequence:
+\[
+0 \longrightarrow U \longrightarrow V \longrightarrow W \longrightarrow 0
+\]
+In this case, we have a canonical isomorphism:
+\[
+\det(V) \cong \det(U) \otimes \det(W),
+\]
+and there is a quite explicit canonical isomorphism. Thanks to its canonicity, it globalizes to trivial vector bundles, and locally trivial vector bundles (so to all vector bundles), and then by standard homological algebra and $K$-theory to complexes of vector bundles.
+
+In fact, the same standard $K$-theory argument shows that the isomorphism class of $\det(C)$ in $\mathrm{Pic}(X)$ depends only on the class $[C]$ of the complex in the $K$-group $K(X)$.
+
+\medskip
+
+\noindent One thing we have not (yet) discussed is how to prove that $N \cong \mathcal{O}(D)$.
+
+More generally, we looked at the relation between the (co)normal sheaf $\mathcal{N}_{X/Y}$ and the ideal sheaf $\mathcal{I}_Y$.
+
+\medskip
+
+\noindent \textbf{Hint:} the conormal sheaf is isomorphic to
+\[
+\mathcal{I}_Y / \mathcal{I}_Y^2.
+\]
+From this relation, the formula $N = \mathcal{O}_X(D)$ follows easily.
+\end{quotation}
+
+\begin{exercise}[dani puts this on April 8 2025]\leavevmode
+Show that canonical isomorphism of determinant bundles given an exact sequence. \textbf{Solution at MSE:} \href{https://math.stackexchange.com/questions/822470/exterior-power-commutes-with-direct-sum}{here}.
+\end{exercise}
+
+\subsubsection{huybrechts complex geometry}
+
+Just for completeness here's huybrecht's approach:
+\iffalse
+
+\begin{thing4}{Definition 2.2.16}[\cite{huc}]\label{def:2.2.16}\leavevmode
+Let \(Y \subset X\) be a complex submanifold. The \textit{\textbf{normal bundle}} of \(Y\) in \(X\) is the holomorphic vector bundle \(\mathcal{N}_{Y/X}\) on \(Y\) is the cokernel of the natural injection \(\mathcal{T}_Y \subset \mathcal{T}_X|_{Y}\). Thus there exists a short exact sequence of holomorphic vector bundles, the \textit{\textbf{normal bundle sequence}}:
+\[\begin{tikzcd}0\arrow[r]&\mathcal{T}_Y\arrow[r]&\mathcal{T}_X|_{Y}\arrow[r]&\mathcal{N}_{Y/X}\arrow[r]&0\end{tikzcd}\]
+\end{thing4}
+
+\begin{thing7}{Explanation}[Example 2.23, \cite{lec}]\leavevmode
+The \textit{\textbf{holomorphic normal bundle}} of \(Y\) in \(X\) is the bundle \(NY \to Y\) defined by \(NY:=(T'X|_{Y}/T'Y\) where the apostrophe means holomorphic tangent bundle for Lee. So probably this is the metric-free definition of the normal bundle.  ``(It is important to observe that the \textit{\textbf{geometric normal bundle}} that can be defined as the set of tangent vectors that are orthogonal to \(S\) with respect to some Riemannian metric on \(M\) will not in general have holomorphic transition functions.)" So maybe metric normal bundle may not be holomorphic, and instead metric-free normal bundle is holomorphic always?
+\end{thing7}
+
+\begin{thing6}{Dream}\leavevmode
+It'd still be nice to understand the construction geometrically: take the tangent bundle of the ambient variety, and quotient by the tangent bundle of the subvariety. At a point, we have collapsed the tangent bundle of the subvariety, and all we are left with is the vectors that are not tangent to the subvariety. I guess it kind of makes sense: take for example a curve on \(\mathbb{R}^3\), collapse the tangent line at a point of the curve, and you get \(\mathbb{R}^2\).
+\end{thing6}
+\fi
+
+\begin{thing4}{Proposition 2.2.17, \cite{huc}}[Adjunction formula]\label{prop:2.2.17}\leavevmode
+Let \(Y\) be a submanifold of a complex manifold \(X\). Then the canonical bundle \(K_Y\) of \(Y\) is naturally isomorphic to the line bundle \(K_X|_{Y} \otimes \det(\mathcal{N}_{Y/X})\).
+\end{thing4}
+
+\begin{thing4}{Proposition 2.4.7}[\cite{huc}]\label{prop:2.4.7}\leavevmode
+Let \(X\) be a smooth hypersurface of a complex manifold \(Y\) defined by a section \(s \in H^{0}(Y,L)\) of some holomorphic line bundle \(L\) on \(Y\). Then \(\mathcal{N}_{X/Y}\cong L_X\) and thus 
+\end{thing4}
 
 \subsection{line bundles and all other things that are the same}
+
+\subsubsection{line bundles}
 
 Looks \cite{gri} has the final word on the subject. This is chapter 0, sec. 5.
 
@@ -1387,14 +1529,9 @@ for all $\alpha,\beta$, where the $g_{\alpha\beta}$ are transition functions of 
 
 \end{enumerate}
 
+\subsubsection{divisors}
 
-\subsection{Holomorphically symplectic forms and C-symplectic forms}
-
-A \textit{\textbf{C-symplectic form}} \(\Omega\) on a smooth 4\(n\)-dimensional manifold is a closed complex-valued form such that \(\Omega^{n+1}=0\) and \(\Omega^n \wedge \overline{ \Omega}^n\) is a non-degenerate volume form. So perhaps \(dz^1 \wedge \ldots \wedge dz^n\) is an example? Ask GPT or make sure.
-
-The point is that… the kernel of a C-symplectic form gives a decomposition of the complexification of the tangent bundle of the manifold, and if it is closed…
-
-\subsection{Line bundles and divisors}
+\subsubsection{meromorphic functions}
 
 Skimming ---because understanding the details looks… difficult--- \cite{gri} chpt. 1, sec. 1 ``Divisors and line bundles"
 
@@ -1415,6 +1552,10 @@ Here's a quote from \cite{gri} p.145:
 \end{thing7}
 
 
+\subsubsection{locally free sheaves}
+
+\subsubsection{first chern classes}
+
 
 \subsection{Exponential exact sequence}
 
@@ -1431,135 +1572,43 @@ To see it probably you'd have to delve back into \v Cech, but \(H^{1}(X,\mathcal
 
 And not only that but actually the intersection form is cup product of Chern classes
 
-\subsection{Intersection form on surfaces}
-
-See \cite{beu} defs. I.2, I.3.
 
 
-\subsection{riemann-roch}
+\subsection{ampleness}
+\subsubsection{ampleness}
 
-\[\boxed{h^{0}(L)=\operatorname{deg}L-g+1}\]
-where:
-\begin{itemize}
-\item \(h^0(L)=\dim H^{0}(X,L)=\) dimension of the vector space of sections of the line bundle which is finite-dimensional because we are complex and in smooth world it is not finite-dimensional.
-\item \(\operatorname{deg}L=\int_M c_1(L)\) so de Rham pairing of cohomology class and homology  class (the ``fundamental class" of \(M\) if you wish).
- \item \(p_a-1=\chi(M)=\) alternating sum of the dimensions of the cohomology \textbf{of the structure sheaf} \(\mathcal{O}_M\).
-\end{itemize}
-So that's why this is just so hard to grasp. Of course this is the first setting in which dani came to understand this, the I don't use the word divisor but hey, isn't it all just so cusiously the same.
-
-Right so a comment from \href{https://en.wikipedia.org/wiki/Riemann%E2%80%93Roch_theorem}{wiki}: it's not that way really. Really its
-	\[\boxed{h^0(L)-h^0(K-L)=\operatorname{deg}L-g+1}\]
-	but as as it happens, ``as long as \(L\) has degree at least \(2g-1\), the correction term is zero, so that" you get the other formula over there.
-\subsubsection{Genus}
-
-\begin{defn}[\cite{huc}, p. 234]\leavevmode
-The \textit{\textbf{arithmetic genus}} of a compact complex manifold \(X\) of dimension \(n\) is
-\[p_a(X):=(-1)^n (\chi(\mathcal{O}_X)-1)\]
-\end{defn}
-
-Following 
-\begin{defn}[\cite{huk} chpt. 1, sec. 1, p.18]\leavevmode
-``Consider a curve \(C \subset X\) in a smooth surface \(X\). A priori, \(C\) is allowed to be singular, reducible, non-reduced, etc. The \textit{\textbf{arithmetic genus}} of \(C\) is by definition
-\[p_a(C):= 1 - \chi(C, \mathcal{O}_C).\]
-\end{defn}
-
-And then \cite{huk} says:
 \begin{quotation}
-	``For an arbitrary [so, possibly singular] reduced curve \(C\) the \textit{geometric genus} is by definition the genus of the normalization \(\nu:\tilde{C} \to C\), i.e. \(g(C):=g(\tilde{C}\) [I wonder: is \(g(\tilde{C})=p_a(\tilde{C})\) i.e. arithmetic=geometric since  \(\tilde{C}\) is normal (\(\approx\)smooth)]. Thus, \(p_a(C)=g(C)+h^{0}(\delta)\) [in which case we could also write  \(p_a(C)=p_a(\tilde{C})+h^{0}(\delta)\)]."
+	``In \(\mathbb{C}^n\) many complex hypersurfaces can be written as regular level sets of globally defined holomorphic functions. But in a compact complex manifold, this is never possible, because all global holomorphic functions are constants. Instead, we can use sections of line bundles."
 \end{quotation}
 
-\begin{upshot}\leavevmode
-For singular curves arithmetic and geometric genus may not coincide:
-\[\underbrace{p_a(C)}_{\text{arithmetic} }=\underbrace{g(C)}_{\text{geometric} }+h^0(\delta)\]
-where \(\delta=\nu_*(\mathcal{O}_{\tilde{C}}/\mathcal{O}_C\) ``is concentrated in the singular points of \(C\)" (what is \(\delta\) right?).
+Story goes, the space of global sections of a holomorphic vector bundle on a compact complex manifold is finite dimensional. (The corresponding thing in smooth world is very infinite-dimensional.) This is essentialy due to complex analysis. Montel's theorem is used to prove this in Lee. For a down-to-earth-illustrative point of view consider the line bundle of \(\mathcal{O}_X\) of holomorphic functions on the the manifold (which is a bundle since it is a free rank-1 \(\mathcal{O}_X\) module---the trivial bundle), which, if we remember, it's only constant functions because \(M\) is compact, so it's actually \(\mathbb{C}\), which is finite-dimensional over \(\mathbb{C}\).
 
-\end{upshot}
+Anyway you can choose a basis \((s_0,\ldots,s_m)\) of \(\mathcal{O}(L)\). And then. you. construct. a. map. to. \(\mathbb{P}^m\). As follows: choose a point \(x \in M\), and take a local trivializaing open set of the bundle, where you have a local frame consisting of one local section (because it's a line bundle) called \(s: U \to E(U)\). Then each of the global sections \(s_i\) is represented locally as \(f_is=s_i\). So you get this \(\mathbb{C}\)-valued functions, right? And then you get the map \(p \mapsto (f_0(p),\ldots,f_n(p))\). But that would depend on the trivializing open set. But if you think projectively you can show that it does not depend on the choice of frame.
 
-\subsubsection{Genus in Harshorne}
-\begin{defn}[\cite{hart}, p.180]\leavevmode
-\(X\) nonsingular projective variety, \textit{\textbf{geometric genus}} of \(X\) is \(p_g:=\dim_k\Gamma(X,\omega_X)\), where \(\omega_X=\Lambda^{n}(\Omega_{X/k})\) is the canonical sheaf/bundle.
-\end{defn}
+\begin{exercise}\leavevmode
+You have 13 minutes to prove that.
+\end{exercise}
+\begin{proof}[Solution]\leavevmode
+ (Several hours after that…) Now I'm at home and I prove it like this. Just notice that \(s_i=f_is:W \to \pi^{-1}(W)\) (where of course \(W=U \cap V\) is the intersection of two different trivializing charts and \(f_i\) is the function corresponding to the basis \(s\) of the chart \(U\)). Right so there is a transition function mapping \(\pi^{-1}(W) \to \pi^{-1}(W)\) that is the identity on the base and a linear map on the fibers. Now, as I said above, since \(s_i\) is a function from \(W\) to the bundle, the transition function maps the vector part of the fiber w.r.t \(U\) to the vector part w.r.t. \(V\) by a linear transformation. Which is a number{\color{2}what?}. So the equation we all want is
+\[s=\xi s'\]
+which gives
+\[s_i=f_is,\qquad s_i=g_is'=g_i\xi s' \implies f_i=\xi g_i\]
+and then the coordinates of this map we are defining become
+\[[f_0,\ldots,f_n]=[\xi g_0,\ldots,\xi g_n]=[g_0,\ldots,g_n]\]
+so that the thing when defined projectively does not depend on the charts.
+\end{proof}
 
-\begin{remark}\leavevmode
-I think these sections \(\Gamma(X,\omega_X)\) can also be written as \(H^{1}(X,\mathcal{O}_X)\). (To me it's not obvious why.)
-\end{remark}
+Nice! So we see, that whenever \(H^{0}(X,L)\) is not empty, we can construct a map from \(X\) to projective space. And the next question is whether this map is an embedding. And the answer is ampleness. \(L\) is \textit{\textbf{very  ample}} when it is an embedding.
 
-\begin{defn}[p. 54]\leavevmode
-The hilbert polynomial \(P_Y\) of a projective variety  \(Y\) is the polynomial whose coefficients are the dimensions of every summand in the graded decomposition \(\bigoplus S^i\) of \(\mathcal{O}_X\) (using that \(Y\) is projective).
+But hey, what's \textit{\textbf{base point free}}. Ah, when at every point there's at least one global section that won't vanish. Well that better be true it you want that map to be well defined right!?
 
-The \textit{\textbf{arithmetic genus}} of \(Y\) is \(p_a(Y):=(-1)^{r}(P_Y(0)-1).\)
-\end{defn}
-
-\begin{remark}\leavevmode
-	In the case of a projective nonsingular \textit{curve}, the arithmetic genus and the geometric genus coincide (by Serre duality). This may not be true in dimension \(\geq 2\).
-\end{remark}
-
-\begin{thing4}{Proposition IV.1.1}\label{prop:IV.1.1}\leavevmode
-If \(X\) is a curve, then
-\[p_a(X)=p_g(X)=\dim_kH^{1}(X,\mathcal{O}_X),\]
-so we call this number simply the \textit{\textbf{genus}} of \(X\) and denote it by \(g\).
+Anyway, we have
+\begin{thing4}{Theorem 3.43}[\cite{lec}]\label{thm:3.43}\leavevmode
+Basically that a line bundle over a compact complex manifold \(M\) is very ample iff \(\mathcal{O}(M;L)\) separates points and \(\mathcal{O}(M;L)\) separates directions. (I think those are the sections.)
 \end{thing4}
 
-\subsection{Euler characteristic}
-
-\begin{thing4}{Definition}[\cite{hart}, p. 360]\label{def:}\leavevmode
-For any coherent sheaf \(\mathcal{F}\),
-\[\chi(\mathcal{F})=\sum(-1)^i\dim_kH^{i}(X,\mathcal{F}).\]
-\end{thing4}
-
-\begin{remark}\leavevmode
-Once upon a time, after a long discussion with Donaldson I convinced myself that \(H^{0}(X,\mathcal{F})\) is the set of sections of the sheaf \(\mathcal{F}\). (Not in person.)
-\end{remark}
-
-\subsection{For curves}
-
-\subsubsection{with Lee}
-
-Recall (?) that the \textit{\textbf{fundamental class}} of a manifold is the homology class of a triangulation of the manifold (triangulation exists), which is a top-dimensional simplicial chain. No really, for compact oriented manifolds the top homology group is a cyclic group and the fundamental class is an element that generates \(H_n(M|x,R)\cong R\) for all \(x\) (thm. 3.26 \cite{hat} as indicated in \cite{lec}, p. 165).
-
-Then for any line bundle on  \(M\) you can think of its Chern class, which is a 2-cochain and, if you are a Riemann surface, a real-2-dimension manifold, your fundamental class is a 2-chain and you can do
-\[\left<c(L),[M]\right>\overset{\operatorname{def}}{=}c(L)([M]):=\operatorname{deg}L.\]
-(Which is probably just the integral of the first Chern class of \(L\)!)
-\begin{thing7}{Riemann-Roch}[\cite{lec}]\leavevmode
-Suppose \(M\) is a connected compact Riemann surface of genus \(g\), and \(L \to M\) is a holomorphic line bundle. Then 
-\[\dim \mathcal{O}(M;L)=\operatorname{deg}L+1-g+\dim\mathcal{O}(M;K\otimes L^*)\]
-where \(\mathcal{O}(M;E)\) is just the holomorphic sections of the vector bundle \(E\).
-\end{thing7}
-\begin{remark}\leavevmode
-On the proof we get that
-\begin{quotation}
-	``[…] and the Riemann-Roch theorem is equivalent to the claim that
-	\[\chi(\mathcal{O}(L))=\operatorname{deg}L+1-g."\]
-\end{quotation}
-which might be useful if you compare with Riemann-Roch for surfaces as in Misha's course.
-\end{remark}
-\subsubsection{with Hartshorne/wiki}
-
-
-According to wikipedia, \(\ell(D)\) for a divisor \(D\) on a Riemann surface (\(D\) is a sum of points with some coefficients) is the set of all meromorphic functions \(h\) such that the coefficients of \((h)+D\) are non-negative.
-\begin{thing4}{Theorem IV.1.3}[Riemann-Roch]\label{prop:IV.1.3}\leavevmode
-Let \(D\) be a divisor on a curve \(X\) of genus \(g\). Them
-\[\ell(D)-\ell(K-D)=\operatorname{deg}D-g+1.\]
-\end{thing4}
-
-\subsection{For surfaces}
-\begin{thm}[K3 course]\leavevmode
-\(L\) line bundle on a surface and \(K_X=\Omega^2(X)\) its canonical bundle. Then
-\[\chi(L)=\chi(\mathcal{O}_X)+\frac{(L-K_X,L)}{2}.\]
-\end{thm}
-
-\subsection{Noether's formula}
-
-From \cite{beauville}, I.14.
-
-\begin{thing7}{Noether's formula}\leavevmode
-%\[\chi(\mathcal{O}_S)=\frac{1}{12}(K^2_S+\chi_\operatorname{top}(S),\]
-% where \(\chi_\operatorname{top}(S))\)
-\end{thing7}
-
-\subsection{Ampleness}
-
-\subsection{The hyperplane bundle}
+\subsubsection*{the hyperplane bundle}
+where should I put this?
 \begin{upshot}[About the hyperplane bundle]\leavevmode
 Because the dual bundle is, of course, the bundle whose fiber at each point is the dual vector space of the original one. So hyperplane is because every \textit{linear}  functional of the dual space (an element of the fiber of the dual) is just a hyperplane.
 
@@ -1591,45 +1640,6 @@ Save techincalities, we have that if \(S \subseteq M\) is a closed complex hyper
 So the associated line bundle of a hypersurface determined by a homogeneous degree \(d\) polynomial is… the tautological section of this polynomial! (and the bundle is \(\mathcal{O}(d)\)).
 \end{thing8}
 
-\subsection{Ampleness}
-\begin{quotation}
-	``In \(\mathbb{C}^n\) many complex hypersurfaces can be written as regular level sets of globally defined holomorphic functions. But in a compact complex manifold, this is never possible, because all global holomorphic functions are constants. Instead, we can use sections of line bundles."
-\end{quotation}
-
-Story goes, the space of global sections of a holomorphic vector bundle on a compact complex manifold is finite dimensional. (The corresponding thing in smooth world is very infinite-dimensional.) This is essentialy due to complex analysis. Montel's theorem is used to prove this in Lee. For a down-to-earth-illustrative point of view consider the line bundle of \(\mathcal{O}_X\) of holomorphic functions on the the manifold (which is a bundle since it is a free rank-1 \(\mathcal{O}_X\) module---the trivial bundle), which, if we remember, it's only constant functions because \(M\) is compact, so it's actually \(\mathbb{C}\), which is finite-dimensional over \(\mathbb{C}\).
-
-Anyway you can choose a basis \((s_0,\ldots,s_m)\) of \(\mathcal{O}(L)\). And then. you. construct. a. map. to. \(\mathbb{P}^m\). As follows: choose a point \(x \in M\), and take a local trivializaing open set of the bundle, where you have a local frame consisting of one local section (because it's a line bundle) called \(s: U \to E(U)\). Then each of the global sections \(s_i\) is represented locally as \(f_is=s_i\). So you get this \(\mathbb{C}\)-valued functions, right? And then you get the map \(p \mapsto (f_0(p),\ldots,f_n(p))\). But that would depend on the trivializing open set. But if you think projectively you can show that it does not depend on the choice of frame.
-
-\begin{exercise}\leavevmode
-You have 13 minutes to prove that.
-\end{exercise}
-\begin{proof}[Solution]\leavevmode
- (Several hours after that…) Now I'm at home and I prove it like this. Just notice that \(s_i=f_is:W \to \pi^{-1}(W)\) (where of course \(W=U \cap V\) is the intersection of two different trivializing charts and \(f_i\) is the function corresponding to the basis \(s\) of the chart \(U\)). Right so there is a transition function mapping \(\pi^{-1}(W) \to \pi^{-1}(W)\) that is the identity on the base and a linear map on the fibers. Now, as I said above, since \(s_i\) is a function from \(W\) to the bundle, the transition function maps the vector part of the fiber w.r.t \(U\) to the vector part w.r.t. \(V\) by a linear transformation. Which is a number{\color{2}what?}. So the equation we all want is
-\[s=\xi s'\]
-which gives
-\[s_i=f_is,\qquad s_i=g_is'=g_i\xi s' \implies f_i=\xi g_i\]
-and then the coordinates of this map we are defining become
-\[[f_0,\ldots,f_n]=[\xi g_0,\ldots,\xi g_n]=[g_0,\ldots,g_n]\]
-so that the thing when defined projectively does not depend on the charts.
-\end{proof}
-
-Nice! So we see, that whenever \(H^{0}(X,L)\) is not empty, we can construct a map from \(X\) to projective space. And the next question is whether this map is an embedding. And the answer is ampleness. \(L\) is \textit{\textbf{very  ample}} when it is an embedding.
-
-But hey, what's \textit{\textbf{base point free}}. Ah, when at every point there's at least one global section that won't vanish. Well that better be true it you want that map to be well defined right!?
-
-Anyway, we have
-\begin{thing4}{Theorem 3.43}[\cite{lec}]\label{thm:3.43}\leavevmode
-Basically that a line bundle over a compact complex manifold \(M\) is very ample iff \(\mathcal{O}(M;L)\) separates points and \(\mathcal{O}(M;L)\) separates directions. (I think those are the sections.)
-\end{thing4}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\textwidth]{fig1}
-	\caption*{Riemann surfaces case}
-\end{figure}
-\begin{quotation}
-A line bundle on a riemann surface is like its tangent bundle--a bunch of planes put somehow over the points of the surface. And a section is like a vector field. And the zeroes of the section are a bunch points. So the submanifold is a bunch of points.
-\end{quotation}
 
 
 
@@ -1676,7 +1686,7 @@ That we can associate divisors to sections. Then we consider all linearly equiva
 \begin{thing4}{Lemma II.7.8}\label{lem:II.7.8}\leavevmode
 	[…] In particular, [a linear system] \(\mathfrak{d}\) is base-point-free iff \(\mathcal{L}\) is generated by the global sections in \(V\).
 \end{thing4}
-\subsection{line systems}
+\subsubsection{line systems}
 \begin{itemize}
   \item A \textbf{line system} is the set of effective divisors associated to sections of a line bundle. How? Every section defines an effective divisor given by its zero-locus.
   
@@ -1695,7 +1705,7 @@ That we can associate divisors to sections. Then we consider all linearly equiva
 \textbf{Conclusion:} The line system is the projectivization of the space of sections.
 
 \textbf{Epiphany:} The canonical map associated to a very ample line bundle is an embedding of \( X \) into… its linear system?
-\subsection{bertini theorem}
+\subsubsection{bertini theorem}
 
 \begin{thing6}{bertini theorem}[\cite{gri}, p.137]\leavevmode
 The generic element of a linear system is smooth away from the base locus of the system.
@@ -1733,113 +1743,7 @@ Let \( X \) be an algebraic variety over a field of characteristic 0, and let \(
 Can you derive this version of Bertini’s Theorem from the special case of the theorem for pencils?
 \end{exercise}
 
-
-
-
-\subsection{adjunction formula}
-
-\subsubsection{Sergey}
-
-\begin{quotation}
-	Today evening (17h) we discussed the \emph{adjunction formula}, written sometimes as 
-\[ K_D = K_X + D \quad \text{or} \quad K_Y = (K_X + Y)|_Y. \]
-
-The formulation and proof are relatively straightforward for smooth hypersurfaces in smooth total spaces (manifold case). Some objects featured in the discussion include: tangent or cotangent bundles, conormal sheaf or normal bundle, and determinants of vector bundles.
-
-We also discussed how to define determinants for complexes of vector bundles, and how to define determinants of coherent sheaves on smooth projective varieties by taking their resolution. More generally, the determinant is well-defined for objects of the bounded derived category of vector bundles, and behaves well in triangles.
-
-This all follows from the formula for determinants of finite-dimensional vector spaces in a short exact sequence:
-\[
-0 \longrightarrow U \longrightarrow V \longrightarrow W \longrightarrow 0
-\]
-In this case, we have a canonical isomorphism:
-\[
-\det(V) \cong \det(U) \otimes \det(W),
-\]
-and there is a quite explicit canonical isomorphism. Thanks to its canonicity, it globalizes to trivial vector bundles, and locally trivial vector bundles (so to all vector bundles), and then by standard homological algebra and $K$-theory to complexes of vector bundles.
-
-In fact, the same standard $K$-theory argument shows that the isomorphism class of $\det(C)$ in $\mathrm{Pic}(X)$ depends only on the class $[C]$ of the complex in the $K$-group $K(X)$.
-
-\medskip
-
-\noindent One thing we have not (yet) discussed is how to prove that $N \cong \mathcal{O}(D)$.
-
-More generally, we looked at the relation between the (co)normal sheaf $\mathcal{N}_{X/Y}$ and the ideal sheaf $\mathcal{I}_Y$.
-
-\medskip
-
-\noindent \textbf{Hint:} the conormal sheaf is isomorphic to
-\[
-\mathcal{I}_Y / \mathcal{I}_Y^2.
-\]
-From this relation, the formula $N = \mathcal{O}_X(D)$ follows easily.
-\end{quotation}
-
-\begin{exercise}[dani puts this on April 8 2025]\leavevmode
-Show that canonical isomorphism of determinant bundles given an exact sequence. \textbf{Solution at MSE:} \href{https://math.stackexchange.com/questions/822470/exterior-power-commutes-with-direct-sum}{here}.
-\end{exercise}
-
-\subsubsection{Huybrechts}
-\iffalse
-
-\begin{thing4}{Definition 2.2.16}[\cite{huc}]\label{def:2.2.16}\leavevmode
-Let \(Y \subset X\) be a complex submanifold. The \textit{\textbf{normal bundle}} of \(Y\) in \(X\) is the holomorphic vector bundle \(\mathcal{N}_{Y/X}\) on \(Y\) is the cokernel of the natural injection \(\mathcal{T}_Y \subset \mathcal{T}_X|_{Y}\). Thus there exists a short exact sequence of holomorphic vector bundles, the \textit{\textbf{normal bundle sequence}}:
-\[\begin{tikzcd}0\arrow[r]&\mathcal{T}_Y\arrow[r]&\mathcal{T}_X|_{Y}\arrow[r]&\mathcal{N}_{Y/X}\arrow[r]&0\end{tikzcd}\]
-\end{thing4}
-
-\begin{thing7}{Explanation}[Example 2.23, \cite{lec}]\leavevmode
-The \textit{\textbf{holomorphic normal bundle}} of \(Y\) in \(X\) is the bundle \(NY \to Y\) defined by \(NY:=(T'X|_{Y}/T'Y\) where the apostrophe means holomorphic tangent bundle for Lee. So probably this is the metric-free definition of the normal bundle.  ``(It is important to observe that the \textit{\textbf{geometric normal bundle}} that can be defined as the set of tangent vectors that are orthogonal to \(S\) with respect to some Riemannian metric on \(M\) will not in general have holomorphic transition functions.)" So maybe metric normal bundle may not be holomorphic, and instead metric-free normal bundle is holomorphic always?
-\end{thing7}
-
-\begin{thing6}{Dream}\leavevmode
-It'd still be nice to understand the construction geometrically: take the tangent bundle of the ambient variety, and quotient by the tangent bundle of the subvariety. At a point, we have collapsed the tangent bundle of the subvariety, and all we are left with is the vectors that are not tangent to the subvariety. I guess it kind of makes sense: take for example a curve on \(\mathbb{R}^3\), collapse the tangent line at a point of the curve, and you get \(\mathbb{R}^2\).
-\end{thing6}
-\fi
-So what is the determinant bundle? See basic math section, but it is the top exterior power of the bundle, i.e. at every point you just put the top exterior power of the corresponding vector space.
-
-\begin{thing4}{Proposition 2.2.17, \cite{huc}}[Adjunction formula]\label{prop:2.2.17}\leavevmode
-Let \(Y\) be a submanifold of a complex manifold \(X\). Then the canonical bundle \(K_Y\) of \(Y\) is naturally isomorphic to the line bundle \(K_X|_{Y} \otimes \det(\mathcal{N}_{Y/X})\).
-\end{thing4}
-
-\begin{proof}\leavevmode
-So you see, the proof is that exercise of the last section.
-\end{proof}
-
-There's more. Today I asked Bruno well how do you associate a divisor to a section of a line bundle? \textit{It's the zeros of the section!} Now think of the normal bundle of the divisor. What is it?
-\begin{thing4}{Proposition 2.4.7}[\cite{huc}]\label{prop:2.4.7}\leavevmode
-Let \(X\) be a smooth hypersurface of a complex manifold \(Y\) defined by a section \(s \in H^{0}(Y,L)\) of some holomorphic line bundle \(L\) on \(Y\). Then \(\mathcal{N}_{X/Y}\cong L_X\) and thus 
-\end{thing4}
-
-How to think this?
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth]{fig1}
-	\caption*{Riemann surfaces case}
-\end{figure}
- \begin{quotation}
- 	So take that Riemann surface and that line bundle and that section of that line bundle and that zero locus of that section of that line bundle on that Riemann surface, which is your divisor/submanifold. It's some points, just some points. The tangent space of some points is totally boring, it's some points again, so the normal space is all the space of the ambient manifold, so the line bundle again. Whoa.
- \end{quotation}
-
- \begin{thing7}{proposition finishes:}\leavevmode
- and thus \(K_X \cong (K_Y \otimes L)|_{X}\).
- \end{thing7}
-
- \begin{upshot}\leavevmode
- I think the proof is essentially the canonical isomorphism of determinant sheaves of the normal exact sequence.
- \end{upshot}
-
-\subsubsection{a formula from Hartshorne}
-
-This is really an application of Riemann-Roch for surfaces:
-
-\begin{thing1}{Proposition V.1.5}[\cite{hart}]\leavevmode
-If \(C\) is a nonsingular curve of genus \(g\) on the surface \(X\) and \(K\) is the canonical divisor on \(X\), then
-\[2g-2=C.(C+K).\]
-
-\end{thing1}
-
-\subsubsection{Kodaira ampleness criterion}
+\subsubsection{kodaira ampleness criterion}
 
 In K3 lecture 9 we have
 
@@ -1889,6 +1793,15 @@ in particular
 
 trick: if you want to prove some vanishing of some line bundle, rewrite your line bundle as K+something, then check if you can make this something ample."
 \end{quotation}
+\subsection{Noether's formula}
+
+From \cite{beauville}, I.14.
+
+\begin{thing7}{Noether's formula}\leavevmode
+%\[\chi(\mathcal{O}_S)=\frac{1}{12}(K^2_S+\chi_\operatorname{top}(S),\]
+% where \(\chi_\operatorname{top}(S))\)
+\end{thing7}
+
 
 \subsection{Positive \((1,1)\)-forms}
 Any positive \((1,1)\) form looks like this: \(\sum \alpha I x_i \wedge x_i\) for some positive functions \(\alpha_i \geq 0\).
@@ -1898,10 +1811,6 @@ Any positive \((1,1)\) form looks like this: \(\sum \alpha I x_i \wedge x_i\) fo
 \begin{thing4}{Theorem V.1.9}[Hodge Index Theorem]\label{prop:V.1.9}\leavevmode
 Let
 \end{thing4}
-
-
-\subsection{Kähler metric}
-The Kähler form is the differential of a plurisubharmonic function \(\psi\). that is \(\omega=d d^c \psi=\sqrt{-1} \partial \partial \psi\).
 
 \subsection{Picard group, Neron-Severi group}
 
@@ -2017,6 +1926,13 @@ But what's the lance?
 	\hfill Yes---you're getting it beautifully now.
 \end{quotation}
 
+\subsection{Holomorphically symplectic forms and C-symplectic forms}
+
+A \textit{\textbf{C-symplectic form}} \(\Omega\) on a smooth 4\(n\)-dimensional manifold is a closed complex-valued form such that \(\Omega^{n+1}=0\) and \(\Omega^n \wedge \overline{ \Omega}^n\) is a non-degenerate volume form. So perhaps \(dz^1 \wedge \ldots \wedge dz^n\) is an example? Ask GPT or make sure.
+
+The point is that… the kernel of a C-symplectic form gives a decomposition of the complexification of the tangent bundle of the manifold, and if it is closed…
+
+
 
 \subsection{Fano}
 
@@ -2025,6 +1941,234 @@ By Kodaira vanishing theorem, you can show that the cohomology \(H^{i}(X,L)\) of
 \[r(X)=\operatorname{min}\{r:\frac{c_1(X)}{r}\in H^{2}(X,\mathbb{Z})\}.\]
 Anyway the point is that \(\operatorname{Pic}(X)\cong H^{2}(X,\mathbb{Z})\) for Fano.
 \end{exercise}
+
+\section{lie groups and lie algebras}
+
+Some notes made quite some time ago from  \cite{les}.
+
+\subsection{classical lie groups}
+\begin{defn}
+	A \textbf{\textit{Lie group}} is a smooth manifold $G$ without boundary that is also a group in the algebraic sense, with the property that the multiplication map and the inversion map are both smooth.
+\end{defn}
+\begin{example}\leavevmode
+	\begin{enumerate}
+		\item The \textbf{\textit{general linear group}} $\operatorname{GL}(n,\mathbb{R})$ is the set of invertible $n\times n$ matrices with real entries.
+		\item $\operatorname{GL}^+(n,\mathbb{R})$, the subset of $\operatorname{GL}(n,\mathbb{R})$ consisting of matrices with positive determinant.
+		\item If $G$ is any Lie group and $H\subset G$ is an open subgroup, $H$ is a Lie group (because restrictions of the operations are smooth).
+		\item The \textbf{\textit{complex general linear group}} $\operatorname{GL}(n,\mathbb{C})$.
+		\item If $V$ is any real or complex vector space, $\operatorname{GL}(V)$ denotes que set of invertible linear maps from $V$ to itself. If $V$ is finite dimensional, there is an isomorphism with either of $GL(n,\mathbb{R})$ or $\operatorname{GL}(n,\mathbb{C})$.
+		\item $\mathbb{R}^n$ and $\mathbb{C}^n$.
+		\item The set $\mathbb{R}^*$ of nonzero real numbers. In fact, it is $\operatorname{GL}(1,\mathbb{R})$. Also $\mathbb{C}^*$.
+		\item The circle $\mathbb{S}^1$.
+		\item Direct product of Lie groups.
+		\item The $n$-torus $\mathbb{T}^n$.
+		\item Any discrete group.
+		\item The set $\operatorname{SL}(n,\mathbb{R})$ of $n\times n$ real matrices with determinant equal to 1 is called the \textbf{\textit{special linear group of degree $n$}}. It is the kernel of the group homomorphism $\det:\operatorname{GL}(n,\mathbb{R})\to\mathbb{R}^*$. Because the determinan function is surjective, it is a smooth submersion by the global rank theorem so $\operatorname{SL}(n,\mathbb{R})$ has dimension $n^2-1$.
+		\item Let $n$ be a positive integer and define the map $\beta:\operatorname{GL}(n,\mathbb{C})\to\operatorname{GL}(2n,\mathbb{R})$ by replacing each complex matrix entry by a $2\times 2$ block matrix. Thus $\operatorname{GL}(n,\mathbb{C})$ is isomorphic to a Lie subgroup of $\operatorname{GL}(2n,\mathbb{R})$.
+		\item The subgroup $\operatorname{SL}(n,\mathbb{C})\subseteq\operatorname{GL}(n,\mathbb{C})$ consisting of complex matrices of determinant 1 is called the \textbf{\textit{complex special linear group of degree $n$}}. By similar arguments the real case, it is of codimension $\dim\mathbb{C}^*=2$ and therefore of dimension $2n^2-2$.
+		\item A real $n\times n$ matrix $A$ is said to be \textbf{\textit{orthogonal}} if as a linear map it preserves the Euclidean dot product. The set $\operatorname{O}(n)$ of orthogonal $n\times n$ matrices is a subgroup of $\operatorname{GL}(n,\mathbb{R})$ called the \textbf{\textit{orthogonal group of degree $n$}}. A matrix $A$ is orthogonal if and only if it takes the standard basis of $\mathbb{R}^n$ to an orthonormal basis, which is equivalent to the columns of $A$ being orthonormal. Since the $(i,j)$-entry of the matrix $A^TA$ is the dot product of the $i$th and $j$th columns of $A$, this condition is also equivalent to the requirement that $A^TA=I_n$. Also, $\operatorname{O}(n)$ is the level set $\Phi^{-1}(I_n)$ of the map $\Phi:\operatorname{GL}(n,\mathbb{R})\to\operatorname{M}(n,\mathbb{R})$ given by $A\mapsto A^TA$, so it is a closed set and an embedded Lie subgroup. It is also bounded because every $A\in\operatorname{O}(n)$ has columns of norm 1, and therefore satisfies that $|A|=\sqrt{n}$. It has dimension $n(n-1)/2$.
+		\item The \textbf{\textit{special orthogonal group of degree $n$}} is defined as $\mathbb{S}O(n)=\operatorname{O}(n)\cap\operatorname{SL}(n,\mathbb{R})\subseteq\operatorname{GL}(n,\mathbb{R})$. Notice that every matrix $A\in\operatorname{O}(n)$ satisfies
+		\[1=\det I_n=\det(A^TA)=\det A\det A^T=(\det A)^2,\]
+		it follows that $\det A=\pm1$. Therefore $\mathbb{S}O(n)$ is the open subgroup of $\operatorname{O}(n)$ consisting of matrices with positive determinant, and is therefore also an embedded Lie subgroup of dimension $n(n-1)/2$ in $\operatorname{GL}(n,\mathbb{R})$. It is a compact group because it is a closed subset of $\operatorname{O}(n)$.
+		\item For any complex matrix $A$, the \textbf{\textit{adjoint of $A$}} is the matrix $A^*$ formed by conjugating the entries of $A$ and taking the transpose: $A^*=\overline{A}^T$. For any positive integer $n$, the \textbf{\textit{unitary group of degree $n$}} is the subgroup $\operatorname{U}(n)\subseteq\operatorname{GL}(n,\mathbb{C})$ consisting of complex $n\times n$ matrices whose columns form an orthogonal basis for $\mathbb{C}^n$ with respect to the Hermitian dot product $z\cdot w=\sum_iz^i\overline{w^i}$. It is straightforward to check that $\operatorname{U}(n)$ consists of those matrices $A$ such that $A^*A=I_n$. It is a properly embedded Lie subgroup of $\operatorname{GL}(n,\mathbb{C})$ of dimension $n^2$.
+		\item The group $\operatorname{SU}(n)=\operatorname{U}(n)\cap\operatorname{SL}(n,\mathbb{C})$ is called the \textbf{\textit{complex special unitary group of degree $n$}}. It is a properly embedded Lie subgroup of $\operatorname{U}(n)$ of dimension $n^2-1$. It is also embedded in $\operatorname{GL}(n,\mathbb{C})$ because composition of embedddings is an embedding.
+		\item The \textbf{\textit{real symplectic group}} is the subgroup $\operatorname{Sp}(2n,\mathbb{R})\subseteq\operatorname{GL}(2n,\mathbb{R})$ consisting of all $2n\times2n$ matrices that leave the standard symplectic tensor $\omega=\sum_{i=1}^ndx^i\wedge dy^i$ invariant, that is, the set of invertible linear maps $Z:\mathbb{R}^{2n}\to\mathbb{R}^{2n}$ such that $\omega(Zx,Zy)=\omega(x,y)$ for all $x,y\in\mathbb{R}^{2n}$.
+	\end{enumerate}
+\end{example}
+\begin{defn}[Extra]
+	If $G$ is any Lie group, a \textbf{\textit{(finite-dimensional) representation of $G$}} is a Lie group homomorphism grom $G$ to $\operatorname{GL}(V)$ for some $V$. If a representation is injective, it is said to be \textbf{\textit{faithful}}.
+\end{defn}
+\subsection{the lie algebra of a lie group}
+Suppose $G$ is a Lie group. Recall that $G$ acts smoothly and transitevely on itself by left translation $L_g(h)=gh$. A vector field $X$ on $G$ is said to be \textbf{\textit{left-invariant}} if it is invariant under all left translations:
+\[d(L_g)_{g'}(G_{g'})=X_{gg'}\qquad\text{ for all }g,g'\in G.\]
+Since $L_g$ is a diffeomorphism, the pushforward of a vector field is well defined and we may write our condition as $(L_g)_*X=X$ for every $g\in G$.
+
+Because $(L_g)_*(aX+bY)=a(L_g)_*+b(L_g)_*$, the set of left-invariant vector fields on $G$ is a linear subspace of $\mathfrak{X}(G)$. But there's more
+\begin{prop}
+	Let $G$ be a Lie group and suppose that $X$ and $Y$ are left-invariant vector fields on $G$. Then $[X,Y]$ is also left-invariant.
+\end{prop}
+\begin{defn}
+	A \textbf{\textit{Lie algebra}} (over $\mathbb{R}$) is a real vector space $\mathfrak{g}$ endowed with a map called the \textbf{\textit{bracket}} from $\mathfrak{g}\times\mathfrak{g}$ to $\mathfrak{g}$ usually denoted by $(X,Y)\mapsto[X,Y]$ that satisfies the following properties for all $X,Y,Z\in\mathfrak{g}$:
+	\begin{enumerate}
+		\item {\scshape Bilinearity:} For $a,b\in\mathbb{R}$,
+		\[[aX+bY,Z]=a[X,Z]+b[Y,Z],\]
+		\[[Z,aX+bY]=a[Z,X]+b[Z,Y].\]
+		\item {\scshape Antisymmetry:}
+		\[[X,Y]=-[Y,X].\]
+		\item {\scshape Jacobi Identity:}
+		\[[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]=0.\]
+	\end{enumerate}
+\end{defn}
+Notice that the Jacobi identity is a substitute for associativity, which does not hold in general for brackets in a Lie algebra. We may also define Lie algebras over $\mathbb{C}$.
+\begin{defn}\leavevmode
+	\begin{itemize}
+		\item If $\mathfrak{g}$ is a Lie algebra, a linear subspace $\mathfrak{h}\subseteq\mathfrak{g}$ is called a \textbf{\textit{Lie subalgebra of $\mathfrak{g}$}} if it is closed under brackets.
+		\item If $\mathfrak{g}$ and $hf$ are Lie algebras, a linear map $A:\mathfrak{g}\to\mathfrak{h}$ is called a \textbf{\textit{Lie algebra homomorphism}} if it preserves brackets: $A[X,Y]=[AX,AY]$. An invertible Lie algebra homomorphism is called a \textbf{\textit{Lie algebra isomorphism}}.
+	\end{itemize}
+\end{defn}
+\begin{example}\leavevmode
+	\begin{enumerate}
+		\item The space $\mathfrak{X}(M)$ of all smooth vector fields on a smooth manifold $M$ is a Lie algebra under the Lie bracket.
+		\item If $G$ is a Lie group, the set of all left-invariant vector fields on $G$ is a Lie subalgebra of $\mathfrak{X}(G)$. This is called the \textbf{\textit{Lie algebra of $G$}} and it is denoted by $\operatorname{Lie}(G)$.
+		\item The vector space $\operatorname{Mat}(n,\mathbb{R})$ of $n\times n$ real matrices is an $n^2$-dimensional Lie algebra under the \textbf{\textit{commutator bracket}}
+		\[[A,B]=AB-BA.\]
+		When regarding $\operatorname{Mat}(n,\mathbb{R})$ as a Lie algebra with this bracket, we denote it by $\mathfrak{gl}(n,\mathbb{R})$.
+		\item Similarly, $\mathfrak{gl}(n,\mathbb{C})$ is the $2n^2$-dimensional (real) Lie algebra obtained by endowing $\operatorname{Mat}(n,\mathbb{C})$ with the commutator bracket.
+		\item If $V$ is a vector space, the vector space of all linear maps from $V$ to itself becomes a Lie algebra which we denote $\mathfrak{gl}(V)$ with the commutator bracket:
+		\[[A,B]=A\circ B-B\circ A.\]
+		Under the usual identification of $n\times n$ matrices with linear maps from $\mathbb{R}^n$ to itself, $\mathfrak{gl}(\mathbb{R}^n)$ is the same as $\mathfrak{gl}(n,\mathbb{R})$.
+		\item Any vector space $V$ becomes a lie algebra if we define all brackets to be zero. Such a Lie algebra is said to be \textbf{\textit{abelian}}.
+	\end{enumerate}
+\end{example}
+\begin{thm}
+	Let $G$ be a Lie group. The evaluation map $\varepsilon:\operatorname{Lie}(G)\to T_eG$ given by $\varepsilon(X)=X_e$ is a vector space isomorphism. Thus $\operatorname{Lie}(G)$ is finite-dimensional with dimension equal to $\dim G$.
+\end{thm}
+\begin{coro}
+	Every left-invariant rough vector field on a Lie group is smooth.
+\end{coro}
+\begin{coro}
+	Every Lie group admits a left-invariant smooth global frame, and therefore every Lie group is parallelizable.
+\end{coro}
+\begin{example}\leavevmode
+	\begin{enumerate}
+		\item $\operatorname{Lie}(\mathbb{R}^n)\cong\mathbb{R}^n$.
+		\item $\operatorname{Lie}(\mathbb{S}^1)\cong\mathbb{R}$.
+		\item $\operatorname{Lie}(\mathbb{T}^n)\cong\mathbb{R}^n$.
+		\item $\operatorname{Lie}(\operatorname{GL}(n,\mathbb{R}))\cong\mathfrak{gl}(n,\mathbb{R})$. (long proof)
+		\item If $V$ is any finite-dimensional real vector space, $\operatorname{Lie}(\operatorname{GL}(V))\cong\mathfrak{gl}(V)$.
+		\item $\operatorname{Lie}(\operatorname{GL}(n,\mathbb{C}))\cong\mathfrak{gl}(n,\mathbb{C})$.
+		\item $\mathfrak{o}(n)=\{\text{skew-symmetric }n\times n\text{ matrices}\}\subseteq\mathfrak{gl}(n,\mathbb{R})$ is $\operatorname{Lie}(\operatorname{O}(n))$.
+		\item $\operatorname{Lie}(\operatorname{GL}(n,\mathbb{C}))\cong\mathfrak{gl}(n,\mathbb{C})$. (long proof)
+	\end{enumerate}
+\end{example}
+\begin{thm}[Ado's Theorem]
+	Every finite-dimensional real Lie algebra admits a faithful finite-dimensional representation.
+\end{thm}
+\begin{coro}
+	Every finite-dimensional real Lie algebra is isomorphic to a Lie subalgebra of some matrix algebra $\mathfrak{gl}(n,\mathbb{R})$ with the commutator bracket.
+\end{coro}
+
+\subsection{the exponential map}
+\begin{defn}
+	Suppose $G$ is a Lie group. A \textbf{\textit{one-parameter subgroup of $G$}} is defined to be a Lie group homomorphism $\gamma:\mathbb{R}\to G$ with $R$ considered as a lie group under addition. Notice that by this definition, a one-parameter subgroup is not a Lie subgroup of $G$ but rather a homomorphism into $G$.
+\end{defn}
+\begin{thm}
+	The one-parameter subgroups of $G$ are precisely the maximal integral curves of left-invariante vector fields starting at the identity.
+\end{thm}
+\begin{defn}
+	Given $X\in\operatorname{Lie}(G)$, the one-parameter subgroup determined by $X$ in this way is called the \textbf{\textit{one-parameter subgroup generated by $X$}}.
+\end{defn}
+Because left-invariant vector fields are uniquely determined by their values at the identity, it follows that each one-parameter subgroup is unequely determined by its initial velocity in $T_eG$, and thus there are one-to-one correspondences
+\[\{\text{one-parameter subgroups of }G\}\leftrightarrow\operatorname{Lie}(G)\leftrightarrow T_eG.\]
+\begin{prop}
+	For any $A\in\mathfrak{gl}(n,\mathbb{R})$, let
+	\[e^A=\sum_{k=0}^\infty\frac{1}{k!}A^k=I_n+A+\frac{1}{2}A^2+\ldots.\]
+	This series converges to an invertible matrix $e^A\in\operatorname{GL}(n,\mathbb{R})$ and the one-parameter subgroup of $\operatorname{GL}(n,\mathbb{R})$ generated by $A\in\mathfrak{gl}(n,\mathbb{R})$ is $\gamma(t)=e^{tA}$.
+\end{prop}
+\begin{prop}
+	Suppose $G$ is a Lie group and $H\subseteq G$ is a Lie subgroup. The one-parameter subgroups of $H$ are precisely those one-parameter subgroups of $G$ whose initial velocities lie in $T_eH$.
+\end{prop}
+\begin{example}
+	If $H$ is a Lie subgroup of $\operatorname{GL}(n,\mathbb{R})$, the precding proposition shows that the one-parameter subgroups of $H$ are precisely the maps of the form $\gamma(t)=e^{tA}$ for $A\in\mathfrak{h}$, where $h\subseteq\mathfrak{gl}(n,\mathbb{R})$ is the subalgebra cooresponding to $\operatorname{Lie}(H)$. For example, taking $H=\operatorname{O}(n)$ this shows that the one-parameter subgroups of $\operatorname{O}(n)$ are the maps of the form $\gamma(t)=e^{tA)}$ for an arbitrary skew-symmetric $A$. In particular, this shows that the exponential of any skew-symmetric matrix is orthogonal.
+\end{example}
+\begin{defn}
+	Given a Lie group $G$ with Lie algebra $\mathfrak{g}$, we define the map $\operatorname{exp}:\mathfrak{g}\to G$ called the \textbf{\textit{exponential map of $G$}} as follows: for any $X\in\mathfrak{g}$, we set
+	\[\operatorname{exp} X=\gamma(1),\]
+	where $\gamma$ is the one-parameter subgroup generated by $X$, or equivalently the integral curve of $X$ starting at the identity.
+\end{defn}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{exp}
+	\label{fig:exp}
+\end{figure}
+
+\begin{prop}
+	Let $G$ be a Lie group. For any $X\in\operatorname{Lie}(G)$, $\gamma(s)=\operatorname{exp} sX$ is the one-parameter subgroup of $G$ generated by $X$.
+\end{prop}
+\begin{example}\leavevmode
+	\begin{enumerate}
+		\item $\operatorname{exp} A=e^A$.
+		\item If $V$ is any finite-dimensional real vector space, a choice of basis for $V$ yields isomorphisms $\operatorname{GL}(V)\cong\operatorname{GL}(n,\mathbb{R})$ and $\mathfrak{gl}(V)\cong\mathfrak{gl}(n,\mathbb{R})$. The analysis of the $\operatorname{GL}(n,\mathbb{R})$ case then shows that the exponential map of $\operatorname{GL}(V)$ can be written in the form
+		\[\operatorname{exp} A=\sum_{k=0}^\infty\frac{1}{k!}A^k\]
+		when we consider $A\in\mathfrak{gl}(V)$ as a linear map from $V$ to itself and $A^k=A\circ\ldots\circ A$.
+	\end{enumerate}
+\end{example}
+\begin{prop}
+	Let $G$ be a Lie group and $\mathfrak{g}$ be its Lie algebra.
+	\begin{enumerate}
+		\item The exponential map is a smooth map from $\mathfrak{g}$ to $G$.
+		\item For any $X\in\mathfrak{g}$ and $s,t\in\mathbb{R}$, $\operatorname{exp}(s+t)X=\operatorname{exp} sX\operatorname{exp} tX$.
+		\item For any $X\in\mathfrak{g}$, $(\operatorname{exp} X)^{-1}=\operatorname{exp}(-X)$.
+		\item For any $X\in\mathfrak{g}$ and $n\in \mathbb{Z}$, $(\operatorname{exp} X)^n=\operatorname{exp}(nX)$.
+		\item The differential $(d\operatorname{exp})_0:T_0\mathfrak{g}\to T_eG$ is the identity map, under the canonical identifications of both $T_0\mathfrak{g}$ and $T_eG$ with $\mathfrak{g}$ itself.
+		\item The exponential map restricts to a diffeomorphism from some neighborhood of 0 in $\mathfrak{g}$ to a neighborhood of $e$ in $G$.
+	\end{enumerate}
+\end{prop}
+Notice that $\operatorname{exp}(X+Y)=\operatorname{exp} X\operatorname{exp} Y$ for arbitrary $X,Y$ in the Lie algebra. In fact, for connected groups, this is only true when the group is abelian.
+
+\begin{thm}[The Lie correspondence]
+	There is a one-to-one correspondence between isomorphism classes of finite-dimensional Lie algebras and isomorphism classes of simply connected Lie groups given by associating each simply connected Lie group with its Lie algebra.
+\end{thm}
+
+
+\subsection{\(\mathsf{U}(n)\) is intersection of any two…}
+
+ \paragraph{Problem 6:} Consider the standard compatible triple $(\operatorname{O}mega_0,J_0,g_0)$ on $\mathbb{R}^{2n}$. Let $\operatorname{O}(2n)$ be the linear orthogonal group of $\mathbb{R}^{2n}$ (i.e., linear transformations preserving the canonical inner product $g_0$), and let $\operatorname{Sp}(2n)$ be the symplectic linear group. Through the identification $\mathbb{R}^{2n}\cong \mathbb{C}^{n}$ (as complex vector spaces), we may see $\operatorname{GL}(n,\mathbb{C})$ (the group of linear automorphisms of $\mathbb{C}^{n}$) as a subgroup of $\operatorname{GL}(2n,\mathbb{R})$ : a complex matrix $A+iB$ is identified with the real $2n\times 2n$ matrix
+ \[\begin{pmatrix}A&-B\\B&A\end{pmatrix}\]
+Let now $\operatorname{U}(n)\subset\operatorname{GL}(n,\mathbb{C})$ be the group of linear transformation preserving the natural hermitian inner product of $\mathbb{C}^{n}$. Show that the intersection of any two of the groups
+\[\operatorname{Sp}(2n),\operatorname{O}(2n),\operatorname{GL}(n,\mathbb{C})\subset\operatorname{GL}(2n,\mathbb{R})\]
+is $\operatorname{U}(n)$.
+
+\subsection{a fact about lie groups and flows}
+
+Not sure where to put this so maybe here for now…
+
+\begin{thing7}{Adjoint representation}\leavevmode
+The \textit{\textbf{adjoint representation}} of a Lie group \(G\) is a map \(\operatorname{Ad}:G \to \mathsf{GL}(\mathfrak{g})\) that represents \(G\) as a group of linear automorphisms of its Lie algebra. It is given by \(G \ni a \mapsto (dC_a)_e\), the differential of the conjugation map \(C_a\).
+\end{thing7}
+
+\subsubsection*{flow of left-invariant is right multiplication}
+
+Now I know what is a flow: the flow is
+\[\varphi^t(p)\]
+For every point of the manifold I get the integral curve of a vector field (of course a priori a flow is just a flow but let me just think it's the flow of a vector field). At every point you get a curve.
+
+Now. The thing with the Lie bracket is that when you differentiate the flow you get to the Lie bracket via a formula that is hard to write. So the easy way to write it is:
+\[[V,W]=\frac{d}{dt}\Big|_{t=0} \varphi^{-t}_{*,\varphi^t(p)}W_{\varphi^t(p)}\]
+and that's it.
+
+
+
+Now I will prove in Portuguese that \textbf{the flow of a left-invariant vector field is right-translation}. First I need a claim.
+
+	\begin{claim}\leavevmode
+	O fluxo \(\varphi\) de um campo invariante à esquerda \(w\) comuta com a traslação à esquerda, i.e.,
+	\[\varphi_t(e)\circ L_h = L_h \circ \varphi_t(e)\qquad \forall t\in \mathbb{R} \forall h \in G.\]
+	\end{claim}
+	\begin{proof}[Prova da afirmação]\leavevmode
+Derivamos de ambos lados. Por um lado,
+\begin{align*}
+\frac{d}{dt}\Big|_{t=0}\varphi_t(e) \circ L_h=\frac{d}{dt}\Big|_{t=0}\varphi_t(h)&=v_h\end{align*}
+Por outro lado,
+\[\frac{d}{dt}\Big|_{t=0}L_h \circ \varphi_t(e)=(L_h)_{*,\varphi_t(e)}\frac{d}{dt}\Big|_{t=0}\varphi_t(e)=(L_h)_{*,e}v_e=v_h.\]
+Por unicidade das soluções de EDOs, acabou.
+	\end{proof}
+Então repare:
+\[\varphi_t(h)=(\varphi_t\circ L_h)(e)=(L_h \circ \varphi_t)(e)=h\varphi_t(e)=R_{\varphi_t(e)}h,\]
+ou seja, qualquer curva integral de \(w\) é simplesmente a curva integral que passa por \(e\) trasladada. \textbf{That's what I wanted to show but there's more:} 
+
+Agora lembre que o colchete de Lie pode ser expressado como
+\[[w,v]_e=\frac{d}{dt}\Big|_{t=0}\Big(\varphi_{-t}\Big)_{*,\varphi_t(e)}v_{\varphi_t(e)}.\]
+(Onde fixamos o parámetro \(-t\) e deixamos livre o outro para ver \(\varphi_{-t}\) como um difeomorfismo de \(G\).)
+
+Juntando com a discussão anterior obtemos
+\[[w,v]_e=\frac{d}{dt}\Big|_{t=0}\Big(R_{\varphi_{-t}(e)}\Big)_{*,\varphi_t(e)}v_{\varphi_t(e)}.\]
+
+
+
+
+
+
 
 \section{complex analysis}
 
@@ -2055,8 +2199,6 @@ And looks the same but actually you quotient by… \(ih\):
 Aha! Right so real with real and imaginary-imaginary,
 \[\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\qquad \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}\]
 \end{thing7}
-
-
 
 
 \bibliography{bib.bib}
