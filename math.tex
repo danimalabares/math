@@ -449,8 +449,8 @@ This is actually an exercise:
 Seja \(\gamma\) uma curva suave por partes parametrizada por comprimento de arco (this is important, velocity is 1) conectando \(p\) a \(q\). Mostre que se \(d(p,q)=\ell(\gamma)\) então \(\gamma\) é uma geodésica.
 \end{thing4}
 
-We shall use the \textit{\textbf{first variation formula}} which in short says
-\[S'(0)=-\int_a^b \left<V,\gamma''\right>dt.\]
+We shall use the \textit{\textbf{first variation formula}} which in short (everything smooth, fixing endpoints) says
+\[\boxed{S'(0)=-\int_a^b \left<V,\gamma''\right>dt}\]
 Explanation. Consider a \textit{\textbf{variation}} of \(\gamma\), which is like a homotopy:
 \begin{align*}
 	\Gamma: (a,b)\times(-\varepsilon,\varepsilon) &\longrightarrow M \\
@@ -481,9 +481,30 @@ So we get that if \(\gamma\) minimizes distance, this integral is zero for any v
 \end{itemize}
 \end{thing8}
 
+So the \textit{\textbf{first variation formula}} in its full power version from \cite{ler} says
+\begin{align*}
+	\boxed{\begin{array}{rl}\frac{d}{ds}\Big|_{s=0}S(s)&=-\int_a^b\left<V,\ddot \gamma\right>-\sum_{i=1}^{k-1}\left<V(t_i),\dot\gamma(t_{i+1})-\dot\gamma(t_{i})\right>\\
+				   & \qquad +\left<V(b),\dot\gamma(b)\right>-\left<V(a),\dot\gamma(a)\right>\end{array}}
+	\end{align*}
+\textbf{Explanation.} The first term we already know what it is. The second term is what happens at the singularities of the piecewise-smooth variation defined with singularities at \(t_1,\ldots,t_n\), and the third term is what happens at the first and final point.
+
+So it remains kind of a mystery why Lee does the computations with the length functional and not with the energy functional. Ah! I think it's parametrization matters: for the formula above to work \textbf{you need unit speed}. I you don't have unit speed you don't get rid of the square root when differentiating, and that's terrible. So what everyone does is instead use the \textit{\textbf{energy functional}} which is just the integral of square of the norm,
+\[\boxed{E(s)=\int_a^b |\dot \gamma|^2}\]
+And what everyone does is that they show this doesn't mind parametrizations \textbf{and} that a geodesic is a geodesic iff it is a critical point of \(E\). That is, \(E\) still detects what you want it to detect, and it's easier to differentiate. And also has nothing to do with thermodynamics.
 \subsection{second variation formula}
 
+Here's  \cite{pet}. For good variations (smooth, fixing endpoints) of a geodesic \(\gamma\) it turns out that
+\[\boxed{\frac{d^2}{ds^2}E(s)\Big|_{s=0}=\int_a^b |\dot V|^2- \int_a^b \left<R(V,\dot \gamma)\dot \gamma,V\right>}\]
+where \(E\) is the energy functional.
 
+And smooth version from \cite{pet} is
+\[\boxed{\frac{d^2}{ds^2}E(s)\Big|_{s=0}=\int_a^b |\dot V|^2-\int_a^b \left<R(V,\dot \gamma)\dot\gamma,V\right>+\left<\nabla_{\partial_s}V,\dot\gamma\right>|_{a}^b}\]
+But the full power version piecewise smooth from Florit lecture is something very similar to:
+\begin{align*}
+	\boxed{\begin{array}{rl}\frac{d}{ds}\Big|_{s=0}E(s)&=-\int_a^b\left<V,\ddot V+R(V,\dot \gamma)\dot \gamma\right>-\sum_{i=2}^{n-1}\left<V(t_i),\dot V(t^+_{i})-\dot V(t^-_{i})\right>\\
+				   & \qquad +\left<V(b),\dot\gamma(b)\right>-\left<V(a),\dot\gamma(a)\right>+\left<\nabla_{\partial_s}V,\dot\gamma\right>|_{a}^b\end{array}}
+	\end{align*}
+which is more or less a useless formula since what do you want that for anyways. Meaning---use for application, not for the sake of knowing it or writing correctly or anything.
 
 \subsection{jacobi field}
 
