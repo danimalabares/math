@@ -430,6 +430,103 @@ Which is great. So you can integrate:
 \[\int_M \varphi^*\operatorname{Vol}_{\widetilde{V}}=\int_M \det D\varphi \operatorname{Vol}_M\]
 And if \(\varphi\) is an isometry the determinant of its differential is… 1. \textbf{Why}. Because \(d \varphi\) is given the matrix whose columns are the images of an orthonormal frame, and these form an orthonormal frame because \(f\) preserves the metric, so the determinant of an orthonormal frame is 1.  So volumes coincide. Yiipa!
 
+\subsection{maximum principle!}
+
+\begin{thing7}{Maximum principle}[E. Hopf]\leavevmode
+\textbf{(Minimal surface course statement.)} For any \((M,g)\), harmonic functions satisfy \textit{\textbf{maximum principle}}: any harmonic function \(f:U \to \mathbb{R}\) for \(U\) connected and open, if \(\exists p \in U\) that is a local maximum or local minimum, then \(f\) is constant on \(U\).
+
+We shall show Do Carmo's version that \(f\) \textit{\textbf{subharmonic}}, i.e. \(\Delta f\geq 0\), on \(M\) compact connected \(\implies\) \(f\) constant. (This is Exercise 12, Chapter III.)
+\end{thing7}
+
+\begin{proof}\leavevmode
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+	\item \textbf{(Exercise 7, Chapter III of  \cite{doc}.)} Make sure you can pick a \textit{\textbf{referencial geodésico}} about every point of \(M\). This is an orthonormal frame \(\{E_i\} \subset \mathfrak{X}(U)\), where \(p \in U\) such that \(\Big(\nabla_{E_i}E_j\Big)_p=0\). This frame can be obtained by taking geodesic coordinates at the point, an orthonormal base \(\{e_i\}\) of \(T_pM\), and taking parallel transport of the vectors \(e_i\) along radial geodesics emanating from \(p\). This immediately ensures that \(E_i\) is orthonormal since parallel transport preserves angles.
+
+		To check that Christoffel symbols vanish at \(p\) we do as follows. (This is actually a basic fact about geodesic coordinates, see \cite{ler} Prop. 5.24.) Take a random vector \(v \in T_pM\) and its geodesic \(\gamma_v(t)=\operatorname{exp}_p(tv)\). I drop the subindex \(v\) for the next computations for the next computations. Then (this is Florit way of using covariant derivative along a curve; it's the \textit{\textbf{pullback}} or \textit{\textbf{induced connection}} \(\nabla^{\gamma}\)):
+		\begin{align*}
+			0&=\nabla_{\frac{d}{dt}}^{\gamma}\gamma'=\nabla^{\gamma}_{\frac{d}{dt}}v^i(E_i\circ \gamma)
+		\end{align*}
+		where the \(v=(v^1,\ldots,v^n)\). Indeed: this is very silly but, since the coordinate chart of geodesic coordinates is \(\operatorname{exp}_p^{-1}\), the coordinate representation of \(\gamma\) in this chart is as simple as
+	\[\hat{\gamma}(t)=(\underbrace{\varphi}_{\text{chart}} \circ \gamma)(t)=\operatorname{exp}_p^{-1} \operatorname{exp}_p(tv)=tv.\]
+And the composition \(E_i \circ \gamma\) just means that we take our local frame \textit{along \(\gamma\)}. Continue:
+		\begin{align*}
+		&=v^i\nabla^{\gamma}_{\frac{d}{dt}}E_i\circ\gamma=v^i\nabla_{\gamma_{v,*} \frac{d}{dt}}E_i\\&=v^i\nabla_{v^jE_j}E_i=v^iv^j\nabla_{E_j}E_i\\&=v^iv^j\Gamma_{ji}^kE_k
+		\end{align*}
+along \(\gamma\). Now choose \(v=e_1\). You get \(\Gamma_{11}^k=0\) for all \(k\) along \(\gamma_{e_1}\). Now choose \(v=e_2\), then \(\Gamma_{22}^k=0\) along \(\gamma_{e_2}\), so at least at \(p\) they both vanish. And now choose \(v=e_1+e_2\). You get
+\begin{align*}
+	0=(v^1)^2 \cancelto{0}{\Gamma_{1 1}^k}+v^1v^2 \Gamma_{1 2}^k+v^2v^1\Gamma_{2 1}^k+(v^2)^2\cancelto{0}{\Gamma_{2 2}^k}
+\end{align*}
+So \(\Gamma_{12}^k=0\) since Levi-Civita is torsion-free, i.e. symmetric. And so on. So the all Christoffel symbols vanish at the same time at \(p\).
+\item \textbf{(Exercise 11, Chapter III of  \cite{doc}.)} Prove that \[di_X \operatorname{Vol}=\operatorname{div}X \operatorname{Vol}\]
+	To do this first recall that \textit{\textbf{divergence}} and \textit{\textbf{trace}} are
+	\begin{align*}\operatorname{div}X&:=\operatorname{tr}(v \mapsto \nabla_vX)\\ \\
+		\operatorname{tr}(T)&:=\sum_i\left<TE_i,E_i\right>, \qquad T\in \operatorname{End}(V), E_i\text{ orthonormal frame} \end{align*}
+	Now pick a Geodesic frame \(E_i\) and its dual coframe \(\varepsilon^i\), i.e. satisfying \(\varepsilon^i(E_j)=\delta_{ij}\). Then \(\operatorname{Vol}=\varepsilon^1 \wedge \ldots \wedge \varepsilon^n\). Then for any \(X=X^iE_i \in \mathfrak{X}(U)\),
+	\begin{align*}
+	i_X\operatorname{Vol}&=\varepsilon^1\wedge\ldots\wedge\varepsilon^n(X^iE_i,\cdot,\ldots,\cdot)=X^i\varepsilon^1\wedge\ldots\wedge\varepsilon^n(E_i,\cdot,\ldots,\cdot)
+	\end{align*}
+	How to compute that? Recall that for top-forms we have
+	\[\varepsilon^1\wedge\ldots\wedge\varepsilon^n(Z_1,\ldots,Z_n)=\det(\varepsilon^i(Z_j))\]
+	so for example if \(n=3\)
+	\begin{align*}\varepsilon^1\wedge \varepsilon^2\wedge\varepsilon^3(E_1,Z_2,Z_3)&=\begin{vmatrix} \varepsilon^1(E_1)&\varepsilon^1(Z_2) &\varepsilon^1(Z_3)\\
+\varepsilon^2(E_1)&\varepsilon^2(Z_2)&\varepsilon^2(Z_3)\\
+\varepsilon^3(E_1)&\varepsilon^3(Z_2)&\varepsilon^3(Z_3)
+	\end{vmatrix}=\begin{vmatrix} 1&\varepsilon^1(Z_2) &\varepsilon^1(Z_3)\\
+0&\varepsilon^2(Z_2)&\varepsilon^2(Z_3)\\
+0&\varepsilon^3(Z_2)&\varepsilon^3(Z_3)
+	\end{vmatrix}\\
+	&=\varepsilon^2(Z_2)\varepsilon^3(Z_3)-\varepsilon^2(Z_3)\varepsilon^3(Z_2)=\varepsilon^2\wedge\varepsilon^3(Z_2,Z_3),\\
+	\varepsilon^1\wedge\varepsilon^2\wedge\varepsilon^3(E_2,Z_2,Z_3)&=\begin{vmatrix} 0&\varepsilon^1(Z_2) &\varepsilon^1(Z_3)\\
+1&\varepsilon^2(Z_2)&\varepsilon^2(Z_3)\\
+0&\varepsilon^3(Z_2)&\varepsilon^3(Z_3)
+	\end{vmatrix}=-\varepsilon^1\wedge\varepsilon^3(Z_2,Z_3)
+	\end{align*}
+and so on. When we sum over all \(i\), we get
+\[X^i\varepsilon^1\wedge\ldots\wedge\varepsilon^n(E_i,\cdot,\ldots,\cdot)=\sum_{i}(-1)^{i+1}X^i\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n.\]
+Now take exterior derivative of that, we get
+\begin{align*}
+d i_X\operatorname{Vol}&=\sum_i(-1)^{i+1}(dX^i)\wedge\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n\\
+&+\sum_{i}(-1)^{i+1}X^i\wedge d(\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n)\end{align*}
+And then the first term actually is
+\begin{align*}
+\sum_i(-1)^{i+1}E_jX^i\varepsilon^j\wedge\varepsilon^1\wedge\ldots\wedge\widehat{\varepsilon^i}\wedge\ldots\wedge\varepsilon^n&=E_iX^i\operatorname{Vol}
+\end{align*}
+while the second term vanishes because look,
+\begin{align*}d \varepsilon^i(E_j,E_k)&=E_j\varepsilon^i(E_k)-E_k\varepsilon^i(E_j)-\varepsilon^i([E_j,E_k])\\
+&=-\varepsilon^i(\nabla_{E_j}E_k-\nabla_{E_k}E_j)\qquad \text{torsion!} \end{align*}
+which vanishes at \(p\) because we said that this geodesic frame would have vanishing Christoffel symbols at \(p\). So we conclude:
+\[di_X \operatorname{Vol}=E_iX^i\operatorname{Vol}\]
+
+Now you just have to think what is divergence:
+\begin{align*}
+\operatorname{div}X&=\sum_{i}\left<\nabla_{E_i}X^jE_j,E_i\right>=\sum_{i}\left<E_iX^jE_j,E_i\right>+X^j\left<\nabla_{E_i}E_j,E_i\right>\\
+&=\sum_i \left<E_iX^jE_j,E_i\right>=\sum_iE_iX^j\left<E_j,E_i\right>=E_iX^i
+\end{align*}
+again using that we are a geodesic frame with vanishing covariant derivative at \(p\).
+
+	\item \textbf{(Exercise 9(b), Chapter III of  \cite{doc}.)} You realise that
+	\[\Delta(fg)=f \Delta g + g \Delta f+2\left<\nabla f,\nabla g\right>.\]
+	Recall that \textit{\textbf{Laplacian}} is
+	\[\Delta f:=\operatorname{div} \nabla f\]
+	This is just a computation no problem, I'll say how it starts. For any \(X \in \mathfrak{X}(M)\),
+	\begin{align*}
+	\left<\nabla(fg),X\right>&=X(fg)=fXg+gXf=f\left<\nabla g,X\right>+g\left<\nabla f,X\right>.
+	\end{align*}
+	which says that	\begin{align*}\nabla(fg)&=f \nabla g+g \nabla f\end{align*}
+	So, for an orthonormal frame \(E_i\)
+	\begin{align*}\Delta(fg)=\operatorname{div} \nabla(fg)&=\sum_i\left<\nabla_{E_i}(f \nabla g+g \nabla f),E_i\right>
+	\end{align*}
+	Then use Leibniz rule and definition of gradient, you get there.
+	
+\item \textbf{(Exercise 12, Chapter III of  \cite{doc}.)} To prove the theorem for subharmonic functions first we show that in fact they are harmonic via step 2 on \(X:= \nabla f\) and Stokes:
+	\[\int_M \Delta f \operatorname{Vol}=\int_M \operatorname{div}X \operatorname{Vol}=\int_M d(i_X \operatorname{Vol})=\int_{\partial M}i_X \operatorname{Vol}=0\]
+meaning that the non-negative function \(\Delta f\) is in fact 0, i.e. \(f\) is harmonic. Now we do it again for \(X:=\nabla(f^2/2)\):
+	\[\int_M \Delta(f^2/2)\operatorname{Vol}=\int_M d(i_X \operatorname{Vol})=\int_{\partial M}i_X \operatorname{Vol}=0\]
+	And then apply step 3:
+	\[0=\int_M \Delta(f^2/2)\operatorname{Vol}=\int_M f \Delta f \operatorname{Vol}+\int_M \left<\nabla f,\nabla f\right>\operatorname{Vol}\]
+First one vanishes because \(f\) is harmonic, so second one is zero which says \(f\) is constant!
+\end{enumerate}
+\end{proof}
 
 \subsection{exponential map and geodesics locally}
 
@@ -538,6 +635,128 @@ differentiate that or \(\overline{J}\) to obtain
 
 \subsection{curvature}
 
+\subsubsection{curvature of CPn!}
+
+\begin{thing6}{Exercício 1}[Curvatura do espaço projetivo complexo, \cite{doc} VIII.12]\label{exer:1}\leavevmode
+Defina uma métrica Riemanniana  em \(\mathbb{C}^{n+1}\setminus\{0\}\) do seguinte modo. Se \(Z \in \mathbb{C}^{n+1}\setminus\{0\}\) e \(V,W \in T_Z (\mathbb{C}^{n+1}\setminus\{0\})\),
+\[\left<V,W\right>_Z=\frac{\operatorname{Re}(V,W)}{(Z,Z)}\]
+onde 
+\[(Z,W)=z_0\overline{w}_0+\ldots+z_n\overline{w}_n\]
+é o produto hermitiano em \(\mathbb{C}^{n+1}\). Observe que a métrica \(\left<\cdot,\cdot\right>\) restrita a \(S^{2n+1}\subset \mathbb{C}^{n+1}\setminus\{0\}\) coincide com a métrica induzida por \(\mathbb{R}^{2n+2}\).
+\begin{enumerate}[label=(\alph*)]
+\item Mostre que, para todo \(0\leq \theta \leq 2\pi\), \(e^{i\theta}:S^{2n+1}\to S^{2n+1}\) é uma isometria, e que, portanto, é possível definir uma métrica Riemanniana em \(\mathbb{P}^n(\mathbb{C})\) de modo que a submersão \(f\) seja Riemanniana.
+
+\item Mostre que, nesta métrica, a curvatura seccional de \(\mathbb{P}^n(\mathbb{C})\) é dada por
+\[\boxed{K(\sigma)=1+3\cos^2\varphi}\]
+onde \(\sigma\) é gerado pelo par ortonormal \(X\), \(Y\), \(\cos \varphi=\left<\overline{X},i\overline{Y}\right>\), e \(\overline{X}\), \(\overline{Y}\) são os levantamentos horizontais de \(X\) e \(Y\), respetivamente. Em particular, \(1 \leq  K(\sigma) \leq  4\).
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+	Começo notando que a métrica \(\left<\cdot,\cdot\right>\) restrita a \(S^{2n+1}\) coincide com a métrica induzida por \(\mathbb{R}^{2n+2}\): pegue \(Z \in S^{2n+1}\) e \(V,W \in T_Z(\mathbb{C}^{n+1}\setminus\{0\}\). Então
+	\begin{align*}
+\left<V,W\right>_Z&=\operatorname{Re}( V,W)\\ &= \operatorname{Re}\sum v^i\overline{w}^i \\
+&= \operatorname{Re}\sum \left(\operatorname{Re} v^i + \sqrt{-1}\operatorname{Im} v^i\right)\left(\operatorname{Re} w^i - \sqrt{-1} \operatorname{Im} w^i\right) \\
+&= \operatorname{Re}\sum\left(\operatorname{Re} v^i\operatorname{Re} w^i + \sqrt{-1}(\operatorname{Im} v^i\operatorname{Re} w^i-\operatorname{Re} v^i\operatorname{Im} w^i ) + \operatorname{Im} v^i\operatorname{Im} w^i\right) \\
+&= \operatorname{Re}\sum\left(\operatorname{Re} v^i\operatorname{Re} w^i + \operatorname{Im} v^i\operatorname{Im} w^i\right) + \operatorname{Re}\left(\sqrt{-1}(\dots)\right) \\
+&= \sum \operatorname{Re} v^i\operatorname{Re} w^i + \operatorname{Im} v^i\operatorname{Im} w^i \\
+&= \langle V,W\rangle_{\mathbb{R}^{2n+2}}
+\end{align*}
+\begin{enumerate}[label=(\alph*)]
+\item Pela observação anterior, basta mostrar que \(e^{i\theta}\) é uma isometria de \(S^{2n+1}\) com a métrica esférica usual. Sabemos que o grupo de isometrias dessa esfera é \(\mathsf{O}(2n+2)\).
+
+	De fato, o mapa \(e^{i\theta} \in \mathsf{O}(n+1,\mathbb{C})\subset\mathsf{O}(2n+2)\) onde o primeiro grupo são as isometrias da forma Hermitiana. Para ver por que, defina \(h\) como a forma hermitiana canônica de \(\mathbb{C}^{n+1}\). Das contas feitas acima fica claro que podemos escrever \(h=g+\sqrt{-1}\omega\), onde \(g\) é a métrica Riemanniana (produto ponto) canônica de \(\mathbb{R}^{2n+2}\) e \(\omega\) é uma outra forma bilinear.
+
+Primeiro note que \(e^{i\theta}\) é uma isometria de \(h\). Para todo \(z \in \mathbb{C}^{n+1}\),
+\begin{align*}
+h(e^{i\theta}z,e^{i\theta}z)=e^{i\theta}\overline{e^{i\theta}}h(z,z)=|e^{i\theta}|^2h(z,z)=h(z,z)
+\end{align*}
+separando em parte real e imaginaria, segue que \(g(e^{i\theta}z,e^{i\theta}z)=g(z,z)\). Como \(e^{i\theta}\) é linear, concluímos que é uma isometria de \(g\).
+\iffalse
+	\textbf{(Ideia original.)}Pegue um vetor \(X(p) \in T_pS^{2n+1}\) e uma curva \(\gamma\) tal que \(\gamma'(0)=X(p)\). A derivada dessa curva depois de compor com \(e^{i\theta}\) vai ter o mesmo tamanho que \(X\) porque a derivada de \(\frac{d}{d\theta}e^{i\theta}=ie^{i\theta}\).
+
+	\textbf{(Ideia de ChatGPT.)} Só note que \(e^{i\theta}\) é um mapa linear em \(\mathbb{C}^{n+1}\). Então a derivada dele é ele mesmo, que preserva o tamanho dos vetores por tratar-se de uma rotação. Aqui da para escrever \(e^{i\theta}\) como uma matriz em \(\mathcal{O}(2n+2)\).\fi
+\item Seguindo a sugestão, defina \(N\) como o vetor de posição de \(S^{2n+1}\). Pensando \(\theta \mapsto e^{i\theta N}\) como uma curva usual em \(\mathbb{C}^{2n+1}\), sabemos pelas propriedades da exponencial complexa, i.e. derivando entrada a entrada, que \((\frac{d}{d\theta}e^{i\theta}N)_{\theta=0}=i N\).
+
+	Esse vetor é vertical já que… (intento 1) \[\left<i N,N\right>=\operatorname{Re}h(i N,N)=\operatorname{Re}ih(N,N)=\operatorname{Re}i=0,\] mas esse argumento mostra que \(i N\) é ortogonal ao vetor posição, que é ortogonal ao espaço tangente da esfera, ou seja, que \(i N \in TS^{2n+1}\). Para mostrar que é vertical devemos ver que está no kernel da projeção \(\pi\). Isso está quase feito: como \(i N\) é a derivada de uma curva, basta compor essa curva com \(\pi\) e derivar em \(\theta=0\). O lance que no quociente essa curva é constante!
+
+	Daí simplesmente escrevemos a fórmula de Manfredo para uma curva \(\alpha:(-\varepsilon,\varepsilon)\to S^{2n+1}\) realizando o levantamento \(\overline{X}\) de \(X \in \mathfrak{X}(\mathbb{C}P^{n})\) em \(N\), i.e. com \(\alpha(0)=N\) e \(\alpha'(0)=\overline{X}\):
+	\begin{align*}
+		(\overline{\nabla}_{\overline{X}}i N)_N&=\frac{d}{dt}i N \circ \alpha(t)\Big|_{t=0}\\
+		&=\frac{d}{dt}i \alpha(t)\Big|_{t=0}\qquad  \text{ já que \(N\) é o vetor posição} \\
+		&=i \alpha'(0)=i\overline{X}, \qquad \qquad \text{derivada complexa usual} 
+	\end{align*}
+	Agora note que
+	\begin{align*}
+	\overline{X}\cancelto{0}{\left<\overline{Y},iN\right>}&=\left<\overline{\nabla}_{\overline{X}}\overline{Y},i N\right>+\left<\overline{Y},\overline{\nabla}_{\overline{X}}i N\right>
+	\end{align*}
+	de modo que
+	\begin{equation}\label{eq:cpn}
+		\begin{aligned}
+	\left<[\overline{X},\overline{Y}],i N\right>&=\left<\overline{\nabla}_{\overline{X}}\overline{Y}-\overline{\nabla}_{\overline{Y}}\overline{X},i N\right>\\
+	&=-\left<i \overline{X},\overline{Y}\right>+\left<i \overline{Y},\overline{X}\right>\\
+	&=2 \cos \varphi\end{aligned}
+	\end{equation}
+por definição de \(\varphi\) como satisfazendo \(\cos \varphi=\left<\overline{X},i \overline{Y}\right>\), e porque \[\left<i \overline{X},\overline{Y}\right>=\operatorname{Re}h(i\overline{X},\overline{Y})=\operatorname{Re}h(\overline{X},\bar{i} \overline{Y} )=\operatorname{Re}h(\overline{X},-i \overline{Y} )=-\left<\overline{X},i \overline{Y}\right>\]
+Finalmente, o \textbf{exercício 10(b)} diz que para \(\sigma=\operatorname{span}\{X,Y\}\) e \(\overline{\sigma}=\operatorname{span}\{\overline{X}, \overline{Y}\}\),
+\[\boxed{K(\sigma)=\overline{K}(\overline{\sigma})+\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2}\]
+onde \(\overline{K}\) é a curvatura de \(\mathbb{S}^{2n+1}\setminus\{0\}\), que é constante 1. Portanto, o desafio final acaba sendo mostrar que
+\[3 \cos^2 \varphi=\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2\]
+Mas já tá quase: elevando \cref{eq:cpn} ao quadrado,
+\begin{align*}
+4\cos^2\varphi&=\left<\left[ \overline{X},\overline{Y} \right] ,i N\right>^2
+\end{align*}
+Ou seja, basta mostrar que
+\[\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2\overset{?}{=}\left<\left[ \overline{X},\overline{Y} \right],i N\right>^2\]
+Como \(i N\) é vertical, o lado direito é igual a \(\left<\left[ \overline{X},\overline{Y} \right]^v, iN\right>^2\).
+
+Como \(N\) é um vetor unitário, podemos expressar 
+\[\left[ \overline{X},\overline{Y} \right]^v=\left|\left[ \overline{X},\overline{Y} \right]^v\right| i N\]
+Então acaba que
+\begin{align*}
+\left<\left[ \overline{X},\overline{Y} \right]^v, iN\right>^2&=\left<\left|\left[ \overline{X},\overline{Y} \right]^v\right| i N, i N\right>^2=\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2 \left<i N, i N\right>=\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\subsubsection{curvature under discrete quotients is preserved}
+\begin{thing6}{Exercício 2}[Espaços lenticulares]\label{exer:2}\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Definição e geodésicas (exer 4. cap. VIII \cite{doc}). Identifique \(\mathbb{R}^4\) com \(\mathbb{C}^2\) fazendo corresponder \((x_1,x_2,x_3,x_4)\) a \((x_1+ix_2,x_3+ix_4)\). Seja
+	\[S^3=\{(z_1,z_2) \in \mathbb{C}^{2};|z_1|^2+|z_2|^2=1\}\]
+	e seja \(h:S^3 \to S^3\) dada por
+	\[h(z_1,z_2)=\left(e^{\frac{2\pi i}{q}}z_1,e^{\frac{2\pi i r}{q}}z_2\right) , \qquad  (z_2,z_2) \in S^3\]
+	onde \(q \) e \(r\) são primos entre si, \(q>2\).
+	\begin{enumerate}[label=(\roman*)]
+	\item Mostre que \(G=\{\operatorname{id},h,\ldots, h ^{q-1}\}\) é um grupo de isometrias da esfera \(S^3\), com a métrica usual, que opera de modo totalmente descontínuo. A variedade \(S^3/G\) é chamada um \textit{\textbf{espaço lenticular}}.
+	\item Considere \(S^3/G\) com a métrica induzida pela projeção \(p:S^3 \to S^3/G\). Mostre que todas as geodésicas de \(S^3/G\) são fechadas mas podem ter comprimentos diferentes.
+	\end{enumerate}
+\item Calcule o volume de um espaço lenticular.
+\item Exiba uma sequência de variedades Riemannianas completas com curvatura seccional constante igual a 1 de modo que a sequência dos volumes seja uma sequência que converge a zero.
+
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}\leavevmode
+\begin{enumerate}
+	
+	\item[(b)] Intuitivamente, o volume de um quociente é o volume do domínio fundamental, que é a região \(D\subset M\) mais pequena tal que \(G\cdot D=M\). Minha primeira ideia é pegar um ponto qualquer \(p \in S^3\) e todas as geodésicas partindo de \(p\). Para cada geodésica temos um tempo em que ela passa por um ponto que será identificado com \(p\) no quociente. A coleção desses pontos será o bordo do domínio fundamental.
+
+Que complicações! Parece que a ideia é muito mais simples:
+\[\operatorname{Vol}(S^3/G)|G|=\operatorname{Vol}(S^3)\]
+no nosso caso, onde temos um grupo finito agindo por isometrias. Basta notar que \(|G|=q\), porque calcular o volume de \(S^3\) não é obvio e seguramente não faz parte do exercício.
+
+\item[(c)] Lembre a pergunta: \textit{exibir uma sequência de variedades Riemannianas completas com curvatura constante igual a 1 de modo que a sequência dos volumes seja uma sequencia que converge a zero}. A resposta natural é \(S^3/G_q\) onde \(G_q\) é o grupo que determina o espaço lenticular, pudendo mudar o valor de \(r\) livremente desde que para cada \(q\) fique \(r\) primo relativo com \(q\).
+
+	Então só falta mostrar que a curvatura secional de \(S^3/G\) é constante igual a 1, e que é completa. O último é imediato porque \(S^3\) é completa. Para ver o primeiro usamos de novo o exercício 10(b) que diz que para \(X,Y \in \mathfrak{X}(S^3/G)\), \(\sigma=\operatorname{span}\{X,Y\}\) e \(\overline{\sigma}=\operatorname{span}\{\overline{X}, \overline{Y}\}\),
+\[\boxed{K(\sigma)=\overline{K}(\overline{\sigma})+\frac{3}{4}\left|\left[ \overline{X},\overline{Y} \right]^v\right|^2}\]
+onde \(\overline{K}\) é a curvatura de \(S^3\), que \(1\). Ou seja, queremos ver que
+\[\left[ \overline{X},\overline{Y} \right]^v=0.\]
+Mas isso segue de que a ação é discreta! Temos uma descomposição \(TS^3 \cong \kappa \oplus  \pi^*T(S^3/G)\), onde \(\kappa\) é o kernel de \(\pi\). Como a dimensão do grupo é zero, a dimensão do espaço lenticular e 3, e o kernel dever ter dimensão zero. Então não tem componentes verticais em geral. Então aprendi que a curvatura seccional é preservada em quocientes sob ações discretas.
+	
+\end{enumerate}
+\end{proof}
+
 \subsubsection{boch equation}
 
 \subsubsection{killing fields}
@@ -557,9 +776,19 @@ so afraid of this
 
 An \textit{\textbf{algebraic variety}} is a compact topological space equipped with a ring of sheaves which is locally isomorphic to an affine variety with its sheaf of regular functions and Zariski topology.
 
-Amazing! An affine variety sure it's \(Z\), the solution set of some polynomial equations on \(\mathbb{C}^n\) equipped with the ring of algebraic functions, which are the restrictions of polynomial functions to \(Z\). Zariski topology sure, closed sets are also solution sets of algebraic equations.
+Amazing! An affine variety? Sure, it's \(Z\), the solution set of some polynomial equations on \(\mathbb{C}^n\) equipped with the ring of algebraic functions, which are the restrictions of polynomial functions to \(Z\). Zariski topology? Sure, closed sets are solution sets of polynomial equations.
 
-But what is the sheaf of regular functions? Pick \(U \subset M\) a Zariski open subset that is a union of open Zariski subsets, \(U=\bigcup U_\alpha\). A function on \(U\) is \textit{\textbf{regular}} if it is regular on \(U_\alpha\).
+Compare with \cite{gri}, p. 12: a subset \(V\) of an open set \(U \subset \mathbb{C}^n\) is an \textit{\textbf{analytic variety}} in \(U\) if for any \(p \in U\) there exists a neighbourhood \(U'\) of \(U\) such that \(V \cap U'\) is the common zero locus of a finite collection of \textit{holomorphic} functions on \(U'\).
+
+And compare with \cite{gri}, p. 128: an \textit{\textbf{algebraic variety}} is defined to be the set of complex zeros of homogeneous polynomials in projective space and may be viewed a priori as an analytic subvariety of \(\mathbb{P}^n\).
+
+But wait, \cite{gri}, p. 20: an \textit{\textbf{analytic subvariety}} \(V\) of a complex manifold \(M\) is a subset given locally as the zeros of a finite collection of holomorphic functions. A point \(p \in V\) is a \textit{\textbf{smooth point}} of \(V\) if \(V\) is a submanifold of \(M\) near \(p\), that is, if \(V\) is given in some neighbourhood of \(p\) by holomorphic functions \(f_1,\ldots,f_k\) with rank \(J(f)=k\).
+
+\textbf{Explanation.} Analytic submanifolds are somehow allowed to have singularities. So the fact that an algebraic variety can be viewed as a projective subvariety does not guarantee that it is smooth (thankfully---otherwise we are just smooth).
+
+
+
+Back to Misha: but what is the sheaf of regular functions? Pick \(U \subset M\) a Zariski open subset that is a union of open Zariski subsets, \(U=\bigcup U_\alpha\). A function on \(U\) is \textit{\textbf{regular}} if it is regular on \(U_\alpha\).
 
 So? What is an algebraic variety? It is a compact topological space with a sheaf that is locally isomorphic to an affine variety \textbf{meaning} that 
 
@@ -587,7 +816,7 @@ Let $M, N$ be open subsets in $\mathbb{R}^n$ and let  $\Psi:M \to N$ be a smooth
 Let $\mathcal{F}$ be the sheaf of smooth functions on $M$ and  $\mathcal{F}'$ on $N$. Choose an open subset $U\subset M$ and $f \in \mathcal{F}'(U)$. Since $\Psi$ is smooth and composition of smooth functions is smooth, $f \circ \Psi$ is a smooth map.
 \end{proof}
 
-\begin{thing4}{Exercise 2.17}\label{exer:2.17}\leavevmode
+\begin{thing4}{Exercise 2.17}[smooth sheaf!!!!]\label{exer:2.17}\leavevmode
 Let $M$ be a smooth manifold of some class and let $\mathcal{F}$ be the space of functions of this class. Show that $\mathcal{F}$ is a sheaf.
 \end{thing4}
 
@@ -595,7 +824,7 @@ Let $M$ be a smooth manifold of some class and let $\mathcal{F}$ be the space of
 Let $U$ be an open set of $M$. To show $\mathcal{F}$ is a presheaf notice that the restriction of a function of class $C^i$ to an open subset is also of class $C^i$. To show $\mathcal{F}$ is a sheaf fix an open set $U \subset M$, an open cover $\{U_j\}$ of $U$, and a collection of functions $f_j \in \mathcal{F}(U_j)$. As in Exercise \hyperref[exer:2.14]{2.14}, differentiability class $C^i$ is a local condition and thus gluing the $f_j$ produces a $C^i$ function on $U$.
 \end{proof}
 
-\begin{thing4}{Exercise 2.18}[Smooth sheaf!!!!]\label{exer:2.18}\leavevmode
+\begin{thing4}{Exercise 2.18}\label{exer:2.18}\leavevmode
 Let $M$ be a topological manifold, and let $(U_i,\varphi_i)$ and $(V_j,\psi_j)$ be smooth structures on $M$. Show that these structures are equivalent if and only if the corresponding sheaves of smooth functions coincide.
 \end{thing4}
 
@@ -1499,9 +1728,9 @@ Let \(X\) be a smooth hypersurface of a complex manifold \(Y\) defined by a sect
 
 \subsection{line bundles and all other things that are the same}
 
-\subsubsection{line bundles}
+\subsubsection{preamble: vector bundles}
 
-Looks \cite{gri} has the final word on the subject. This is chapter 0, sec. 5.
+This is just a massive copy paste of \cite{gri} chapter 0, sec. 5. It just says what are vector bundles.
 
 First you would recall the local trivialization definition of vector bundles (they will do complex). A \textit{\textbf{smooth vector bundle}} on \(M\) consists of a family \(\{E_{x}\}_{x \in M}\) of (complex) vector spaces parametrized by \(M\), together with a \(C^\infty\) manifold structure on \(E:= \bigcup_{x \in M}E_x\) such that
 \begin{enumerate}
@@ -1546,34 +1775,122 @@ f_\alpha=g_{\alpha\beta}\cdot f_\beta
 \]
 for all $\alpha,\beta$, where the $g_{\alpha\beta}$ are transition functions of $E$ relative to $\{\varphi_\alpha\}$.
 \end{tcolorbox}
-
-
 \end{enumerate}
 
 \subsubsection{divisors}
 
+Excited to actually start chapter 1 of \cite{gri}.
+
+\begin{thing1}{Fact 1}\leavevmode
+If \(V \subset M\) is an analytic subvariety, i.e. at any point \(p \in V\), \(V\) can be given in a neighbourhood of \(p\) as \textbf{the zeros of a single holomorphic function \(f\)}. (This is exactly why the dg section of this document starts with submanifold charts claiming that that's what ag is.) Anyway \textbf{Fact 1} is that
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+any holomorphic function \(g\) defined at \(p\) and vanishing on \(V\) is divisible by \(f\) in a neighbourhood of \(p\). \(f\) is called  \textit{\textbf{local defining function }} for \(V\) near \(p\) and is unique up to multiplication by a function nonzero at \(p\).
+\end{tcolorbox}
+\end{thing1}
+And what if \(V\) is singular? You look at \(V^*:=V_{\operatorname{reg}}:=V-V_{\operatorname{sing}}\), which makes \(\overline{V^*}\) an analytic subvariety (why?). No wait a minute! Confusion! GH take it that an analytic subvariety can be singular, no problem with that. Here they are just discussing that we can express the subvariety as a union of irreducible analytic subvarieties.
+
+A \textit{\textbf{divisor}} \(D\) on \(M\) is a locally finite formal linear combination
+\[D=\sum a_i V_i\]
+of \textit{irreducible} analytic hypersurfaces of \(M\). Locally finite means that at every point there is a neighbourhood meeting only finitely many of the \(V_i\) and if \(M\) is compact just means it is a finite sum. A divisor is  \textit{\textbf{effective}} if \(a_i>0\).
+
+By Fact 1, for every holomorphic function \(g\) defined near \(p\), we can define its \textit{\textbf{order}} \(\operatorname{ord}_{V,p}(g)\) to be the \textit{largest} integer \(a\) such that in the local ring \(\mathcal{O}_{M,p}\),
+\[g=f^ah.\]
+So: \(f\) divides \(g\), then there is a highest power of \(f\) that divides \(g\). That's it.
+
+\subsubsection{weil divisors}
+
+It looks like \cite{har} definition of Weil divisor matches \cite{gri} definition of divisor.
+
+There's a bunch of great things I can't deal with in one minute but here's the summary:
+\begin{itemize}
+\item Harshorne will use valuation insted o order to define associated divisor to rational functions.
+\item He will define degree of a projective divisor as the sum of the products of the coefficients in the sum \textit{times} the degree of the hypersurface which is likely to be the degree if the defining polynomial!?!?. (Thank you.) I guess GH don't have this degree because analytic…
+\end{itemize}
+
 \subsubsection{meromorphic functions}
 
-Skimming ---because understanding the details looks… difficult--- \cite{gri} chpt. 1, sec. 1 ``Divisors and line bundles"
-
-\begin{thing7}{The idea}\leavevmode
-is that \textit{\textbf{meromorphic functions}} are abstract things which may not be functions at all. They are given locally, so w.r.t. some covering of the manifold, and in each open set they are a quotient of relatively prime (in \(\mathcal{O}(U_\alpha)\)) functions.
-
-But these data are just very closely related to the Čech cohomology and the trivializing atlas of vector bundles. And it turns out it's all very related.
-
-So a \textit{\textbf{divisor}} is a formal sum of hypersurfaces. A hypersurface is, by \cite{les} slice theorem, defined locally with a slice chart, which just says that one of the coordinates vanishes. So you see: there's an open cover and some functions. So in the first place it turns out that divisors are sections of a certain sheaf of meromorphic functions (\(\mathcal{M}^*/\mathcal{O}^*\)):
-\[ \text{divisors} \overset{\text{complicated details} }{\leftrightsquigarrow}\text{meromorphic functions} \]
-And in the second place you will have line bundles also. And I guess ``meromorphic functions" is also ``sheaves". There's these three things.
-
-Here's a quote from \cite{gri} p.145:
 \begin{quotation}
-	``Suppose \(V\) is given locally by functions \(f_\alpha \in \mathcal{O}(U_\alpha)\); the line bundle \([V]\) on \(M\) is then given by transition functions \(\{g_{\alpha \beta}=f_\alpha/f_\beta\}\)."
+…then there's a rather untracktable definition of the divisor associated to a meromorphic function
 \end{quotation}
 
-\end{thing7}
+\begin{itemize}
+\item First, in the section of sheaves, \cite{gri} p. 36, we see that if \(M\) is a complex manifold, a \textit{\textbf{meromorphic function}} \(f\) \textit{on an open set} \(U \subset M\) is given locally as the quotient of two holomorphic functions.
+
+\item That is, for some covering \(\{U_i\}\) of \(U\), \(f|_{U_i}=\frac{g_i}{h_i}\), where \(g_i\) and \(h_i\) are relatively prime in \(\mathcal{O}(U_i)\) and \(g_ih_j=g_jh_i\) in \(\mathcal{O}(U_i \cap U_j)\).
+
+\item This definition makes implicit uso of the proposition on p. 10. (?)
+
+\item  A meromorphic function is not a function.
+
+\item  The sheaf of meromorphic functions is denoted \(\mathcal{M}\); the multiplicative sheaf of meromorphic functions not identically zero is denoted \(\mathcal{M}^*\).
+
+\item \(\mathsf{OK}\)?!
+\end{itemize}
+Then take a meromorphic function \(f\) which is given locally as \(f=\frac{g}{h}\) for \(g,h\) holomorphic and relatively prime. Then for \(V\) an irreducible hypersurface, define \(\operatorname{ord}_V(f):=\operatorname{ord}_V(g)-\operatorname{ord}_V(h)\), and then define the \textit{\textbf{divisor associated to \(f\)}} by
+\[(f):=\sum_V \operatorname{ord}_V(f)V\]
+
+\subsubsection{global sections of the sheaf \(\mathcal{M}^*/\mathcal{O}^*\)}
+
+What's a global section of \(\mathcal{M}^*/\mathcal{O}^*\)? Well a meromorphic function on an open set is given by a cover of the open set and some quotients of functions assigned to every open set of the cover. So if the open set is \(M\), because we are a global section, then we get a cover of \(M\) and some holomorphic functions defined on the open sets of the cover.
+
+Then I say well a global section of the quotient sheaf \(\mathcal{M}^*/\mathcal{O}^*\) will consist of a global section of \(\mathcal{M}^*\) and nonzero holomorphic functions will have been identified with the identity element, so it's justa  section of purely meromorphic functions. Right so I'm confused. But this is not something I should be working so much on today. The point is: GH manage to create a divisor out every section of that sheaf,
+\[D:=\sum_V \operatorname{ord}_V(f_\alpha)V\]
+where the section is given by  \(f_\alpha/f_\beta \in \mathcal{O}^*(U_\alpha \cap U_\beta)\).
+
+And conversely, for every divisor
+\[D=\sum_{V_i}a_iV_i\]
+we can find an open cover \(U_\alpha\) of \(M\) such that in every \(U_\alpha\), every \(V_i\) has a local defining function \(g_{i\alpha}\in \mathcal{O}(U_\alpha)\). Then we set
+\[f_\alpha=\prod_{i}g_{i\alpha}^{a_i}\in \mathcal{M}^*(U_\alpha)\]
+and apparently this way we obtain a global section of \(\mathcal{M}^*/\mathcal{O}^*\). Right so the \(f_\alpha\) are called \textit{\textbf{locally defining functions}} for \(D\) and we get that mystery homomorphism
+ \[H^{0}(M,\mathcal{M}^*/\mathcal{O}^*)=\operatorname{Div}(M)\]
+
+\subsubsection{cartier divisor}
+
+And it looks like \cite{har} definition of Cartier divisor mathes \cite{gri} definition of sglobal section of \(\mathcal{M}^*/\mathcal{O}^*\).
+
+\begin{defn}[\cite{har}, p. 141]\leavevmode
+A \textit{\textbf{Cartier divisor}} on a scheme \(X\) is a global section of the sheaf \(\mathcal{K}^*/\mathcal{O}^*\). Thinking of the properties of quotient sheaves, we see that a Cartier divisor on \(X\) can be described by giving an open cover \(\{U_i\}\) of \(X\), and for each \(i\) an element \(f_i \in \Gamma(U_i,\mathcal{K}^*)\), such that for each \(i,j\), \(\frac{f_i}{f_j}\in \Gamma(U_i \cap U_j, \mathcal{O}^*)\).
+
+A Cartier divisor is \textit{\textbf{principal}} if it is in the image of the natural map \(\Gamma(X,\mathcal{K}^*)\to \Gamma(X,\mathcal{K}^*/\mathcal{O}^*)\).
+
+Two Cartier divisors are linearly equivalent if their difference is principal.
+
+\begin{thing6}{Proposition 6.11}[\cite{har}]\label{prop:6.11}\leavevmode
+Let \(\mathfrak{X}\) be an integral, separated northerian scheme, all of whose local rings are unique factorization domains (in which case we say \(X\) is \textit{\textbf{locally factorial}}). Then
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+the group \(\operatorname{Div}X\) of Weil divisors on \(X\) is isomorphic to the group of Cartier divisors \(\Gamma(X,\mathcal{K}^*/\mathcal{O}^*)\), and the principal Weil divisors corespond to the principal Cartier divisors under this isomorphism.
+\end{tcolorbox}
+\end{thing6}
+\end{defn}
+
+\(\mathsf{SO}\). What. is. the point of all this? I think Hartshorne has some technical probles defining Weil divisors, he needs to put some untracktable conditions on the varieties to define the divisors, and that's why Cartier divisors section starts with
+\begin{quotation}
+	``Now we want to extend the notion of divisor to an arbitrary scheme. It turns out that using the irreducible subvarieties of codimension one doesn't work very well. So instead, we take as our point of departure the idea that a divisor should be something which locally looks like the divisor of a rational function."
+\end{quotation}
+
+\(\mathsf{OK}\) some enlightening algebra before lunch: what is \(\mathcal{K}\)?
+
+Which also answers the questions: what is a meromorphic function and what is the function field and what's going on.
+
+It appears that I think Hartshorne actually explained this nicely. For a ring \(A\) you realise that the set of nonzero divisors (like \(a\) if \(ab=0 \implies b=0\forall b\) is a multiplicatively closed subset and you can localize. (Warning: not all multiplicatively closed subsets have anything to do with nonzero divisors. So this is a special kind of localization.) This localization is called the  \textit{\textbf{total quotient ring of \(A\)}}.
+
+Now you go schemewise. Pick a scheme \(X\). Relax. For every affine subset \(U=\operatorname{Spec}A\) you take the total quotient ring of \(A\) and call it \(K(U)\).
+
+Now you go sectionwise. You pick the \textit{elements of \(\Gamma(U,\mathcal{O}_X)\) which are not zero divisors in each local ring \(\mathcal{O}_x\)} for \(x \in U\). That's confusing. Some other day I will digest that. Then you can localize by that, giving \(S(U)^{-1}\Gamma(U,\mathcal{O}_X)\), which is a presheaf, whose associated sheaf of rings \(\mathcal{K}\) is called the \textit{\textbf{sheaf of total quotient rings of \(\mathcal{O}\)}}.
+
+\(\mathcal{K}\) replaces the concept of function field of an integral scheme. We denote \(\mathcal{K}^*\) the sheaf of multiplicative groups of invertible elements in the sheaf of rings \(\mathcal{K}\). Similarly \(\mathcal{O}^*\) is the sheaf of invertible elements in \(\mathcal{O}\).
+
+So now you know
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+A \textit{\textbf{Cartier divisor}} is a global section of \(\mathcal{K}^*/\mathcal{O}^*\).
+\end{tcolorbox}
+
+\subsubsection{invertible sheaves}
 
 
-\subsubsection{locally free sheaves}
+\subsubsection{line bundles}
+
+\(\mathsf{OK}\) so here they go all the way up to bertini theorem.
 
 \subsubsection{first chern classes}
 
