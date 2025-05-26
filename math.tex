@@ -1,7 +1,8 @@
 \input{/Users/daniel/github/config/preamble-book.sty}
 \input{/Users/daniel/github/config/thms-eng.sty}%This is available at github.com/danimalabares/config
+\usepackage{textgreek}
 \title{math}
-\autor{\href{https://github.com/danimalabares/math}{github.com/danimalabares/math}}
+\author{\href{https://github.com/danimalabares/math}{github.com/danimalabares/math}}
 \begin{document}
 \bibliographystyle{alpha}
 \maketitle
@@ -97,6 +98,19 @@ The \textbf{tangent bundle} $TM$ of a smooth manifold $M$ is a vector bundle who
 
 So, quasicoherent sheaves play the role of vector bundles in algebraic geometry, and in particular, $\mathcal{T}_X$ is the algebraic analogue of the tangent bundle.
 \end{thing6}
+
+\chapter{dt differential topology}
+
+\section{jets}
+\begin{thing6}{Proposition 8.15}[\cite{muk}]\label{prop:8.15}\leavevmode
+	Let \(M\) and \(N\) be manifolds of dimension \(n\) and \(m\) respectively (possibly with boundary), and \(r\) be a nonnegative integer. Then there is a unique topology \(\tau_r\) on \(J^r(M,N)\) such that for any pair of coordinate charts \((U,\phi)\) in \(M\) and \((V,\psi)\) in \(N\) with \(\phi(U)=U'\) and \(\psi(V)=V'\), \textbf{the set \(J^r(U,V)\) is an open set in \(\tau_r\)}, and the injective map
+	\[k_{U,V}:J^r(U,V) \longrightarrow U'\times V' \times P^r(n,m)\]
+given by \(k_{U,V}=h_{U',V'}\circ(\phi^{-1})^* \circ \psi_*\) is a topological embedding.
+\end{thing6}
+
+The point is that when \(N=\mathbb{R}\), I think we pick regular function \(F:M \to \mathbb{R}\) and consider the graph of \(F\) inside the bundle of \(1\)-jets as parametrized by
+\[\vec{x} \to(p,F(p),\partial_1F,\ldots,\partial_nF)\]
+Aaaand… we get a contact structure on the total space of \(1\)-jets. So: what is the contact form, what is the integral submanifold of the contact distribution? The point is that the contact form vanishes exactly on the tangent bundle of the graph, i.e. the graph is a legendrian subvariety. And there's some lance that every contact structure is of this kind in some way.
 
 \chapter{dg differential geometry}
 
@@ -619,6 +633,37 @@ Then taking \(\operatorname{exp}\) maps them to some geodesics. Then the \textit
 \begin{align*}\nabla_s \gamma_{v+sw}(t)&=\nabla_s \operatorname{exp}_p(t(v+sw))=d_{tv}\operatorname{exp}_p\cdot \frac{d}{ds}\Big(t(v+sw)\Big)\\&=d_{tv}\operatorname{exp}_p(tw).\end{align*}
 And that's it.
 
+That's not it. Given a variation of a geodesic \(\gamma\) by geodesics (this is even more general than above because we can vary the endpoints too), the variational vector field \(J \in \mathfrak{X}_\gamma\) satisfies the \textit{\textbf{jacobi equation}} 
+\[J''+R_{\gamma'}J=0\]
+where \(R_{\gamma'}V=R(V,\gamma')\gamma'\).
+
+\subsection{a brutal exercise}
+
+put yourself in the following situation: \(\gamma\) geodesic, \(v:=\gamma'(0)\), \(J \in \mathfrak{X}^J_\gamma\), \(J(0)=0\) (variation fixing endpoints), \(J'(0):=w\).
+
+Up to this point \cite{au} says then \(J\) is como querias: \(J(t)=d_{tv}\operatorname{exp}_p(tw)\).
+
+But I think we need more: \(J \perp \gamma'\) and probably also \(v \perp w\).
+
+Then you can just do this: define \(g(s):=|J(s)|^2\) and differentiate \(g\) a lot:
+\begin{align*}
+g'(s)&=\frac{d}{ds}\left<J(s),J(s)\right>=2 \left<J'(s),J(s)\right>\\
+g''(s)&=2\Big(\left<J''(s),J(s)\right>+\left<J'(s),J'(s)\right>\Big)\\
+g'''(s)&=2 \Big(\left< J'''(s),J(s)\right>+\ldots
+\end{align*}
+Then you evaluate at \(0\) because you are computing Taylor at 0, realise so many things cancel, find \(R\) at \(g^{iv}\) and conclude that
+\[|J(t)|^2=|w|^2t^2-\frac{1}{3}\left<R(w,v)v,w\right>t^2+O(t^4)\]
+
+And then, some time after this in the course, all the way down to second variation formula and all that, you'll face
+\begin{exercise}\leavevmode
+\begin{itemize}
+\item Show that \(d(\gamma_v(t),\gamma_w(t))=|v-w|t+O(t^2)\). Suggestion: consider the variation given by minimizing geodesics joining \(\gamma_c(t)\) and \(\gamma_w(t)\) for each small \(t\) and differentiate.
+\item Use the previous exercise to show that \(\operatorname{Iso}(M,d)=\operatorname{Iso}(M,g)\).
+\item Show that \(d(\gamma_v(t),\gamma_w(t))=|v-w|t-\frac{1}{6}\frac{\left<R(w,v)v,w\right>}{|v-w|}+O(t^4)\) but see equation 9 in \cite{mey}.
+\end{itemize}
+\end{exercise}
+
+
 \section{riccati equation}
 
 Take any point and any tangent vector at that point. Take the geodesic and take the geodesic sphere of raduis say \(\varepsilon\) with center in the point. It's a hypersurface. Normal vectors are all multiples of the unit normal vector. But who's that, the unit normal? Ah, it's the speed of the geodesic. So? The normal derivative of any vector field tangent to the sphere w.r.t. the unit normal is…
@@ -645,7 +690,7 @@ differentiate that or \(\overline{J}\) to obtain
 O \textit{\textbf{tensor de Ricci}} de \((M,g)\) é
 \begin{align*}
 	\operatorname{Ric}: TM \times TM &\longrightarrow  \mathbb{R}\\
-	 \operatorname{Ric}(X,Y)&= \frac{1}{n-1}\operatorname{tr}(Z  \mapsto \left<R(Z,X,Y),Z\right>)
+	 \operatorname{Ric}(X,Y)&= \frac{1}{n-1}\operatorname{tr}(Z  \mapsto R(Z,X)Y)
 \end{align*}
 (É simétrico.)
 
@@ -656,11 +701,6 @@ A \textit{\textbf{curvatura de Ricci}} é
 \end{align*}
 onde \(E_i \perp X\), ou seja \(\{X,E_1,\ldots,E_{n-1}\}\) é uma base ortonormal.
 
-\begin{remark}[conferir!]\leavevmode
-\[\operatorname{Ric}(X,X)=\int_{\mathbb{S}^{n-1}\subset X^\perp}K(X,V)\]
-
-\end{remark}
-
 A \textit{\textbf{curvatura escalar}} é
 \begin{align*}
 	\operatorname{scal}: M &\longrightarrow \mathbb{R} \\
@@ -669,8 +709,40 @@ A \textit{\textbf{curvatura escalar}} é
 
 \begin{exercise}\leavevmode
 \[\operatorname{scal}=\frac{1}{n}\sum_{i}\operatorname{Ric}(e_i,e_i)=\frac{1}{n(n-1)}\sum_{i+j}K(e_i,e_j)\overset{\text{exer} }{=}\frac{1}{\operatorname{Vol}\mathbb{S}^{n-1}}\int_{\sigma \subset T_pM}K(\sigma)\]
-
 \end{exercise}
+
+Curvature in constant sectional curvature \(c\) says
+\[\left<R(X,Y)Z,W\right>=c\Big(\left<X,W\right>\left<Y,Z\right>-\left<X,W\right>\left<Y,Z\right>\Big)\]
+which follows from… noticing that that function is so-called curvature-like i.e. satisfying the simmetries of \(R\) and that not immediate computation that any two curvature-like tensor with equal scalar curvatures must be equal themselves.
+
+\subsection{pullback of curvature}
+
+\begin{exercise}\leavevmode
+\(f^* R=R_{\nabla^f}\)
+\end{exercise}
+
+\subsection{some facts about curvature}
+
+\begin{claim}\leavevmode
+\(M\) simplesmente conexa. Um fibrado a afim (i.e. munido de uma conexão) é isomorfo ao fibrado trivial iff \(R \equiv 0\).
+\end{claim}
+
+
+
+\begin{exercise}\leavevmode
+Suponha que \((M_1,g_1)\) e \((M_2,g_2)\) são variedades Riemannianas e considere \(M_1\times M_2\) com a métrica produto \(g=g_1 \oplus  g_2\). Mostre que a curvatura Riemanniana, a curvatura de Ricci e a curvatura escalar de \(g\) são dadas pelas seguintes fórmulas:
+\begin{enumerate}[label=(\alph*)]
+\item \(R=\pi_1^*R_1+\pi_2^*R_2\)
+\item \(\operatorname{Ric}=\pi_1^*\operatorname{Ric}_1+\pi_2^*\operatorname{Ric}_2\)
+\item \(\operatorname{scal}=\pi_1^*\operatorname{scal}_1+\pi_2^*\operatorname{scal}_2\)
+\end{enumerate}
+\end{exercise}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item 
+\end{enumerate}
+\end{proof}
 
 \subsection{curvature of CPn!}
 
@@ -818,6 +890,38 @@ use esa fórmula para mostrar que não pode ter \(M \hookrightarrow \mathbb{R}^{
 \begin{thing6}{hadamard}\leavevmode
 \(M\) completa, simplesmente conexa e \(K \leq  0\). Então, para todo \(p \in M\), \(\operatorname{exp}_p\) é um difeomorfismo global. Em particular \(M^n \overset{\operatorname{difeo}}{\simeq} \mathbb{R}^n\).
 \end{thing6}
+
+\begin{exercise}\leavevmode
+Remember Hadamard’s theorem? It says that a simply-connected, complete riemannian manifold with nonpositive sectional curvature is diffeomorphic to \(\mathbb{R}^n\).
+
+Rumors say at some point in history of Florit’s class there was an exercise that says: change sectional curvature with Ricci curvature (in hadamard’s theorem) and show the statement is false.
+
+A K3! It’s simply connected, complete, Ricci flat but compact.
+
+Above idea sounds like an overkill—and even more in the context of a standard RG course hehe, but I cannot say I wouldn’t love to understand the details up to explaining them to RG monitor Ivan!
+
+Anyway, if anyone finds it fun, Ivan would appreciate to have a good answer.
+\end{exercise}
+\begin{proof}\leavevmode
+	The solution is basically showing that smooth K3 surfaces exist. So we may choose the easiest example, which is maybe a quartic surface in \(\mathbb{P}^3\). We have to explain in real riemannian geometry language what it is and why it is both simply connected and Ricci flat.
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+\item Introduce the \textit{\textbf{Ricci form}} (prop. 8.30 \cite{lec}). This is nice: it's the classic version of Ricci form, i.e. trace of \(Z \mapsto R(Z,X)Y\), that in a kahler manifold may be expressed locally as
+	\[\partial\bar\partial \operatorname{log} \det g\]
+So (overkill starts?) save the proof of this fact, it shall be enough to show that this \((1,1)\)-form vanishes.	
+	
+\item Thm 8.31 \cite{lec} says: Ricci form is equal to \(2\pi\) times the first Chern form of the Chern connection on \(T'M\).
+\item If we show that canonical bundle of our quartic is trivial (via adjunction formula) we are done. NO! I thought I could use this and never do Yau theorem but nope: this shows the \textit{cohomology} class of the Ricci form vanishes, but not that the Ricci curvature vanishes. So we'd have to solve Monge-Ampère (super-overkill) to find \textit{another} kahler metric whose ricci curvature truly vanishes.
+\item We still have to show that the quartic is simply connected. Roughly, Misha's way is to define the smooth quartic as \(X \cap H\), a section of veronesse embedding of degree 4 \(\mathbb{P}^3 \to \mathbb{P}^N\) and take section with a hyperplane. And then hyperplane Lefschetz (final overkill) shows that \(\pi_{1}(X \cap H)=\pi_{1}(\mathbb{P}^3)\). \end{enumerate}
+So maybe there's another way of showing simply connectedness at least? No super theorems? hahaha anyway… probably there's another solution…
+
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+\item Say what it is. Choose a homogeneous quartic polynomial and define a submanifold of \(\mathbb{C}P^{3}\) as the zero-set function of the polynomial using inverse function theorem. You get a riemannian metric on the quartic induced from Fubini-Study, which I think at this point is most easily defined as the usual spherical metric on \(S^3\) passing down to the quotient under Hopf map. You have Levi-Civita connection, curvature, all the things in the classical RG story.
+\item There's also the not-so-rg-classical-but-still notion of curvature matrix and curvature form, and first chern class which is basically curvature form up to a constant. Here we have to prove that this chern class is zero for the quartic we defined in step 1.
+\item Introduce the \textit{\textbf{Ricci form}} (prop. 8.30 \cite{lec}). Note that Ricci form vanishes iff Ricci tensor vanishes i.e. manifold is Ricci flat in classical sense. That's what we want.
+\item Thm 8.31 \cite{lec} says: Ricci form is equal to \(2\pi\) times the first Chern form of the Chern connection on \(T'M\).
+\item Show that your favourite quartic surface in \(\mathbb{P}^3\) has vanishing first Chern class and is simply connected.
+\end{enumerate}
+\end{proof}
 
 \begin{thing6}{amazing theorem 8}\leavevmode
 Seja \(M\) completa, simplemente conexa, com curvatura constante. Então \(M\) é globalmente isométrica a \(\mathbb{Q}^n_c\).
@@ -1151,7 +1255,6 @@ What happens for higher degree? That symmetrization does nothing---namely \(f \o
 
 \subsubsection{galkin}
 The \textit{\textbf{Veronesse map degree 2}} in AG is 
-\[\mathbb{P}(U^\vee) \to \mathbb{P}(S^2 U^\vee)\]
 \begin{align*}
 	\mathbb{P}(U^\vee ) &\longrightarrow \mathbb{P}(S^2U^\vee) \\
 	[f] &\longmapsto [f \otimes f]\\
@@ -1202,6 +1305,83 @@ Let \( U \) be a vector space of dimension \( n+1 \). Then:
   \]
   \item The map sends linear forms to degree \( d \) homogeneous polynomials.
 \end{itemize}
+
+\section{sysys}
+
+\begin{quote}
+\hfill \textit{Syzygy} \textnormal{[from Greek]} \textgreek{συζυγία}
+
+\hfill\textit{yoke, pair, copulation, conjunction}
+\end{quote}
+
+Yoke is a wooden thing put on the necks of \textit{two} oxen (cow-like animals) so that they pull \textit{together} a heavy load. So, conjunction, pair, two things, relations. It was also used for alignment of planets.
+
+All this is just the first pages of \cite{sys}.
+
+In ag we study varieties through properties of \(S:=k[x_0,\ldots,x_r]\). To study ideals effectively we have to study other \(S\)-modules. The simplest way to describe a module is by generators and relations.
+
+A set \(A \subset M\) of generators of an \(S\)-module \(M\) can be thought of as as \textbf{a free \(S\)-module \(F=S^A\) onto \(M\)}, sending the basis element of \(F\) corresponding to a generator \(m \in A\) to the element \(m \in M\).
+
+\textbf{Explanation.} Take a set of generators and abstract that by creating a free \(S\)-module on that set of generators. This gives a surjective map from the new free \(S\)-module to the original module \(M\). What's the kernel? \textit{\textbf{sysysy}}
+
+\begin{itemize}
+\item the module of sysysy depends on the choice of generators
+\item a sysys is an element of that kernel. you think of it as a linear relation with coefficients in \(S\) on the chosen generators
+\item when we give \(M\) by generators and relations, we are choosing generators for \(M\) and \textbf{generators for the module of sysysys of \(M\)}.
+\end{itemize}
+
+Now do as before. You have defined the first module of sysys as the kernel of that map above. Now call that \(M_1\), choose some generators and look for the sysys. That's the second sysysys module, and so on. That's why you get
+\[\begin{tikzcd}[column sep=small]
+	\cdots\arrow[r]&F_2\arrow[r,"\phi_2"]&F_1\arrow[r,"\phi_1"]&F\arrow[r]&M\arrow[r]&0
+\end{tikzcd}\]
+and the image of each map is a surjection onto the kernel of the following map---the sysysy.
+
+\textbf{Rk.} This works great in projective geometry where we \(M\) is finitely generated and can choose a minimal set of homogeneous generators for \(M\), and choose the maps preserving degrees. and also by Hilbert's Basis theorem, the sysysy modules will also be finitely generated and so on.
+
+\textbf{Hilbert's sysysy theorem} says that the sysysys modules are free for \(i \geq r\).
+
+Minimal resolutions seem to depend on the choices of generators of the initial module and the sysyss modules, but no, they are all isomorphic, and by hilbert sysys theorem, finite.
+
+\textbf{\textit{Hilbert polynomial}} is the polynomial that (exists, theorem) for large \(d\) agrees with the \textit{\textbf{hilbert function}} \(d \mapsto  \dim_k M_d\). (the dimension of the sysysy)
+
+Let me finish this with an outline of \cite{sys}:
+\begin{enumerate}
+\item Chapter 1: Hilbert function and sysys. And also graded betti numbers, the basic discrete invariants of the resolution, and the convenient betti diagrams for displaying them (must read)
+\item Chapter 2. how to know if a complex is a resolution. Proof of hilbert sysyss theorem, koszul homology. 7 points in \(\mathbb{P}^3\).
+\item Chapter 3. sets of points in \(\mathbb{P}^2\).
+\item Chapter 4. another invariant of the resolution: Castelnuovo-Mumford regularity. proof of some fact relating sets of points in \(\mathbb{P}^r\) this invariant.
+\item Chapter 5. the most important result on CM regularity up to date: bounding the regularity of projective curves.
+\item Chapter 6. Examples. develop enough material about linear series to explain the free resolutions of all the curves of genus \(0\) and \(1\) in complete embeddings.
+\end{enumerate}
+
+\subsection{bettitally}
+
+\cite{sysy} page 8. In general, suppose that \(\mathbb{F}\) is a free complex
+\[\begin{tikzcd}
+	\mathbb{F}:& 0\arrow[r]& F_s \arrow[r]&  \cdots \arrow[r]&F_m\arrow[r]&\cdots \arrow[r]&F_0
+\end{tikzcd}\]
+where (for some reason)  \(F_i=\bigoplus_{j}S(-j)^{\beta_{i,j}}\); that is, \(F_i\) requires \(\beta_{i,j}\) minimal generators of degree \(j\). The betti diagram of \(F\) has de form
+\[\text{**a bettitally**} \]
+*Explanation follows*
+
+\section{twist!}
+
+\begin{thing6}{epiphany}\leavevmode
+	\(S=k[x_0,\ldots,x_r]\) the polynomial ring in \(r+1\) variables over a field \(k\), with all variables of degree \(1\). Let \(M =\bigoplus_{d \in \mathbb{Z}}M_d\) be a finitely generated graded \(S\)-module with \(d\)-th graded component \(M_d\)…
+
+	Wait what is  \(M_d\)? It's the thing such that multiplication by a degree \(i\) element in \(S\) sends degree \(j\) elements of \(M\) to degree \(i+j\) elements… \(S_i M_j \subseteq M_{i+j}\). (in the case \(M=S\) yes, that's only the homogeneous degree \(d\)-polynomials.)
+
+	\(\mathsf{OK}\) here's the epiphany:
+	\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+	for any graded module \(M\), denote by \(M(a)\) the module \(M\) shifted or ``twisted" by \(a\):
+	\[M(a)_d=M_{a+d}\]
+	
+	\end{tcolorbox}
+\end{thing6}
+
+\section{tangent and cotangent space}
+
+this is \cite{sys} appendix A2B. Let \(R\) be a local ring with maximal ideal \(\mathfrak{m}\). The \textit{\textbf{zariski cotangent}} is \(\mathfrak{m}/\mathfrak{m}^2\), regarded as a vector space over \(R/\mathfrak{m}\). […] The ring \(R\) is called \textit{\textbf{regular}} if \(\dim R\) is equal to the vector space dimension of the Zariski tangent space; otherwise \(R\) is \textit{\textbf{singular}}.
 
 \section{normalization}
 
@@ -1270,81 +1450,6 @@ The cuspidal cubic \(x^3=y^2\) is not normal.
 
 
 %\end{thing7}
-
-\section{Veronesse embedding}
-[All this is GPT] The \emph{Veronese embedding} is a classical construction in algebraic geometry. It embeds projective space into a higher-dimensional projective space using all monomials of a fixed degree.
-
-Let
-\[
-\nu_d : \mathbb{P}^n \to \mathbb{P}^N
-\]
-be the Veronese map of degree \( d \), where
-\[
-N = \binom{n + d}{d} - 1.
-\]
-Then \( \nu_d \) is defined by sending a point \( [x_0 : \dots : x_n] \) to the point in \( \mathbb{P}^N \) whose coordinates are all monomials of degree \( d \) in \( x_0, \dots, x_n \).
-
-For example, when \( n = 1 \) and \( d = 2 \), the map is:
-\[
-[x_0 : x_1] \mapsto [x_0^2 : x_0x_1 : x_1^2\ldots],
-\]
-which embeds \( \mathbb{P}^1 \) as a conic in \( \mathbb{P}^2 \).
-
-The Veronese embedding transforms degree-\( d \) hypersurfaces into hyperplanes in the image. It plays an important role in the classification of projective varieties and is used in the study of projective embeddings and Hilbert schemes.
-
-\textbf{In other words…} [This is Galkin lecture] The \textit{\textbf{Veronesse map degree 2}} in AG is 
-\[\mathbb{P}(U^\vee) \to \mathbb{P}(S^2 U^\vee)\]
-\begin{align*}
-	\mathbb{P}(U^\vee ) &\longrightarrow \mathbb{P}(S^2U^\vee) \\
-	[f] &\longmapsto [f \otimes f]\\
-	f & \longmapsto f^2\\
-	\ell(x) & \longrightarrow (\ell(x))^2
-\end{align*}
-I guess for
-\[\ell(x)=a_1x_1+\ldots+a_nx_n\]
-\[\ell(x)^2=a_1^2x_1^2+2a_1a_2x_1x_2+\ldots\]
-and
-\[[a_1,\ldots,a_n]\to [a_1^2:a_1a_2:\ldots]\]
-
-\begin{remark}\leavevmode
-As I recall from last lecture, when this happened, the point of \(S^dU\) is that it is in fact the set of degree \(d\) polynomials. That makes sense? GPT: So this embedding really sends linear forms to degree \( d \) polynomials — it makes perfect sense!
-\end{remark}
-
-Let \( U \) be a vector space of dimension \( n+1 \). Then:
-
-\begin{itemize}
-  \item \( S^d U^\vee \) is the space of degree \( d \) homogeneous polynomials on \( U \).
-  \item \( S^d U \) is the dual space to \( S^d U^\vee \), i.e., it consists of linear functionals on the space of degree \( d \) polynomials.
-  \item The Veronese map of degree \( d \) is
-  \[
-    \nu_d : \mathbb{P}(U^\vee) \longrightarrow \mathbb{P}(S^d U^\vee), \quad [f] \mapsto [f^d].
-  \]
-  \item The map sends linear forms to degree \( d \) homogeneous polynomials.
-\end{itemize}
-
-Remember Manfredo in the olden days in mexico: is \(f \in U^\vee\) is a linear form, then
-\[f \otimes f \in U^\vee \otimes U^\vee\]
-which upon symmetrization, blending in some ChatGPT notation, becomes
-\[f \odot f\in \operatorname{Sym}^2(U^\vee)=\mathsf{S}^2U^\vee=(U^\varepsilon \otimes U^\varepsilon)/\left<\varphi \otimes \psi - \psi \otimes \varphi\right>\]
-is a symmetric bilinear form called the \textit{\textbf{symmetrization}} which, now I remember, this is what Lee said:
-\[\operatorname{Sym}(f  \odot f)=\frac{1}{2}(f\otimes f + f \otimes f)\]
-\textit{almost} by definition because definition is… alternating sum no sé qué, anyways… no a ver:
-\[\operatorname{Sym}(f_1 \otimes \ldots \otimes f_n)\overset{\text{GPT} }{=}\frac{1}{n!}\sum_{\sigma \in S_d}f_{\sigma(1)}\otimes \ldots \otimes f_{\sigma(d)}\]
-while, for a so-called \(k\)-tensor which is a  \(k\)-multilinear form, that is an element of \((U^{\vee})^{\otimes n}\),
-\[(\operatorname{Sym}F)(v_1,\ldots,v_k)\overset{\text{Lee} }{=}\frac{1}{k!}\sum_{\sigma \in S_k}F(v_{\sigma(1)},\ldots,v_{\sigma(k)}\]
-which is probably the same please continue.
-
-The point is that
-\begin{align*}
-	B=f \odot f: U \times U &\longrightarrow k \\
-	(u_1,u_2)&\longmapsto f(u_1)f(u_2)
-\end{align*}
-which, (this is what manfredo said), gives you a quadratic polynomial via
-\[Q(\vec{x}):=B(\vec{x},\vec{x})\]
-So why is it quadratic? Because what is quadratic…? So for example if \(f(x,y)=4x+\frac{2}{7}y\) then \(Q(x,y)=f(x,y)f(x,y)=(4x+\frac{2}{7}y)^2\) which is quadratic.
-
-What happens for higher degree? That symmetrization does nothing---namely \(f \otimes \ldots \otimes f\) is already symmetric because permuting all the things does nothing, so we end up having that the associated form is just applying \(f^d\)---a homogeneous degree \(d\) polynomial.
-
 \section{reduced variety}
 \(\mathsf{OK}\) irreducible is one-piece. But what's reduced? Reduced is what you want when you try to define a variety by the polynomial \(x^2\). It's zero set is the same as \(x\). So the underlying variety is the same SETWISE. So \textit{\textbf{reduced}} is when you don't have this redundance. And of course the a side of the story: that the coordinate ring  \(R/I\) has no \textit{\textbf{nilpotents}}, which are elements such that \(a^n=0\) for some \(n\).
 
@@ -1373,6 +1478,14 @@ is a \textbf{proper morphism}, which means:
   \item \textbf{Separated}: analogous to the Hausdorff condition in topology,
   \item \textbf{Universally closed}: the image of any closed set remains closed under any base change.
 \end{enumerate}
+
+\section{Fano}
+
+\begin{exercise}\leavevmode
+By Kodaira vanishing theorem, you can show that the cohomology \(H^{i}(X,L)\) of a Fano variety \(X\) vanishes. You just have to put \(L=\mathcal{O}(k)\) with \(k\geq  -r\) for the \textit{\textbf{Fano index}} 
+\[r(X)=\operatorname{min}\{r:\frac{c_1(X)}{r}\in H^{2}(X,\mathbb{Z})\}.\]
+Anyway the point is that \(\operatorname{Pic}(X)\cong H^{2}(X,\mathbb{Z})\) for Fano.
+\end{exercise}
 
 
 
@@ -1424,10 +1537,6 @@ What's the decomposition for hypercomplex? What's the decomposition of the exter
 It's the analogue of rotating vectors around a circle in a complex manifold. There you have an \(S^1\) action given by \(a Jv\) where \(|a|=1\). Now you have a whole  \(S^3\) to do this. \textbf{Why is this so hard to grasp.} Because rotating vectors around a circle on a differentiable manifold is not something you would do. Like why.
 \end{thing7}
 
-\begin{remark}\leavevmode
-	That \(\Omega^{1,0}(M)\) is the \textit{annihilator} of \(T^{0,1}(M)\). So this addresses the question $\mathsf{OK}$, \(T^{0,1}(M)\) is the \(- \sqrt{-1}\)-eigenspace but what is \(\Omega^{0,1}(M)\) and \(\Omega^{1,0}(M)\)?
-\end{remark}
-
 \begin{thing6}{Facts form Sergey class}\leavevmode
 \begin{itemize}
 	\item A local system of coordinates for a 1-complex-dimensional manifold is given by solution of  \(\overline{\partial}f=0\) for nonconstant \(f\).
@@ -1446,13 +1555,174 @@ It's the analogue of rotating vectors around a circle in a complex manifold. The
 \end{thing6}
 
 
+\section{cauchy-riemann in highschool}
 
-\section{complex coordinates}
+\(f:U \subset \mathbb{C} \to \mathbb{C}\) is \textit{\textbf{holomorphic}} at \(z_0\in U\) if
+\[\lim_{z \to z_0} \frac{f(z_0-z)-f(z_0)}{z-z_0}\]
+exists. And also, don't get confused, \(h\in \mathbb{C}\),
+\[\lim_{h \to 0} \frac{f(z_0+h)-f(z_0)}{h}\]
 
-You must learn to use complex coordinates
+\begin{thing7}{Cauchy-Riemann}\leavevmode
+The idea is to use the second definition along the \(x\) axis, call \(f=u+iv\) and  \(z_0=x_0+iy_0\). To take derivative along the \(x\) axis you take \(h\) and don't get confused, this time \(h\) \textit{is} just a real number
+\begin{align*}f(z_0+h)-f(z_0)&=\Big(u(x_0+h,y_0)+iv(x_0+h,y_0)\Big)-\Big(u(x_0,y_0)+iv(x_0,y_0)\Big)\\
+&=\Big(u(x_0+h,y_0)-u(x_0,y_0)\Big)+i\Big(v(x_0+h,y_0)-v(x_0,y_0)\Big)
+\end{align*}
+which will give you upon limiting:
+\[\frac{\partial u}{\partial x}+i\frac{\partial v}{\partial x}\]
+Do the other one, probably you'll get
+\[\frac{\partial v}{\partial y}-i\frac{\partial u}{\partial y}\]
+But do do it. The trick is that again, don't get confused, \(h\) is real but you put \(i\):
+\begin{align*}
+f(z_0+ih)-f(z_0)&=\Big(u(x_0,y+ih)+iv(x,y+ih)\Big)-\Big(u(x,y)+iv(x,y)\Big)\\
+&=\Big(u(x,y+ih)-u(x,y)\Big)+i\Big((v(x,y+ih)-v(x,y)\Big)\ldots
+\end{align*}
+And looks the same but actually you quotient by… \(ih\):
+\begin{align*}\frac{f(z+ih)-f(z)}{ih}&=\frac{1}{i}\left(\frac{\partial u}{\partial y}+i\frac{\partial v}{\partial y}\right)=\frac{\partial v}{\partial y}-i\frac{\partial u}{\partial y}
+	\end{align*}
+Aha! Right so real with real and imaginary-imaginary,
+\[\boxed{\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\qquad \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}}\]
+\end{thing7}
+
+\textbf{now} that shows a map if holomorphic if it satisfies cauchy-riemman. Converse is true, and general  \(n\)-dimensional version is also true but you must say what that means. It means this. The \textit{\textbf{canonical complex structure in \(\mathbb{R}^{2n}\)}} is
+\[J=\begin{pmatrix} 0& -\operatorname{Id}_n\\ \operatorname{Id}_n&0\end{pmatrix} \]
+So for \(n=1\) we have shown: if \(f: \mathbb{C}^1 \to \mathbb{C}^1\) holomorphic, then
+\begin{align*}
+df J&=\begin{pmatrix}\frac{\partial u}{\partial x}&\frac{\partial u}{\partial y}\\ \frac{\partial v}{\partial x}&\frac{\partial v}{\partial y}\end{pmatrix}\begin{pmatrix} 0& -1\\ 1&0\end{pmatrix}\\
+&=\begin{pmatrix}\frac{\partial u}{\partial y}&-\frac{\partial u}{\partial x}\\ \frac{\partial v}{\partial y}&-\frac{\partial v}{\partial x}\end{pmatrix}=\begin{pmatrix}-\frac{\partial v}{\partial x}&-\frac{\partial v}{\partial y}\\ \frac{\partial u}{\partial x}&\frac{\partial u}{\partial y}\end{pmatrix}\\
+&=\begin{pmatrix}0&-1\\ 1&0\end{pmatrix}\begin{pmatrix}\frac{\partial u}{\partial x}&\frac{\partial u}{\partial y}\\ \frac{\partial v}{\partial x}&\frac{\partial v}{\partial y}\end{pmatrix}\\
+&=Jdf
+\end{align*}
+\iffalse SHORTER NOTATION
+\begin{align*}
+df J&=\begin{pmatrix}u_x&u_y\\ v_x&v_y\end{pmatrix}\begin{pmatrix} 0& -1\\ 1&0\end{pmatrix}\\
+&=\begin{pmatrix}u_y&-u_x\\ v_y&-v_x\end{pmatrix}=\begin{pmatrix}-v_x&-v_y\\ u_x&u_y\end{pmatrix}\\
+&=\begin{pmatrix}0&-1\\ 1&0\end{pmatrix}\begin{pmatrix}u_x&u_y\\ v_x&v_y\end{pmatrix}\\
+&=Jdf
+\end{align*}
+\fi
+That is, if \(f\) is holomorphic then \(df J=J df\). And then there's the converse…
+
+\section{complexification}
+
+complexification of \(\mathbb{R}\) is \(\mathbb{C}\). Complexification of \(\mathbb{R}^2\) is \(\mathbb{C}^2\). complexification of an \(n\)-dimensional real vector space gives an \(n\)-dimensional complex vector space
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+the real dimension of the complexification is twice the original real dimension
+\end{tcolorbox}
+when someone tells ``complexification of the tangent bundle" of a real manifold, you get e new bundle whose real dimension is \(2n\). \textbf{What am I going to do with a rank 4 vector bundle on a real surface?}
+
+What we expected with the so-called complexification is just to put a complex structure on the tangent bundle. At some point we were convinced that this would only work if the manifold is of even dimension, so it makes sense to somehow introduce a complex multiplication or something in these even dimensional vector spaces at once.
+
+but that's not what actually happens--- complexification goes to a bundle that is twice the original dimension, and then you split that in two halves. and that's the beginning of a never ending story about splitting the vector space
+
+one half is the holomorphic half, which is… well the \(\sqrt{-1}\)-eigenspace of \(J\) but I didn't tell what is \(J\) so far. I'm an even dimensional real manifold, I complexify the tangent bundle which is to consider \(TM \otimes_\mathbb{R} \varepsilon^1\), and what's the ``holomorphic half"? And \textbf{what's \(J\)}?
+
+Answer: there's no ``holomorphic half" and there's no \(J\).
+
+In the section you forgot all we had said about complex manifolds, started with an even dimensional real manifold and complexified it's tangent bundle. It's a big bundle but there's no canonical choice of complex structure on it. There is a complex structure
+\begin{thm}\leavevmode
+there is a complex structure
+\end{thm}
+but you have to choose it.
+
+BUT if you go back the previous section and say well my manifold already has complex coordinates. Then yes:
+\begin{thing6}{plan}[to invent the holomorphic half when you are already complex]\leavevmode
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+\item introduce \(J:TM \to TM\) locally by
+\[J \partial_{x^i}=\partial_{y^i} \qquad J\partial_{y^i}=-\partial_{x^i}\]
+(anticlockwise rotation). Notice \(J^2 =-1\). \textbf{Thm.} \(J\) is global. \textbf{Pf.} The jacobian of the coordinate change \(A\) commutes with \(J\) because that's cauchy-riemann. Then \(J_{\operatorname{new}}=A J A=J\).
+\item extend \(J\) to \(J^\mathbb{C}:=J \otimes \operatorname{id}_\mathbb{C}\in \operatorname{End}(TM \otimes \varepsilon^1)\).
+\item Now you can define the holomorphic half of the complexified tangent bundle
+\end{enumerate}
+\end{thing6}
+
+But here's an alternative plan:
+\begin{thing6}{alternative plan}\leavevmode
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+\item complexify first
+\item now you can multiply vectors times imaginary numbers so you can define this two guys (\textbf{baptism}):
+	\[\partial_z:=\frac{1}{2}(\partial_x-\sqrt{-1}\partial_y),\qquad \partial_{\bar{z}}\frac{1}{2}(\partial_x+\sqrt{-1}\partial_y)\]
+	why? there's a whole story that makes it have sense, next section. but those are a basis of the complexified tangent space.
+\item define \(J\):
+	\[J\partial_z=\sqrt{-1}\partial_z,\qquad J\partial_{\overline{z}}=-\sqrt{-1}\partial_{\overline{z}}\]
+\textbf{claim.} \(J\) is global. \textbf{Pf.} I think I need \(\bar\partial\). Or not? gpt-idea: ``because coordinate changes preserve \(T^{1,0}\) and \(T^{0,1}\)".
+\end{enumerate}
+\end{thing6}
+
+\iffalse\begin{thing6}{holomorphic map}\label{prop:holomorphic map}\leavevmode
+a map is holomorphic iff…
+\begin{itemize}
+\item \(J \circ df = df \circ J\) 
+
+	When you extend complex linearly \(df\) to the complexified tangent bundle…
+\item \(d_pf T_p^{1,0}M \subset T_{f(p)}^{1,0}\tilde{M}\)
+\item \(d_pf T_p^{0,0}M \subset T_{f(p)}^{0,1}\tilde{M}\)
+\item \(\overline{\partial}f=0\)
+\end{itemize}
+\end{thing6}\fi
+So what is \(\overline{\partial}\)? Why is it so that \(f:\mathbb{C} \to \mathbb{C}\) is holomorphic iff cauchy-riemann iff comutes with \(J\) iff \(\overline{\partial}f=0\)?
+
+And what in the earthly grounds is a \(\partial\bar\partial\)
+
+\begin{thing6}{final section remark for now}\leavevmode
+the two plans for introducing a complex structure depend on the fact that the manifold is already complex and yes, if the manifold is already complex that's the canonical choice of a complex structure. But you can also put others. And of course you wonder dani must prove that given a complex structure you get a holomorphic atlas but NO! because that's such a hard theorem that nobody every proves it, namley that an \textit{integrable} complex structure gives a holomorphic atlas, so I'm excused on that one yay. Anyway the point is: you can introduce many holomorphic structures that are give non-biholomorphic manifolds and guess what that's the whole story about twistors: what's the space of different complex structures (!)
+\end{thing6}
+
+\section{complex coordinates and dbar}
+
+if you put
+\[z=x+\sqrt{-1}y,\qquad \overline{z}=x-\sqrt{-1}y\]
+you get
+\[x=\frac{1}{2}(z+\overline{z}),\qquad y=\frac{1}{2\sqrt{-1}}(z-\overline{z})\]
+so
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+every function \(f:\mathbb{C}\to \mathbb{C}\) can be written as a function of \(z\) and \(\overline{z}\).
+\end{tcolorbox}
+\(\mathsf{OK}\) so far we've got what? A smooth manifold, the complexification. A complex structure if I have a complex atlas, and a hard theorem (which makes it easier---not a danitask) that says the almost converse.
+
+now I want to introduce the \(\overline{\partial}\). So I need complex coordinates
+
+you must learn to use complex coordinates
 \[z^i=x^i+\sqrt{-1}y^i \]
 Moral of complex coordinates is that it is the same to split in real and imaginary part as above and as \(z\) and \(\bar{z} \). \(z\) and \(\overline{z}\) are better.
 
+here's the summary so I can move on to the real things I have to do this weekend
+\begin{enumerate}
+\item you have the local real coordinates \(x^i\) and \(y^i\).
+\item this gives the local differential forms \(dx^i\) and \(dy^i\).
+\item they are a basis of the real cotangent space
+\item but you complexify and they are also a real basis of the complexification. I mean not \textit{them them} but \(dx^i \otimes 1\) and \(dy^i \otimes 1\) which is so stupid nobody even writes that. but it's understood that now I can multiply things by complex number at the great expense of the accepting the confusing fact that the tangent space is now the complex tangent space which has twice the dimension as the original
+\item I define
+	\[dz^i:=dx^i+\sqrt{-1}dy^i\qquad d\overline{z}^i:=dx^i-\sqrt{-1}dy^i\]
+	because I can. and they are a basis of the complexified cotangent space
+\item which means that for every function \(f:U \to \mathbb{C}\) there must be functions such that
+	\[df=A_idz^i+B_id\overline{z}^i\]
+but no worries that's computable and gives
+\[A=\partial_if, \qquad B=\partial_{\bar{i} }f\]
+as defined before: \[\partial_i:=\partial_{z^i}:=\frac{1}{2}(\partial_{x^i}-\sqrt{-1}\partial_{y^i})\]
+\[\partial_{\bar{i}}:=\partial_{\overline{z}^i}:=\frac{1}{2}(\partial_{x^i}+\sqrt{-1}\partial_{y^i})\]
+\(\mathsf{OK}\)?! \iffalse here you go: just substitute the formulas for $dx^j$ and $dy^j$ in terms of $dz^j$, $d\bar{z}^j$ and collect terms:
+\begin{equation}\label{eq:local}\begin{aligned}
+  df &= \frac{\partial f}{\partial x^j}\left(\frac{dz^j + d\bar{z}^j}{2}\right) + \frac{\partial f}{\partial x^j}\left(\frac{dz^j - d\bar{z}^j}{2i}\right) \nonumber\\[8pt]
+  &= \frac{1}{2}\left(\frac{\partial f}{\partial x^j} - i\frac{\partial f}{\partial y^j}\right)dz^j + \frac{1}{2}\left(\frac{\partial f}{\partial x^j} + i\frac{\partial f}{\partial y^j}\right)d\bar{z}^j.
+\end{aligned}\end{equation}\fi
+Later I show the computations.
+\item collect your knowledge:
+	\[df=\partial_ifdz^i+\partial_{\bar{i}}fd\overline{z}^i\]
+\item Baptise
+\[\overline{\partial}f:=\partial_{\bar{i}}fd\overline{z}^i\]
+\item start an endless journey:
+	\[\text{``\(\bar\partial\) can be extended tremendously throughout the exterior complexified algebra to yield a cohomology theory"} \]
+\item retreat. don't go there and better off realise that
+\[\boxed{\overline{\partial}f=0 \iff f\text{ is cauchy-riemann}}\]
+\textbf{Pf.}
+\begin{align*}
+\frac{\partial f}{\partial \bar{z}}
+&= \frac{1}{2} \left( \frac{\partial f}{\partial x} + i \frac{\partial f}{\partial y} \right)= \frac{1}{2} \left( \left( u_x + i v_x \right) + i \left( u_y + i v_y \right) \right)\\
+&= \frac{1}{2} \left( u_x + i v_x + i u_y - v_y \right)= \frac{1}{2} \left( u_x - v_y + i (v_x + u_y) \right)
+\end{align*}
+	
+\end{enumerate}
+\subsection*{lee's way}
 \(\mathsf{OK}\) let us just put a whole page or so from \cite{lec}:
 
 Let us specialize to the case of $\mathbb{C}^n$, with its standard holomorphic coordinates $z^j = x^j + i y^j$. Considering $\mathbb{C}^n$ as a smooth manifold of (real) dimension $2n$, we can use $(x^j,y^j)$ as smooth global coordinates. We have a smooth global coframe $\{dx^j, dy^j\}$ for $T^*\mathbb{C}^n$, which is therefore also a coframe for $T^*_\mathbb{C}\mathbb{C}^n$. Consider the $2n$ complex 1-forms $dz^j = dx^j + i dy^j$ and $d\bar{z}^j = dx^j - i dy^j$. Because we can solve for $dx^j = \frac{1}{2}(dz^j+d\bar{z}^j)$ and $dy^j = \frac{1}{2i}(dz^j - d\bar{z}^j)$, it follows that $\{dz^j, d\bar{z}^j\}$ is also a smooth coframe for $T^*_\mathbb{C}\mathbb{C}^n$, and arbitrary complex 1-forms can also be expressed in terms of this coframe. In particular, if $f : U \to \mathbb{C}$ is a smooth function on an open subset $U \subseteq \mathbb{C}^n$, we can write
@@ -1476,13 +1746,33 @@ Motivated by this calculation, we define $2n$ smooth complex vector fields $\par
 \end{equation*}
 In the special case in which $f$ is a holomorphic function on an open subset of $\mathbb{C}^n$, you will notice that we had already defined the expression $\partial f/\partial z^j$ by equation (1.2); now we seem to have introduced a different meaning for the same expression. The next proposition ensures that the two definitions are equivalent for holomorphic functions.
 
-\begin{thing4}{Proposition 1.42}\label{prop:1.42}\leavevmode
-Suppose $U \subseteq \mathbb{C}^n$ is open. Let $f : U \to \mathbb{C}$ be any smooth function, and let $\partial/\partial z^j$ and $\partial/\partial \bar{z}^j$ be the complex vector fields on $U$ defined by (1.8).
-\begin{itemize}
-    \item[(a)] $f$ is holomorphic if and only if $\partial f/\partial \bar{z}^j = 0$ for $j = 1, \dots, n$.
-    \item[(b)] If $f$ is holomorphic, then for each $j$, the expression $\partial f/\partial z^j$ obtained by applying the complex vector field $\partial/\partial z^j$ to $f$ is equal to the complex partial derivative defined by (1.2).
-\end{itemize}
-\end{thing4}
+\section{dolbeault complex}
+now that you now what is \(\bar\partial\) you may be wondering is the image of \(\overline{\partial}\) in some sort of half of \(\Omega^1(M)\)? ok maybe nobody got to this point before reading somewhere that the decomposition of the tangent bundle into holomorphic and antiholomorphic parts give a decomposition of all the exterior algebra
+
+right so what is that decomposition.
+
+this super natural:
+\[TM=T^{1,0}M \oplus T^{0,1}M\]
+gives
+\begin{align*}TM \otimes TM&=(T^{1,0}M \oplus T^{0,1}M) \otimes(T^{1,0}M \oplus T^{0,1}M)\\
+&=(T^{1,0}M \otimes T^{1,0}M) \oplus (T^{1,0}M\otimes T^{0,1}M)\\&\qquad \oplus (T^{0,1}M \otimes T^{1,0}M) \oplus  (T^{0,1}M \otimes T^{0,1}M)
+\end{align*}
+but of course nobody uses tangent tensor algebra as much as cotangent tensor algebra so for starters i'll put this one from sergey class:
+
+\begin{quotation}
+That \(\Omega^{1,0}(M)\) is the \textit{annihilator} of \(T^{0,1}(M)\). So this addresses the question $\mathsf{OK}$, \(T^{0,1}(M)\) is the \(- \sqrt{-1}\)-eigenspace but what is \(\Omega^{0,1}(M)\) and \(\Omega^{1,0}(M)\)?
+\end{quotation}
+\textit{then} you take the exterior algebra, \textit{extend} \(\overline{\partial}\) across the layers of the complexified exterior algebra and produce dolbeault cohomology. you may then
+\begin{thing6}{conjecture}\leavevmode
+	\[\overline{\partial}TM \subset \Omega^{0,1}M \qquad \text{and}\qquad  \(\partial TM \subset \Omega^{1,0}M\]
+and finally say well, perhaps even
+\[\partial\overline{\partial}TM \subset \Omega^{1,1}(M)\]
+the so-called \((1,1)\)-forms---the lair of the complex ricci curvature form
+\end{thing6}
+\section{volume form}
+It's
+\[\frac{\omega^n}{n!}=\prod dz_i \wedge d\bar{z}_i\]
+where \(dz_i=dx_i + \sqrt{-1}dy_i\). It is the volume form of the hermitian manifold, i.e. the unique nowhere-vanishing section of the determinant bundle that gives 1 to the volume of the real unit cube \(e_1 \wedge Ie_1\wedge\ldots\wedge e_n \wedge I e_n\) obtained from an \(h\)-orthonormal complex basis \(\{e_i\}\).
 
 \section{complex manifolds are orientable}
 
@@ -1563,11 +1853,6 @@ The transition functions of a complex manifold are biholomorphisms. Their real J
 \det_{\mathbb{R}} = |\det_{\mathbb{C}}|^2
 \]
 This implies that complex manifolds are always orientable.
-
-\section{Volume form}
-It's
-\[\frac{\omega^n}{n!}=\prod dz_i \wedge d\bar{z}_i\]
-where \(dz_i=dx_i + \sqrt{-1}dy_i\). It is the volume form of the hermitian manifold, i.e. the unique nowhere-vanishing section of the determinant bundle that gives 1 to the volume of the real unit cube \(e_1 \wedge Ie_1\wedge\ldots\wedge e_n \wedge I e_n\) obtained from an \(h\)-orthonormal complex basis \(\{e_i\}\).
 
 \section{hessian metric and kahler metric}
 
@@ -2564,35 +2849,29 @@ The \textit{\textbf{Fubini-Study metric}} is \(g(\cdot ,\cdot )=\omega(\cdot ,I\
     This is called the \textit{Obata connection}. Unlike the Levi-Civita connection, it is not necessarily compatible with a metric. Instead, it preserves the entire hypercomplex structure and serves as the natural connection in hypercomplex geometry.
 \end{remark}
 
-\subsection{\(\mathsf{SU}(n)\)}
+\subsection{Holomorphically symplectic forms and C-symplectic forms}
 
-\textbf{How to think of \(\mathsf{SU}(2)\)} Take a real vector space \(V\) equipped with a hypercomplex structure and think of \(\mathsf{SU}(2)\) as
-\[\mathsf{SU}(2)=\{a+b I+c J+ d K: a^2+b^2+c^2+d^2=1,\qquad a,b,c,d \in \mathbb{R} \}\]
-Just because that's the way to go. (But at some point of terrenal mathematics you should prove that indeed, \(\mathsf{SU}(2)\cong \text{unit quaternions} \cong S^3\).)
+A \textit{\textbf{C-symplectic form}} \(\Omega\) on a smooth 4\(n\)-dimensional manifold is a closed complex-valued form such that \(\Omega^{n+1}=0\) and \(\Omega^n \wedge \overline{ \Omega}^n\) is a non-degenerate volume form. So like \(dz^1 \wedge \ldots \wedge dz^n\) is an example?
 
-But what's the lance?
-\begin{quotation}
-	``We are using these three complex structures (quaternionic is the term right? (it's not: this is called a \textit{\textbf{hypercomplex structure}}) for their nice relations IJ=-JI=K) to \textit{model} the division algebra H that is god-given. Then this thing which is a group \textit{acts} on the space of endomorphisms of the quaternionic vector space by conjugation"
+The point is that C-symplectic forms are in correspondence with hyperkahler structures.
 
-	\vspace{1em}
-	\hfill Yes---you're getting it beautifully now.
-\end{quotation}
+\section{mitia's metric}
 
-\section{Holomorphically symplectic forms and C-symplectic forms}
+I think that mitia's result that
+\begin{thing6}{mitia's result}\leavevmode
+The cone metric is sub-Finsler
+\end{thing6}
+allows to put a metric (yes, a sub-Finsler metric, which is a metric defined as the infimum of the lengths of all paths joining the two points by \textit{admissible curves}, which are curves whose velocities lie in a ``totally integrable" or ``Chow-Rashaveskii" subbundle, which is a distribution that taking \([B,B]\) and then again that with \([[B,B],B]\) and then again and again, eventually you recover \(TM\)) on a thing called \(\operatorname{Gr}_{+++}\), which is essentially a teichmuller space of the hyperkahler manifold, that is, some crazy space where metrics, or symplectic structures, or c-symplectic structures or kahler metrics live.
 
-A \textit{\textbf{C-symplectic form}} \(\Omega\) on a smooth 4\(n\)-dimensional manifold is a closed complex-valued form such that \(\Omega^{n+1}=0\) and \(\Omega^n \wedge \overline{ \Omega}^n\) is a non-degenerate volume form. So perhaps \(dz^1 \wedge \ldots \wedge dz^n\) is an example? Ask GPT or make sure.
+So apparently mitia and misha used demailly-paun theorem (some complicated theorem) to prove global torelli using this metric. That is, this metric facilitates the proof of global torelli. What's the point of global? That holomorphically symplectic forms on a hyperkahler manifold (that is, the hyperkahler structures?) are \textit{isomorphic} (that is, isometric?) to the grassmanian no sé qué, the \(\operatorname{Gr}_{+++}\), which has the cones inside, and you can put the sub-twistor metric inside.
 
-The point is that… the kernel of a C-symplectic form gives a decomposition of the complexification of the tangent bundle of the manifold, and if it is closed…
+Some question is: how many twistor lines do you need to join any two points?
 
+\subsection{global torelli theorem}
 
-
-\section{Fano}
-
-\begin{exercise}\leavevmode
-By Kodaira vanishing theorem, you can show that the cohomology \(H^{i}(X,L)\) of a Fano variety \(X\) vanishes. You just have to put \(L=\mathcal{O}(k)\) with \(k\geq  -r\) for the \textit{\textbf{Fano index}} 
-\[r(X)=\operatorname{min}\{r:\frac{c_1(X)}{r}\in H^{2}(X,\mathbb{Z})\}.\]
-Anyway the point is that \(\operatorname{Pic}(X)\cong H^{2}(X,\mathbb{Z})\) for Fano.
-\end{exercise}
+\begin{thing6}{demailly-paun theorem}\leavevmode
+Let \(M\) be a compact kahler manifold, and \(K \subset H^{1,1}(M,\mathbb{R})\) a subset consisteing of all classes \(\eta\) such that \(\int_Z \eta^p >0\) for any \(p\)-dimensional complex subvariety \(Z \subset M\). Then the kahler cone of \(M\) is one of the connected components of \(K\).
+\end{thing6}
 
 \chapter{lie groups and lie algebras}
 
@@ -2789,8 +3068,6 @@ Now. The thing with the Lie bracket is that when you differentiate the flow you 
 \[[V,W]=\frac{d}{dt}\Big|_{t=0} \varphi^{-t}_{*,\varphi^t(p)}W_{\varphi^t(p)}\]
 and that's it.
 
-
-
 Now I will prove in Portuguese that \textbf{the flow of a left-invariant vector field is right-translation}. First I need a claim.
 
 	\begin{claim}\leavevmode
@@ -2815,42 +3092,6 @@ Agora lembre que o colchete de Lie pode ser expressado como
 
 Juntando com a discussão anterior obtemos
 \[[w,v]_e=\frac{d}{dt}\Big|_{t=0}\Big(R_{\varphi_{-t}(e)}\Big)_{*,\varphi_t(e)}v_{\varphi_t(e)}.\]
-
-
-
-
-
-
-
-\chapter{complex analysis}
-
-\section{cauchy-riemann}
-
-\(f:U \subset \mathbb{C} \to \mathbb{C}\) is \textit{\textbf{holomorphic}} at \(z_0\in U\) if
-\[\lim_{z \to z_0} \frac{f(z_0-z)-f(z_0)}{z-z_0}\]
-exists. And also, don't get confused, \(h\in \mathbb{C}\),
-\[\lim_{h \to 0} \frac{f(z_0+h)-f(z_0)}{h}\]
-
-\begin{thing7}{Cauchy-Riemann}\leavevmode
-The idea is to use the second definition along the \(x\) axis, call \(f=u+iv\) and  \(z_0=x_0+iy_0\). To take derivative along the \(x\) axis you take \(h\) and don't get confused, this time \(h\) \textit{is} just a real number
-\begin{align*}f(z_0+h)-f(z_0)&=\Big(u(x_0+h,y_0)+iv(x_0+h,y_0)\Big)-\Big(u(x_0,y_0)+iv(x_0,y_0)\Big)\\
-&=\Big(u(x_0+h,y_0)-u(x_0,y_0)\Big)+i\Big(v(x_0+h,y_0)-v(x_0,y_0)\Big)
-\end{align*}
-which will give you upon limiting:
-\[\frac{\partial u}{\partial x}+i\frac{\partial v}{\partial x}\]
-Do the other one, probably you'll get
-\[\frac{\partial v}{\partial y}-i\frac{\partial u}{\partial y}\]
-But do do it. The trick is that again, don't get confused, \(h\) is real but you put \(i\):
-\begin{align*}
-f(z_0+ih)-f(z_0)&=\Big(u(x_0,y+ih)+iv(x,y+ih)\Big)-\Big(u(x,y)+iv(x,y)\Big)\\
-&=\Big(u(x,y+ih)-u(x,y)\Big)+i\Big((v(x,y+ih)-v(x,y)\Big)\ldots
-\end{align*}
-And looks the same but actually you quotient by… \(ih\):
-\begin{align*}\frac{f(z+ih)-f(z)}{ih}&=\frac{1}{i}\left(\frac{\partial u}{\partial y}+i\frac{\partial v}{\partial y}\right)=\frac{\partial v}{\partial y}-i\frac{\partial u}{\partial y}
-	\end{align*}
-Aha! Right so real with real and imaginary-imaginary,
-\[\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\qquad \frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}\]
-\end{thing7}
 
 
 \bibliography{bib.bib}
