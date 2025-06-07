@@ -3,13 +3,51 @@
 \usepackage{textgreek}
 \title{math}
 \author{\href{https://github.com/danimalabares/math}{github.com/danimalabares/math}}
+
+
 \begin{document}
 \bibliographystyle{alpha}
+
 \maketitle
 \phantomsection
 \tableofcontents
 \clearpage
 \chapter{basic math}
+
+\section{adjoint}
+
+for a linear map \(A\) we want to define its \textit{\textbf{adjoint}}
+\[A:V \to W, \qquad A^{\dag}:W \to V\]
+satisfying
+\[\left<Av,w\right>_W=\left<v,A^\dag w\right>_V\]
+so we need some matrices \(H\) and \(G\) for the metrics on \(W\) and \(V\). the latter equation is just
+\[v^{\mathbf{T}}A^{\mathbf{T}}Hw=(Av)^{\mathbf{T}}Hw=v^{\mathbf{T}}GA^\dag w\]
+where the \(\mathbf{T}\) is the usual transpose. so you conclude
+\[A^{\mathbf{T}}H=GA^\dag \implies A^\dag:=G^{-1}A^{\mathbf{T}}H\]
+
+this in fact allows to define \textit{\textbf{frobenius norm}} by
+\[\|A\|^2=\operatorname{tr}A^\dag A=\operatorname{tr}G^{-1}A^{\mathbf{T}}HA\]
+
+but you can also smooth the construction to get that 
+
+\section{trace}
+
+I need to be sure I know what is the trace. The \textit{\textbf{trace}} of an endomorphism \(A \in \operatorname{End}(V)\) is the sum of the diagonal entries of \(A\) with respect to any basis. So I claim that this number is invariant under change of basis and prove it:
+
+trace is commutative: \(\operatorname{tr}(AB)=\operatorname{tr}(BA)\) because is just multiplication of some numbers. Change of coordinates is a multiplication of matrices, can commute, get identity, done.
+
+\textit{Warning: confusion up ahead} choose two bases \(e_i\) and \(e'_i\) of \(V\). Define
+\[Ae_i=A^j_ie_j,\qquad Ae'_i=\tilde{A}^j_ie'_j,\qquad e_i=J^j_ie'_j, \qquad e'_i=\overline{J}^j_ie_j\]
+so the claim is that
+\[A^i_i=\tilde{A}^i_i\]
+
+Change of coordinate basis does
+\[A^i_j=J^k_i \tilde{A}^j_k \overline{J}^\ell_j\]
+(the index names on LHS and RHS aren't related) because for any basic vector \(e_i\),
+\[Ae_i=A^j_i e_j=A^j_i J^k_j e'_k=J_i^jA_j^ke'_k=J_i^jA_j^k \overline{J}_k^\ell e_\ell\]
+So
+\[\operatorname{tr}J\tilde{A}J^{-1}\overset{\operatorname{def}}{=}J^k_i\tilde{A}^j_k J^\ell_k=A^i_i \overset{\operatorname{def}}{=}\operatorname{tr}A\]
+
 
 \section{tensor product}
 
@@ -328,63 +366,6 @@ Mostre que \(T_{\nabla^f}=f^*T\).
 \end{align*}
 \end{proof}
 
-\section{fundamental property of isometric immersions}
-
-\begin{thing6}{Exercício L3.2}[Imersões isométricas]\label{exer:L3.2}\leavevmode
-Seja \(f:M \to \overline{M}\) uma imersão isométrica. Sejam \(\nabla\) a conexão de Leci-Civita de \(M\) e \(\overline{\nabla}\) a conexão de Levi-Civita de \(\overline{M}\).
-\begin{enumerate}[label=(\alph*)]
-\item Let \(f:M^n \to \widetilde{M}^m\) be an isometric immersion and let \(\widetilde{\nabla}\) denote the connection on \(f^*T \widetilde{M}\) induced by the Levi-Civita connection of \(\widetilde{M}\). Verify that
-	\[\nabla_XY=f^{-1}_*\left(\widetilde{\nabla}_X f_*Y\right)^\top\]
-defines a compatible torsion-free connection on \(TM\), which itherefore coincides with the Levi-Civita connection of \(M\).	
-
-\item  (Reformulation of (a).) Mostre que
-	\[f_*(\nabla_XY)=\left(\overline{\nabla}^f_Xf_*Y\right)_{TM}\]
-e que essa igualdade determina \(\nabla\) em função de \(\overline{\nabla}\). Aqui, para \(W \in T_{f(p)}\overline{M}\), \(W_{TM}\) denota a sua projeção ortogonal ao subespaço \(f_*(T_pM) \subset T_{f(p)}\overline{M}\).
-\item Seja \(c\) uma curva suave em \(M\). Mostre que para todo \(Y \in \mathfrak{X}_c\) vale
-	\[f_*\nabla^c_{\frac{d}{dt}}Y=\left(\nabla^{f \circ c}_{\frac{d}{dt}}f_*Y\right)_{TM} \]
-\item Seja \(\gamma:I \to M\) uma curva suave parametrizada pelo comprimento de arco. Mostre que \(\gamma\) é uma geodésica de \(M\) se, e somente se, sua aceleração em \(\overline{M}\) é perpendicular à variedade \(M\), i.e.,
-	\[\overline{\nabla}^{f \circ \gamma}_{\frac{d}{dt}\Big|_{t}}(f \circ \gamma)' \perp f_*(T_{\gamma(t)}M)\]
-	para todo \(t \in I\).
-\end{enumerate}
-\end{thing6}
-
-\begin{proof}[Solução]\leavevmode
-\begin{enumerate}[label=(\alph*)]
-\item Nos han enseñado que esto se hace así (como dice la version de \cite{daj}): defina
-	\[D: \mathfrak{X}(M)\times \mathfrak{X}(M) \longrightarrow \mathfrak{X}(M)\]
-una conexión random pero satisfaciendo que
-\[f_*(D_XY) = \left(\widetilde{\nabla}_X^f f_*Y\right)^\top\]
-. Afirmamos que \(D\) es métrica y simétrica, o sea, \(D=\nabla\) y se acabó. (Que básicamente es el ``lema de simetría y compatibilidad".)
-\begin{itemize}
-\item \textbf{(Métrica.)} Se me antoja empezar con \(X\left<Y,Z\right>=\) pero ahí no sé que poner. (Puedo poner \(\nabla\) pero eso no sirve de nada.) Entonces mejor aplico \(f_*\), después de pensarlo me doy cuenta de que \(f_*Y\) y \(f_*Z\) son secciones de \(f^*\widetilde{M}\), o sea vectores en \(T\widetilde{M}\) pero como funciones están definidas em \(M\)! Acaba que lo que único que tiene sentido escribir es:
-\begin{align*}
-X\left<f_*Y,f_*Z\right>&=\left<\widetilde{\nabla}^f_Xf_*Y,f_*Z\right>+\left<f_*Y,\widetilde{\nabla}^f_Xf_*Z\right>
-\end{align*}
-\(\mathsf{OK}\) pero… eso es cierto? Bueno, lo que sabemos es que:
-\begin{align*}
-\left<\left( \widetilde{\nabla}^f_Xf_*Y\right)^\top,f_*Z\right>+\left<f_*Y,\left(\widetilde{\nabla}^f_Xf_*Z\right)^\top\right>&=\left<f_*(D_XY),f_*Z\right>+\left<f_*Y,f_*(D_XZ)\right>
-\end{align*}
-
-
-
-Ah, entonces eso es lo que hay que probar justamente. Me fijo en el lado izquierdo y digo bueno en cada punto, como \(f\) es isometría local,
-\[\left<f_{*,p}Y(p),f_{*,p}Z(p)\right>_{f(p)}=\left<Y(p),Z(p)\right>_{p}\]
-y como es un tensor escribo nomás
-\[\left<f_*Y,f_*Z\right>=\left<Y,Z\right>\]
-Y eso sí,
-\[\left<Y,Z\right>=\left<\nabla_XY,Z\right>+\left<Y,\nabla_XZ\right>\]
-No sé qué hacer con esos campos pero en campos coordenados sí, porque la base de  \(T_p\widetilde{M}\) es \(\partial_i\), pero eso no es una base del fibrado pullback, la que sí es base del fibrado pullback es \(\partial_i \circ f\). Ah entonces
-\begin{align*}
-\left<\widetilde{\nabla}_X^f \partial_i \circ f,\partial_i \circ f\right>+\left<\partial_j \circ f,\widetilde{\nabla}_X^f \partial_j \circ f\right>&= \left<\tilde{\nabla}_{f_*X}\partial_i,\partial_j\right>+\left<\partial_i,\widetilde{\nabla}_{f_* X}\partial_j\right>\\
-&=f_*X\left<\partial_i, \partial_j\right>\\
-&=X\left<\partial_i \circ f,\partial_j \circ f\right>
-\end{align*}
-\end{itemize}
-
-\end{enumerate}
-\end{proof}
-
-
 
 
 \section{riemannian submersion finally and also riemannian immersion}
@@ -590,10 +571,12 @@ So energy is almost an upper bound of length.
 
 So the \textit{\textbf{first variation formula}} in its full power version from \cite{ler} says
 \begin{align*}
-	\boxed{\begin{array}{rl}\frac{d}{ds}\Big|_{s=0}S(s)&=-\int_a^b\left<V,\ddot \gamma\right>-\sum_{i=1}^{k-1}\left<V(t_i),\dot\gamma(t_{i+1})-\dot\gamma(t_{i})\right>\\
+	\boxed{\begin{array}{rl}\frac{d}{ds}\Big|_{s=0}S(s)&=-\int_a^b\left<V,\ddot \gamma\right>-\sum_{i=1}^{k-1}\left<V(t_i),\dot\gamma(t_{i}^-)-\dot\gamma(t_{i}^+)\right>\\
 				   & \qquad +\left<V(b),\dot\gamma(b)\right>-\left<V(a),\dot\gamma(a)\right>\end{array}}
 	\end{align*}
 \textbf{Explanation.} The first term we already know what it is. The second term is what happens at the singularities of the piecewise-smooth variation defined with singularities at \(t_1,\ldots,t_n\), and the third term is what happens at the first and final point.
+
+\textbf{further explanation} \textit{the curve is piecewise smooth and the variation field is full smooth}. remember that, when you do the telescopic sum, if everything was smooth then the derivatives at the midpoints match and the midpoints would cancel, but if the velocities of the curve are not smooth then they don't match at the midpoints and you get those differences from the left and right. but the variation field is full smooth so that part matches and you can factor the thing.
 
 So it remains kind of a mystery why Lee does the computations with the length functional and not with the energy functional. Ah! I think it's parametrization matters: for the formula above to work \textbf{you need unit speed}. I you don't have unit speed you don't get rid of the square root when differentiating, and that's terrible. So what everyone does is instead use the \textit{\textbf{energy functional}} which is just the integral of square of the norm,
 \[\boxed{E(s)=\int_a^b |\dot \gamma|^2}\]
@@ -621,8 +604,95 @@ We'll see eventually whether this turns out useful or forgotten. The \textit{\te
 	I_a(V,W) &=\int_0^a \left<V',W'\right>-\left<R_{\gamma'}V,W\right>
 \end{align*}
 
+\section{minimal}
+\subsection{first variation of a regular map to riemannian target}
 
+Consider an isometric immersion \(f_0:(M,g) \to(\tilde{M},\tilde{g})\) and a vector field \(\xi \in f^*T\tilde{M}\).
+
+Define a variation by:
+\begin{align*}
+	f: (-\varepsilon,\varepsilon)\times M &\longrightarrow \tilde{M} \\
+	f(s,p) &=\operatorname{exp}_{p}(s \xi)
+\end{align*}
+Then \(f_s:=f(s,\cdot):M \longrightarrow \tilde{M}\) is an immersion (isometric at \(s=0\) by hypothesis). Now we define the \textit{\textbf{volume functional}} that simply computes the volume of \(M_s\):
+\[S(s):= \int_{M}\operatorname{Vol}_{f_s ^*\tilde{g}}=\int_M f_s^*\operatorname{Vol}_{\tilde{g}}.\]
+(\(S\) is physics notation and \(s\) is Florit notation.)
+
+\begin{exercise}\leavevmode
+Compute \(S'(0)\).
+\end{exercise}
+TL;DR. The derivative of the determinant is a trace, that trace is the trace of the shape operator, which is the mean curvature.
+
+\begin{proof}[Solution]\leavevmode
+How to express volume in any coordinate system?
+\[\sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n\]
+Let's differentiate:
+\begin{align*}
+	\frac{d}{ds}S(s)&=\frac{d}{ds}\int_M\operatorname{Vol}_{f^*_s\tilde{g}}=\frac{d}{ds}\int_M \sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n\\
+&=\int_M \frac{d}{ds}\sqrt{\det (f^* _sg)_{ij}}dx^1\wedge\ldots\wedge dx^n
+\end{align*}
+We must differentiate the square root of the determinant of a matrix. 
+%So let \(A(t)\) be any smooth 1-parametric family of matrices.
+\[\boxed{\frac{d}{dt}\det A(t)=\det A(t) \cdot \operatorname{tr}\left(A(t)^{-1}\cdot \frac{d}{dt}A(t)\right)}\]
+and using that we see that
+\[\boxed{\frac{d}{dt}\sqrt{\det A(t)} =\frac{1}{2}\sqrt{\det A(t)} \cdot\operatorname{tr}\left(A(t)^{-1}\cdot \frac{d}{dt}A(t)\right) }\]
+So we put \(A(s)=(f^*_s\tilde{g})_{ij}\). The good news is that square root of the determinant part is exactly the local coordinate function of \(\operatorname{Vol}_{f_0^*\operatorname{Vol}_{\tilde{g}}}=\operatorname{Vol}_g\). Then we only have to integrate that other function, which hopefully is related to the mean curvature.
+
+Before computing recall the basic equations of submanifold theory: for \(X,Y \in \mathfrak{X}(M)\), \(\xi \in \Gamma(T^\perp M)\), \(\tilde{\nabla}\) L.C. connection of \(\tilde{M}\) and \(\nabla\) LC connection of \(M\) isometrically immersed in  \(\tilde{M}\), splitting everything into normal and tangent part we get
+\[\boxed{\tilde{\nabla}^f_Xf_*Y:=f_*\nabla_XY+\alpha(X,Y)}\]
+\[\boxed{\tilde{\nabla}_X^f g_*\xi:=-A_\xi f_*X+\nabla^\perp_X\xi}\]
+and call \(\alpha\) the second fundamental form and \(A\) the shape operator. These two equations/definitions together imply
+\[\boxed{\left<\xi,\alpha(X,Y)\right>=\left<-A_\xi X,Y\right>}\]
+
+
+Let's compute
+\begin{align*}
+\frac{d}{ds}\Big|_{s=0}(f_s^*\tilde{g})_{ij}&=\frac{d}{ds}\Big|_{s=0}f_s^*\tilde{g}\left(\partial_i,\partial_j\right)=\frac{d}{ds}\Big|_{s=0}\tilde{g}(f^s_*\partial_i,f^s_*\partial_j)\\
+&=\tilde{g}\left(\nabla^f_{\partial_s}f^s_*\partial_i,f^s_*\partial_j\right)+\tilde{g}\left(f^s_*\partial_i,\nabla^f_{\partial_s}f_*^s\partial_j\right)\Big|_{s=0}\\
+&=\tilde{g}\left(\nabla^f_{\partial_s}f^0_*\partial_i,f_*^0\partial_j\right)+\tilde{g}\left(f^0_*\partial_i,\nabla^f_{\partial_s}f_*^0\partial_j\right)\\
+&=\tilde{g}\left(\nabla^f_{\partial_i}f^0_*\partial_s,f_*^0\partial_j\right)+\tilde{g}\left(f^0_*\partial_i,\nabla^f_{\partial_j}f_*^0\partial_s\right)\qquad  \text{symmetry lemma} \\
+&=\tilde{g}(\nabla^f_{\partial_i}\xi, f_*^0\partial_j)+\tilde{g}(f^0_*\partial_i,\nabla^f_{\partial_j}\xi)\end{align*}
+Where \(\nabla^f\) is the pullback connection. The point is that we arrived at the variational field \(\xi\). If we assume (for now) that \(\xi\) is normal to \(M\) then upon differentiation we get:
+\[\nabla^f_{\partial_i}\xi=-A_{\xi}\partial_i+N\]
+where the normal component \(N\) vanishes since it is orthogonal to the basic tangent vectors of \(M\). We conclude that
+\begin{align*}
+\frac{d}{ds}\Big|_{s=0}(f_s^*\tilde{g})_{ij}&=\tilde{g}\left(-A_{\xi}\partial_i,\partial_j\right)+\tilde{g}\left(\partial_i,-A_{\xi}\partial_j\right)\\
+&=\tilde{g}(\xi,\alpha(\partial_i,\partial_j))+\tilde{g}(\alpha(\partial_j,\partial_i),\xi)\\
+&=2\tilde{g}(\xi,\alpha(\partial_i,\partial_j))\qquad\qquad \text{\(\alpha\) is symmetric}\\
+&=-2\tilde{g}(A_{\xi}\partial_i,\partial_j)
+\end{align*}
+Now we have to multiply by the inverse matrix, which is just the inverse of the metric in \(M\) because we are at \(s=0\). Then we take trace and obtain the mean curvature, defined as the trace of the shape operator:
+\begin{align*}
+\operatorname{tr}\Big(g^{ij}g(A \partial_j,\partial_k)\Big)=g^{ij}g(A \partial_j,\partial_i)=g^{ij}g(A^\ell_j\partial_\ell,\partial_i)=g^{ij}A^\ell_jg_{\ell i}=\delta^{i}_jA^j_i=A^j_j
+\end{align*}
+
+We conclude
+\[\frac{d}{ds}\Big|_{s=0}S(s)=-\int_M H \operatorname{Vol}_{g}\]
+which says: \textbf{zeroes of the mean curvature function correspond to critical points of the volume functional}.
+\end{proof}
+
+\textbf{Addendum.} And the mean curvature vector? The mean curvature vector is \(H\xi\) for unit normal \(\xi\). And \(\tilde{g}(H\xi,\xi)=H\).
 \section{jacobi field}
+
+a \textit{\textbf{Jacobi field}} along a geodesic \(\gamma\) is \(J \in \mathfrak{X}_\gamma\) such that \(J''+R_{\gamma'}J=0\). 
+
+Lembre que
+	\begin{equation}\label{eq:segue}\dim\{J \in \mathfrak{X}^J_\gamma:J(0)=0, J \perp \gamma\}=n-1\end{equation}
+Isso segue das seguintes observações:
+\begin{enumerate}[label=(\alph*)]
+\item \(\dim\mathfrak{X}^J_\gamma=2n\) porque são soluções de \(n\) equações diferenciais ordinárias de segunda ordem, i.e. cada campo de Jacobi está determinado pelas condições iniciais \(J(0)\) e \(J'(0)\). 
+\item \(\dim \{J \in \mathfrak{X}^J_\gamma:J(0)=0\}=n\).
+\item \(\dim \{J \in \mathfrak{X}^J_\gamma:J\perp \gamma'\}=2n-2\). Para confirmar isso note que pelas simetrias de \(R\) e a equação de Jacobi tem-se que \(\left<J,\gamma'\right>''=0\), pelo que \(\left<J,\gamma'\right>=a+bt\) para dois números reais \(a,b\). Segue que qualquer \(J \in \mathfrak{X}^J_\gamma\) se escreve como \(J(t)=a\gamma'(t)+bt\gamma'(t)+\hat{J}(t)\) para algum \(\hat{J}\) perpendicular a  \(\gamma'\). (Supondo que \(|\gamma'|=1\).) Então se \(J \perp \gamma\), temos que  \(a=b=0\), então tiramos dois números do \(2n\) que tínhamos.
+\item Segue \cref{eq:segue}.
+\end{enumerate}
+
+Space of jacobi fields is thus of dimension \(2n\) since it any jacobi field is determined by initial conditions \(J(0)\) and \(J'(0)\). and the space of jacobi fields that vanish at the origin is just \(n\).
+
+less obviously the space of jacobi fields orthogonal to  \(\gamma'\) is \(2n-2\) because: any jacobi field \(J\) can be written as
+\[J=a+\gamma'+bt\gamma'(t)+\hat{J}\]
+for some \(\hat{J}\perp \gamma\) and \(a,b \in \mathbb{R}\) such that \(\left<J,\gamma'\right>=a+bt\), and that's because \(\left<J,\gamma'\right>''=0\), so that's an affine real function \(a+bt\) for  \(a,b \in \mathbb{R}\). So the condition \(J(0)=a\gamma'(0)+bt\gamma'(0)\) says takes two numbers from the \(2n\) we already had.
+
+finally if you look at the jacobi fields that are both perpendicular to \(\gamma'\) and \(J(0)=0\) you realise that \(a=0\) so the dimension of those is \(n-1\).
 
 Just because I finally understood something about Jacobi field. A geodesic is given by \(\gamma_v(t)=\operatorname{exp}_p(tv)\) where \(p=\gamma(0)\) and \(v=\gamma'(0)\). Then choose a vector \(w \in T_pM\) and consider these lines:
 \begin{figure}[H]
@@ -872,6 +942,71 @@ Mas isso segue de que a ação é discreta! Temos uma descomposição \(TS^3 \co
 
 \section{isometric immersions}
 
+\subsection{fundamental formulas of isometric immersions}
+\(f:M \to \widetilde{M}\) isometric immersion. for \(X \in \mathfrak{X}(M)\) and \(\xi \in \mathfrak{X}_f=\Gamma(X,f^*  T \widetilde{M})\) you always have
+\[\widetilde{\nabla}^f_X \xi=\left(\widetilde{\nabla}_X \xi\right)^\top+\left(\widetilde{\nabla}_X \tilde{Y}\right)^\perp\]
+by decomposition of \(f^*T \widetilde{M} \cong TM \oplus \nu\).
+\[\boxed{\widetilde{\nabla}_X^ff_*Y=f_* \nabla_XY+\alpha(X,Y)}\]
+so you prove that the first factor is indeed the pushforward of Levi-Civita of \(M\) and that the second factor is a symmetric bilinear form (form?). Now if \(\xi \in T^\perp M\),
+\[\boxed{\widetilde{\nabla}^f_X\xi:=-A_\xi X+\nabla^\perp_X\xi}\]
+so you define the \textit{\textbf{shape operator}} as the tangent part of the derivative of a normal vector field, and the \textit{\textbf{normal connection}} as the normal part. And you prove \(\nabla^\perp\) is a connection.
+
+\subsection{fundamental exercise of isometric immersions}
+
+\begin{thing6}{Exercício L3.2}[Imersões isométricas]\label{exer:L3.2}\leavevmode
+Seja \(f:M \to \overline{M}\) uma imersão isométrica. Sejam \(\nabla\) a conexão de Levi-Civita de \(M\) e \(\overline{\nabla}\) a conexão de Levi-Civita de \(\overline{M}\).
+\begin{enumerate}[label=(\alph*)]
+\item Let \(f:M^n \to \widetilde{M}^m\) be an isometric immersion and let \(\widetilde{\nabla}\) denote the connection on \(f^*T \widetilde{M}\) induced by the Levi-Civita connection of \(\widetilde{M}\). Verify that
+	\[\nabla_XY=f^{-1}_*\left(\widetilde{\nabla}_X f_*Y\right)^\top\]
+defines a compatible torsion-free connection on \(TM\), which therefore coincides with the Levi-Civita connection of \(M\).	
+
+\item  (Reformulation of (a).) Mostre que
+	\[f_*(\nabla_XY)=\left(\overline{\nabla}^f_Xf_*Y\right)_{TM}\]
+e que essa igualdade determina \(\nabla\) em função de \(\overline{\nabla}\). Aqui, para \(W \in T_{f(p)}\overline{M}\), \(W_{TM}\) denota a sua projeção ortogonal ao subespaço \(f_*(T_pM) \subset T_{f(p)}\overline{M}\).
+\item Seja \(c\) uma curva suave em \(M\). Mostre que para todo \(Y \in \mathfrak{X}_c\) vale
+	\[f_*\nabla^c_{\frac{d}{dt}}Y=\left(\nabla^{f \circ c}_{\frac{d}{dt}}f_*Y\right)_{TM} \]
+\item Seja \(\gamma:I \to M\) uma curva suave parametrizada pelo comprimento de arco. Mostre que \(\gamma\) é uma geodésica de \(M\) se, e somente se, sua aceleração em \(\overline{M}\) é perpendicular à variedade \(M\), i.e.,
+	\[\overline{\nabla}^{f \circ \gamma}_{\frac{d}{dt}\Big|_{t}}(f \circ \gamma)' \perp f_*(T_{\gamma(t)}M)\]
+	para todo \(t \in I\).
+\end{enumerate}
+\end{thing6}
+
+\begin{proof}[Solução]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Nos han enseñado que esto se hace así (como dice la version de \cite{daj}): defina
+	\[D: \mathfrak{X}(M)\times \mathfrak{X}(M) \longrightarrow \mathfrak{X}(M)\]
+una conexión random pero satisfaciendo que
+\[f_*(D_XY) = \left(\widetilde{\nabla}_X^f f_*Y\right)^\top\]
+. Afirmamos que \(D\) es métrica y simétrica, o sea, \(D=\nabla\) y se acabó. (Que básicamente es el ``lema de simetría y compatibilidad".)
+\begin{itemize}
+\item \textbf{(Métrica.)} Se me antoja empezar con \(X\left<Y,Z\right>=\) pero ahí no sé que poner. (Puedo poner \(\nabla\) pero eso no sirve de nada.) Entonces mejor aplico \(f_*\), después de pensarlo me doy cuenta de que \(f_*Y\) y \(f_*Z\) son secciones de \(f^*\widetilde{M}\), o sea vectores en \(T\widetilde{M}\) pero como funciones están definidas em \(M\)! Acaba que lo que único que tiene sentido escribir es:
+\begin{align*}
+X\left<f_*Y,f_*Z\right>&=\left<\widetilde{\nabla}^f_Xf_*Y,f_*Z\right>+\left<f_*Y,\widetilde{\nabla}^f_Xf_*Z\right>
+\end{align*}
+\(\mathsf{OK}\) pero… eso es cierto? Bueno, lo que sabemos es que:
+\begin{align*}
+\left<\left( \widetilde{\nabla}^f_Xf_*Y\right)^\top,f_*Z\right>+\left<f_*Y,\left(\widetilde{\nabla}^f_Xf_*Z\right)^\top\right>&=\left<f_*(D_XY),f_*Z\right>+\left<f_*Y,f_*(D_XZ)\right>
+\end{align*}
+
+
+
+Ah, entonces eso es lo que hay que probar justamente. Me fijo en el lado izquierdo y digo bueno en cada punto, como \(f\) es isometría local,
+\[\left<f_{*,p}Y(p),f_{*,p}Z(p)\right>_{f(p)}=\left<Y(p),Z(p)\right>_{p}\]
+y como es un tensor escribo nomás
+\[\left<f_*Y,f_*Z\right>=\left<Y,Z\right>\]
+Y eso sí,
+\[\left<Y,Z\right>=\left<\nabla_XY,Z\right>+\left<Y,\nabla_XZ\right>\]
+No sé qué hacer con esos campos pero en campos coordenados sí, porque la base de  \(T_p\widetilde{M}\) es \(\partial_i\), pero eso no es una base del fibrado pullback, la que sí es base del fibrado pullback es \(\partial_i \circ f\). Ah entonces
+\begin{align*}
+\left<\widetilde{\nabla}_X^f \partial_i \circ f,\partial_i \circ f\right>+\left<\partial_j \circ f,\widetilde{\nabla}_X^f \partial_j \circ f\right>&= \left<\tilde{\nabla}_{f_*X}\partial_i,\partial_j\right>+\left<\partial_i,\widetilde{\nabla}_{f_* X}\partial_j\right>\\
+&=f_*X\left<\partial_i, \partial_j\right>\\
+&=X\left<\partial_i \circ f,\partial_j \circ f\right>
+\end{align*}
+\end{itemize}
+
+\end{enumerate}
+\end{proof}
+
 \subsection{gcr}
 \textit{\textbf{Gauss}}:
 \[\left<\tilde{R}(X,Y)Z,W\right>=\left<R(X,Y)Z,W\right>-\left<\alpha(X,Z),\alpha(Y,W)\right>+\left<\alpha(X,W),\alpha(Y,Z)\right>\]
@@ -887,9 +1022,148 @@ use esa fórmula para mostrar que não pode ter \(M \hookrightarrow \mathbb{R}^{
 
 \section{amazing theorems}
 
+\begin{thing6}{hopf-rinow}\leavevmode
+São equivalentes
+\begin{enumerate}[label=(\alph*)]
+\item \(\operatorname{dom}\operatorname{exp}_p=T_pM\) 
+\item Conjuntos fechados e limitados são compactos
+\item \((M,d)\) é um espaço métrico completo
+\item \(M\) é geodésicamente completa (toda geodésica está maximalmente definida em \(\mathbb{R}\))
+\item Existem exhaustion
+\end{enumerate}
+Além disso, qualquer uma implica
+\begin{enumerate}[label=(\alph*)]
+	\item[(f)] \(\forall p,q \in M\) existe uma geodésica minimizante unindo eles.
+\end{enumerate}
+\end{thing6}
+
 \begin{thing6}{hadamard}\leavevmode
 \(M\) completa, simplesmente conexa e \(K \leq  0\). Então, para todo \(p \in M\), \(\operatorname{exp}_p\) é um difeomorfismo global. Em particular \(M^n \overset{\operatorname{difeo}}{\simeq} \mathbb{R}^n\).
 \end{thing6}
+\begin{proof}\leavevmode
+con puro hopf-rinow
+\end{proof}
+
+\begin{thing6}{amazing theorem 8}\leavevmode
+Seja \(M\) completa, simplemente conexa, com curvatura constante. Então \(M\) é globalmente isométrica a \(\mathbb{Q}^n_c\).
+\end{thing6}
+
+\begin{thing6}{bonnet-myers}\leavevmode
+	\(M\) completa, \(\operatorname{Ric} \geq \frac{1}{r^2}\). Então \(\operatorname{diam}\leq \pi r\). Em particular \(M\) é compacta.
+\end{thing6}
+\begin{proof}\leavevmode
+con pura segunda variación y un campo sinoidal
+\end{proof}
+
+\begin{thing6}{Weinstein theorem}\label{thm:Weinstein theorem}\leavevmode
+Seja \(M^n\) orientada, compacta, \(K>0\) e \(f \in \operatorname{Iso}(M)\).  Suponha que se \(n\) é par, \(f\) preserva orientação e que se \(n\) é ímpar \(f\) reverte orientação. Então \(f\) possui um ponto fixo.
+\end{thing6}
+
+\begin{thing6}{Synge theorem}\leavevmode
+\(M^n\) compact, \(K>0\).
+ \begin{enumerate}[label=(\roman*)]
+\item Se \(n\) é par, \(\pi_{1}(M)=\begin{cases}
+	1\qquad &\text{ se \(M\) é orientável}  \\
+	\mathbb{Z}_2\qquad &\text{ se não} 
+\end{cases}\) 
+\item Se \(n\) é ímpar, \(M^n\) é orientável.
+\end{enumerate}
+\end{thing6}
+
+\begin{thing6}{jacobi theorem}\leavevmode
+\(\gamma:I \to M\) geodésica, \(\gamma(a)\) conjugado a \(\gamma(b)\) ao longo de \(\gamma\) \(\implies\) \(\forall \delta>0\), \(I_{a+\delta}\not \geq 0\). ou seja, \(\gamma\) não minimiza depois do primeiro ponto conjugado (cf. teorema do indice de morse).
+\end{thing6}
+\begin{proof}\leavevmode
+con pura segunda variación
+\end{proof}
+
+\begin{thing6}{index lemma}\leavevmode
+Se \(\gamma\) não tem pontos conjugados \(\forall V \in \mathfrak{X}_\gamma\) dif por partes, \(V(0)=0\) então
+	\[\boxed{I_a(J,J) \geq I_a(J,J)}\]
+para \(J \in \mathfrak{X}^J_\gamma\), \(J(0)=0\), \(J(a)=V(a)\). Vale \(=\) \(\iff\) \(V=J\).
+\end{thing6}
+
+\begin{thing6}{sturm}\leavevmode
+	Dos funciones \(f\) y \(\tilde{f}\) definidas en \([0,a] \to \mathbb{R}\).
+	Otras dos funciones \(K\), \(\tilde{K}\) definidas en \([0,a]\). \textbf{Importantemente,} \(\tilde{f}>0\). Ahora las condiciones iniciales son
+	\[f(0)=0, \tilde{f}(0)=0, \qquad f'(0)=\tilde{f}(0)\]
+y bueno
+\[f''+Kf=0, \qquad  \tilde{f}''+\tilde{K}\tilde{f}=0\]
+Se \[\tilde{K} \geq K\], entonces \(f/\tilde{f}\) é não decreciente, que implica que \(\tilde{f} \leq  f\).
+
+Além disso se para algum \(t \in (0,a]\) se satisface que \(f(t)=\tilde{f}(t) \implies  f\equiv\tilde{f}\) e \(K\equiv\tilde{K}\) em \([0,t]\).
+\end{thing6}
+
+\begin{thing6}{rauch}\leavevmode
+	Dos geodésicas creo que unitarias, pero en variedades distintas, y un campo de Jacobi en cada una. \textbf{\(\tilde{\gamma}\) no tiene puntos conjugados}. Los campos de Jacobi son parecidos en cuanto a que
+	\[J(0)=0, \tilde{J}(0)=0, \qquad \left<J,\gamma'\right>=0=\left<\tilde{J},\tilde{\gamma}'\right>,\qquad |J'(0)|=|\tilde{J}'(0)|\]
+Si
+\[K\leq \tilde{K}\]
+entonces
+\[|\tilde{J}|\leq |J|\]
+ \begin{align*}
+\begin{aligned}
+	\gamma:[0,a] \longrightarrow M^n \qquad &J\\
+	\tilde{\gamma}:[0,a] \text{ SPC} \longrightarrow \tilde{M}^m \qquad &\tilde{J}
+\end{aligned}\qquad K \leq \tilde{K} \implies \|J\| \geq \|\tilde{J}\|
+\end{align*}
+\[K(\gamma',J) \leq \tilde{K}(\tilde{\gamma};,\cdot)\qquad \frac{\|J\|}{\|\tilde{J}\|}\text{ é crescente} \]
+Além disso, se para algum \(t \in (0,a]\) se satisface que \(\|J(t)\|=\|\tilde{J}(t)\|\) entonces \(\|J\|\equiv\|\tilde{J}\|\), \(K(\gamma',J)\equiv K(\tilde{\gamma}',\tilde{J})\) em \([0,t]\).
+\end{thing6}
+\begin{proof}\leavevmode
+con lema do índice
+\end{proof}
+
+\begin{thing6}{otsuki lemma}\leavevmode
+\end{thing6}
+
+\begin{thing6}{corolário}\leavevmode
+\(M^n \subset \tilde{M}^{n+p}\), \(K < \tilde{K} \implies p \geq n-1\).
+\end{thing6}
+
+\begin{thing6}{moore}\leavevmode
+No contexto do lema de cartan, \(M^n \subset \tilde{M}^{n+p}\) subvariedade compacta, \(\tilde{M}\) hadamard, \(K \leq  \tilde{K} \leq 0 \implies p \geq n\).
+\end{thing6}
+
+\begin{thing6}{superprop}\leavevmode
+seja \(f\) a isometria do lema de cartan. \(K \leq  \tilde{K} \implies \) \(f\) é uma contração, i.e. \(\|f_*\|\leq  1\). Bastará com \(K(\gamma'_v,\cdot)\leq \tilde{K}(\tilde{\gamma}'_{iv},\cdot)\)? Além disso, se \(B\) é convexa então \(f\) é uma contração métrica.
+\end{thing6}
+
+\textbf{explicação:} se \(K \leq  \tilde{K}\) então \(d \geq \tilde{d}\) onde \(d,\tilde{d}\) são os lados opostos de triângulos com mesmo angulo e lados adjacentes do mesmo tamanho/
+
+\begin{thing6}{teorema de hermann}[not in proved]\leavevmode
+\(N \subset M\), \(N\) fechada e \(M\) completa, \(\operatorname{Foc}(N \subset M)=\varnothing\) então \(\operatorname{exp}^\perp\) é aplicação de recobrimento
+\end{thing6}
+
+\begin{thing6}{índice de morse}\leavevmode
+o índice \(i(I_t)\) é finito e igual ao número de pontos conjugados em \([0,t)\) ao longo de \(\gamma\).
+\end{thing6}
+
+\begin{coro}\leavevmode
+as geodésicas não minimizam depois do primeiro ponto conjugado. de fato, \(I_a \not\geq 0\iff\exists t\in[0,a)\) conjugado a \(\gamma(0)\) ao longo de \(\gamma\).
+\end{coro}
+
+\begin{coro}\leavevmode
+pontos conjugados são discretos
+\end{coro}
+
+\begin{thing6}{bishop-gromov}\leavevmode
+\(\operatorname{Ric}\geq k \implies \operatorname{Vol}(B_t(p))/\operatorname{Vol}(B_{t,k})\) decrescente para todo \(0 \leq  t \leq  i(p)\) onde \(i(p) =d(p,C_m(p))\) é o raio de injetividade de \(\operatorname{exp}\).
+\end{thing6}
+
+\subsection{proofs and divagations}
+
+\subsubsection{hadamard}
+\begin{proof}\leavevmode
+by you have a product/i have a product argument any two universal objects are isomorphic. so universal coverings are isomorphic. since \(M\) is simply connected it is its own universal cover. then we only need to show that also \(T_pM\) is a universal cover.
+
+since \(K\leq 0\) we know \(\operatorname{exp}\) is a local difeo. but that doesn't say it is a cover. it has been claimed that a local diffeomorphism is a cover iff it lifts curves, but i don't know why the reverse is true (the direct implication is in hatcher).
+
+to show \(\operatorname{exp}\) is a cover we put the pullback metric on \(T_pM\) show that it is complete with this metric… because… geodesics in this space are the preimages under \(\operatorname{exp}\) of geodesics of \(M\), that is, geodesics on this space are \(t \mapsto  tv\) because geodesics on \(M\) are \(\operatorname{exp}_ptv\). and those geodesics are defined in all of \(\mathbb{R}\) because \(M\) is complete. so that space is complete.
+
+\end{proof}
+
+\subsubsection{complex ricci}
 
 \begin{exercise}\leavevmode
 Remember Hadamard’s theorem? It says that a simply-connected, complete riemannian manifold with nonpositive sectional curvature is diffeomorphic to \(\mathbb{R}^n\).
@@ -923,13 +1197,7 @@ So maybe there's another way of showing simply connectedness at least? No super 
 \end{enumerate}
 \end{proof}
 
-\begin{thing6}{amazing theorem 8}\leavevmode
-Seja \(M\) completa, simplemente conexa, com curvatura constante. Então \(M\) é globalmente isométrica a \(\mathbb{Q}^n_c\).
-\end{thing6}
-
-\begin{thing6}{bonnet-myers}\leavevmode
-	\(M\) completa, \(\operatorname{Ric} \geq \frac{1}{r^2}\). Então \(\operatorname{diam}\leq \pi r\). Em particular \(M\) é compacta.
-\end{thing6}
+\subsubsection{weinstein}
 
 \begin{thing6}{Weinstein theorem}\label{thm:Weinstein theorem}\leavevmode
 Seja \(M^n\) orientada, compacta, \(K>0\) e \(f \in \operatorname{Iso}(M)\).  Suponha que se \(n\) é par, \(f\) preserva orientação e que se \(n\) é ímpar \(f\) reverte orientação. Então \(f\) possui um ponto fixo.
@@ -984,19 +1252,109 @@ Ou seja, os eigenvalores que não são 1 ou \(-1\) não afetam o determinante. D
 E essas são as condições que precisamos para que \(A\) tenha um ponto fixo e tudo funcione. Então bota isso aí na hipótese do teorema.
 \end{proof}
 
-\begin{thing6}{Synge theorem}\leavevmode
-\(M^n\) compact, \(K>0\).
- \begin{enumerate}[label=(\roman*)]
-\item Se \(n\) é par, \(\pi_{1}(M)=\begin{cases}
-	1\qquad &\text{ se \(M\) é orientável}  \\
-	\mathbb{Z}_2\qquad &\text{ se não} 
-\end{cases}\) 
-\item Se \(n\) é ímpar, \(M^n\) é orientável.
-\end{enumerate}
+\subsubsection{index theorem}
+
+\begin{thing6}{index lemma}\leavevmode
+Se \(\gamma\) não tem pontos conjugados \(\forall V \in \mathfrak{X}_\gamma\) dif por partes, \(V(0)=0\) então
+	\[\boxed{I_a(V,V) \geq I_a(J,J)}\]
+para \(J \in \mathfrak{X}^J_\gamma\), \(J(0)=0\), \(J(a)=V(a)\). Vale \(=\) \(\iff\) \(V=J\).
 \end{thing6}
+
+\begin{proof}\leavevmode
+the idea is that because there are no conjugate points along \(\gamma\) we can take a basis of jacobi fields. then we get super cumberstone computations
+\end{proof}
+
+\subsection{morse index theorem}
+
+the problem is that the vector spaces of sections of smooth manifolds are infinite-dimensional. we are interested in computing
+\[i(I_a):=\operatorname{sup}\{\dim L \subset \mathfrak{X}_\gamma:I_a |_{L \times L}<0\}\]
+which is just the usual index or signature of a bilinear form. But how to compute that if the vector space is monstrous.
+
+the index form
+\[I_a:\mathcal{V}_a \times \mathcal{V}_a \longrightarrow \mathbb{R}\]
+where
+\[\mathcal{V}_a:=\{V \in \mathfrak{X}_\gamma \text{piecewise diff, }V(0)=0,V(a)=0\}\]
+is hard to deal with.
+
+so we chose a partition of the piecewise differentiable \(\gamma\) and define
+\[\mathcal{V}_t^+:=\{V \in \mathcal{V}_t: V(t_i)=0\}\]
+\[\mathcal{V}_t^-:=\{V \in \mathcal{V}_t:V|_{[t_j,t_{j+1}}\in \mathfrak{X}^J_{\gamma|_{[t_j,t_{j+1}}}\}\]
+so yes, the \(-\) part is the jacobi fields, who save the day. and they \textit{do} save the day---because they are a priori not involved in this problem: the index form is really just the second variation formula. so when did jacobi fields appear? \textit{it's just curvature after all}
+
+now there are three key observations:
+\begin{enumerate}
+\item \(\mathcal{V}_t=\mathcal{V}_t^+ \oplus  \mathcal{V}_t^-\)
+\item \(\mathcal{V}_t^- \cong \bigoplus_{j=1}^{i-1}T_{\gamma(t_j)}M:=S\). {\color{2}i think} this is because we are in jacobi fields with first initial condition equal to zero. which means that every copy of \(T_{\gamma(t)}M\) is for the other initial condition \(J'(t)\).
+\item \(\ker I_t:=\{V \in \mathcal{V}_t:I_t(V,W)=0 \forall W \in \mathcal{V}_t\}=\mathcal{V}_t \cap \mathfrak{X}_\gamma^J\)
+this one says that \textbf{the kernel of \(I_t\) is the jacobi field part} (it is inside the set of all jacobi fields). that's because second variation formula. so \textbf{the dimension of the kernel is what we call multiplicity} of \(\gamma(t)\) and \(\gamma(0)\) as conjugate points.
+\item \(I_t|_{\mathcal{V}^+_t \times \mathcal{V}^+_t}>0\) because for \(V \in \mathcal{V}^+_t\), \(I_t(V,V)=\sum_{j=1}^{i+1}I_{\gamma|_{t_{j-1},t_j}}(V|_{[t_{j-1},t_j]},V|_{[t_{j-1},t_j]}{\color{2}\geq I(0,0)=0}\).
+\item \(I_{t}(\mathcal{V}_t^-,\mathcal{V}_t+)=0\).
+\item so we conclude that
+	\[\begin{array}{c}
+	\mathcal{V}_t^-\\
+	 \mathcal{V}_t^+\end{array}\left(\begin{array}{@{}c|c@{}}
+	&0\\
+	\hline
+	0&>0\end{array}\right)\]
+meaning that the \textbf{index is the index on the jacobi field part \(\mathcal{V}^-_t\)} and in particular it is finite:
+\[i(I_t)=i(I_t|_{\mathcal{V}_t^- \times \mathcal{V}_t^-}<\infty\]
+which is great. but it is not still clear what is the relationship with that and the kernel of \(I_t\) (and conjugate points).
+\item then comes a function \(\varphi\) that i don't know what it does
+\item now let \(L\) be the subset of \(S\) (which, if you recall, is just \(j-1\) copies of  \(T_{\gamma(t)}M\), one for each initial condition \(J'(0)\)) such that
+	 \[I_{t}|_{L \times L}>0\]
+so that
+\[\dim L=\dim S-i(t)-\mathcal{V}(t)\]
+which is just because \(S\) is split as: the part where \(I_t\) is positive definite, where it is negative definite, and where it is zero. \textbf{não tem mistério}
+\item then comes the \(\varphi\). looks like
+\begin{enumerate}[label=(\alph*)]
+\item \(\varphi\) preserves the index: \(i(I_t)=i(\varphi_t^*I_t):=i(\hat{I}_t)=i(t)\). So there's another index form
+	\begin{align*}
+		\hat{I}_t: S \times S &\longrightarrow \mathbb{R} \\
+		\hat{I}_t(U,V) &= I_t(\varphi u,\varphi v)
+	\end{align*}
+\item So maybe now it makes sense that
+	\[\varphi_{t'}:S \overset{\operatorname{iso}}{\longrightarrow}\mathcal{V}_{t'}^-\]
+	contínuas para toda \(|t'-t|<\varepsilon\).
+\item So there's a bunch of these \(\varphi\) things.
+\end{enumerate}
+\item \(\mathsf{OK}\) back to earth take \(V \in L\) so that \(\hat{I}_t(V,V)>0\). but hey that says that
+	\[\hat{I}_{t+\delta}(V,V)=I_{t+\delta}(\varphi_{t+\delta}V,\varphi_{t+\delta}V\]
+\item then he erases that and instead puts
+	\[\exists  \delta>0: |t-t'|<\delta \implies I_{t'}|_{L \times L}>0\]
+	 {\color{2}which makes no sense} because \(I_{t'}\) should be positive on \(L \times L\) anyways…
+
+	 and that means that
+	 \[i(t') \leq \dim S- \dim L=i(t)+\mathcal{V}(t)\]
+	 mmm… something like \textit{near \(t\), the index is smaller than the index plus the nullity} 
+\item Final step: apply index lemma to show that
+	\[\hat{I}_t > \hat{I}_{t+\varepsilon}\text{ em } \ker I_t\]
+which says that for small \(\varepsilon>0\) 
+\[i(t+\varepsilon)\geq  i(t)+\mathcal{V}(t)\]
+so that
+\[\boxed{i(t+\varepsilon)=i(t)+\mathcal{V}(t)}\]
+\( \forall t \in [0,a]\) and  \(\varepsilon\) pequeno. and that proves the theorem
+	
+\end{enumerate}
+\textbf{why?}
+
+
+\section{pontos focais}
+
+It's a Jacobi field that the curves \(c^s\) arrive perpendicularly at the submanifold \(N\). Also the curve \(\beta(s)=f(s,0)\) is contained in the submanifold \(N\). And \(J(r)=0\) for some \(r\). This is supposed to be equivalent to 
+\[J(0) \in T_p N\qquad  \text{and} \qquad J'(0)+A_{\gamma'(0)}J(0) \in T_p^{\perp}N\]
+Ou seja: \(q \in M\) is a \textit{\textbf{focal point}} de \(N\) (ao longo de \(\gamma\)) se \(\gamma\) é uma geodésica unindo \(N\) e \(q=\gamma(r)\), \(\gamma'(0) \perp N\), existe \(0 \neq  J \in \mathfrak{X}^J_\gamma\) satisfazendo isso que tá na caixa e tal que \(J(r)=0\).
+
+\begin{prop}\leavevmode
+singularidades de \(\operatorname{exp}^\perp:=\operatorname{exp}|_{T^\perp N}\) são os pontos focais de \(N \subset M\).
+\end{prop}
 
 \clearpage
 \chapter{ag algebraic geometry}
+
+\begin{quotation}
+	the sea advances insensibly in silence, nothing seems to happen, nothing moves
+\end{quotation}
+
 \section{algebraic variety}
 
 An \textit{\textbf{algebraic variety}} is a compact topological space equipped with a ring of sheaves which is locally isomorphic to an affine variety with its sheaf of regular functions and Zariski topology.
@@ -1117,9 +1475,73 @@ An isomorphism of smooth manifolds is called a \textit{\textbf{diffeomorphism}}.
 
 \section{basic structure sheaf stuff}
 
-\textbf{What is the structure sheaf?} 
+\textbf{what is the structure sheaf?} The structure sheaf of an affine scheme \(\operatorname{Spec}A\) is defined on the open set \(D(f)\) as…
+\begin{quotation}
+	``the localization of \(A\) at the multiplicative set of all functions that do not vanish outseide of \(V(f)\)…"
+\end{quotation}
+…now that we have defined \(\operatorname{Proj}S_\bullet\) as a topological space, we are ready to define the structure sheaf. On \(D_+(f)\), we wish it to be the structure sheaf of \(\operatorname{Spec}((S_{\bullet})_f)_0\). (follow exercises.)
 
-\textbf{What is the induced map on structure sheaves?}
+\begin{question}\leavevmode
+Why vakil uses so much \(\operatorname{Spec}\) and not so much \(\operatorname{Proj}\)?
+\end{question}
+\begin{conjecture}\leavevmode
+Projective schemes are schemes. This says: take a graded ring \(S\) and its projective scheme \(\operatorname{Proj}S\) with its projective structure sheaf and for any point of \(\operatorname{Proj} S\) find a neighbourhood of \(p\) that is a ringed space isomorphic to an affine scheme. But---what's the difference then, of projective and normal scheme then? We have the grading, ok, but then…
+\end{conjecture}
+
+Suppose \(\pi:X \to Y\) is a continuous map and \(\mathcal{F}\) is a presheaf on \(X\). Then define a presheaf \(\pi_*\mathcal{F}\) on \(Y\) by \(\pi_*\mathcal{F}(V)=\mathcal{F}(\pi^{-1}(V))\). Show that \(\pi_*\mathcal{F}\) is a presheaf on \(Y\) and is a sheaf if \(\mathcal{F}\) is is. this is called the \textit{\textbf{pushforward}} or \textit{\textbf{direct image}} of \(\mathcal{F}\). Now define the \textit{\textbf{inverse image}} of \(\mathcal{G}\) by \(\pi^{-1}\mathcal{G}:=(\pi^{-1}_{\operatorname{pre}}\mathcal{G})^{\operatorname{sh}}\).
+
+\begin{thing6}{Fact}\leavevmode
+\(\pi^{-1}\) is adjoint to \(\pi_*\)
+\end{thing6}
+
+\begin{exercise}\leavevmode
+show that the stalks of \(\pi^{-1}\mathcal{G}\) are the same as the stalks of \(\mathcal{G}\).
+\end{exercise}
+
+\section{morphisms}
+
+a \textit{\textbf{morphism of ringed spaces}} \(\pi:X \to Y\) is a continuous map of topological spaces (which we unfortunately also call \(\pi\) along with a map \(\mathcal{O}_Y \to \pi_*\mathcal{O}_X\), which we think of as a ``pullback map". By adjointness, this is the same as a map \(\pi^{-1}\mathcal{O}_Y \to \mathcal{O}_X\).
+
+\textbf{the point} is that the \textit{induced map on sheaves} is a map on two sheaves \textbf{on \(Y\)}. That's it's a morphism of sheaves of two sheaves on \(Y\)---because morphisms of sheaves are for sheaves over the same space. 
+
+recall (def. 4.3.7) that a \textit{\textbf{locally ringed space}} is a ringed space \((X,\mathcal{O}_X)\) such that the stalks \(\mathcal{O}_{X,p}\) are all local rings. a \textit{\textbf{morphism of locally ringed spaces}} \(\pi:X \to Y\) is a morphism of ringed spaces such that the induced map of stalks \(\pi^\sharp:\mathcal{O}_{Y,p} \to \mathcal{O}_{X,p}\) (exer 7.3.E; every morphism of ringed induces as a map on corresponding stalks) sends the maximal ideal \(\mathfrak{m}_{Y,q}\) of the former into the maximal ideal \(\mathfrak{m}_{X,p}\) of the latter (i.e. it's a \textit{\textbf{morphism of local rings}}).
+
+\textbf{7.2.F. key exercise} Suppose \(\pi^\sharp:B \to A\) is a morphism of rings. define a morphism of ringed spaces \(\pi:\operatorname{Spec}A \to \operatorname{Spec}B\) as follows.[uses basic open sets]
+
+\textbf{7.3.C. easy important exercise} Recall (§4.3.7) that \(\operatorname{Spec}A\) is a locally ringed space. Show that the morphism of ringed spaces \(\pi:\operatorname{Spec}A \to \operatorname{Spec}B\) defined by a ring morphism \(\pi^\sharp:B \to A\) (exer. 7.2.F) is a morphism of locally ringed spaces.
+
+\textbf{7.3.2 key proposition.} if \(\pi:\operatorname{Spec}A \to \operatorname{Spec}B\) is a morphism of locally ringed spaces then it is the morphism of locally ringed spaces induced by the map  \(\pi^\sharp:B \to A\) where \(A=\Gamma(\operatorname{Spec}B,\mathcal{O}_{\operatorname{Spec}B})\) and \(A=\Gamma(\operatorname{Spec}A,\mathcal{O}_{\operatorname{Spec}A})\).
+
+an \textit{\textbf{affine morphism}} is such that the inverse image of any affine open set is an affine scheme.
+
+\section{closed embeddings}
+
+A morphism \(\pi:X \to Y\) is a \textit{\textbf{closed embedding}} or \textit{\textbf{closed immersion}} if it is an affine morphism and for every affine open subset \(\operatorname{Spec}B \subset Y\) with \(\pi^{-1}(\operatorname{Spec}B)\cong \operatorname{Spec} A\), the map \(B \to A\) is surjective, i.e. of the form \(B \to B/I\).
+
+we call a sub-\(\mathcal{O}_Y\)-module of \(\mathcal{O}_Y\) an \textit{\textbf{ideal sheaf}} on \(Y\). a closed subscheme \(\pi:X \hookrightarrow  Y\) gives a surjection of \(\mathcal{O}_Y\)-modules \(\mathcal{O}_Y \to \pi_* \mathcal{O}_X\). the kernel \(\mathcal{I}_{X/Y}\) of this map is then a sheaf of ideals on \(Y\). On each open subset \(U\), it gives an ideal \(\mathcal{I}_{X/Y}(U)\) of the ring  \(\mathcal{O}_Y(U)\); on the affine subset \(\operatorname{Spec}B\), it gives the ideal \(I\) of \(B\) determining the surjection \(B \to A=B/I\) in the definition of ``closed subscheme".
+
+…a subvariety? *emerges from the abyss*
+
+yes, if \(X\) is a subset of \(Y\) (and \(\pi\) on the level of sets is the inclusion), we say that \(X\) is a \textit{\textbf{closed subscheme}} of \(Y\). A closed embedding \textit{is the same thing} as an isomorphism with a closed subscheme.
+
+yes, like, embedded submanifolds are the same things as submanifolds. subtle difference is---where are the subschemes? to me it looks like this is the invention of subschemes… i may be wrong but yes,, like, you can't even think of subsets of schemes, so this is the way to define subschemes.
+
+\section{cartier divisors}
+
+if \(\pi:X \to Y\) is a closed embedding, and there is a cover \(Y\) by affine open subsets \(\operatorname{Spec}A_I \subset Y\) and there exist non-zerodivisors \(t_i \in A_i\) with \(V(t_i)=X|_{\mathsf{Spec}(A_i)}\), i.e. the ideal sheaf of \(X\) over \(\operatorname{Spec}A_i\) is generated by \(t_i\), then we say that \(X\) is an \textit{\textbf{effective cartier divisor}} on \(Y\).
+
+\section{dimension}
+
+I think the dimension of a variety is the maximum height of a local ring \(\mathcal{O}_{X,p}\). The height is the maximum \(\mathfrak{p}_1 \subset \mathfrak{p}_2 \subset\ldots \subset\mathfrak{p}_k\) of prime ideals we can put inside \(\mathfrak{p}\).
+
+\begin{thing6}{12.3.3 \cite{sea} krull's principal ideal theorem (algebraic version)}\leavevmode
+Suppose \(A\) is a Noetherian ring, and \(f \in A\). Then every prime \(\mathfrak{p}\) minimal among those containing \(f\) has codimension at most \(1\).
+\end{thing6}
+
+
+\section{regular ring}
+
+a ring \(A\) is \textit{\textbf{regular}} when \(\dim A= \dim_k \mathfrak{m}/\mathfrak{m}^2\).
 
 \section{segre and veronesse}
 
@@ -1309,7 +1731,7 @@ Let \( U \) be a vector space of dimension \( n+1 \). Then:
 \section{sysys}
 
 \begin{quote}
-\hfill \textit{Syzygy} \textnormal{[from Greek]} \textgreek{συζυγία}
+\hfill \textit{Syzygy} %\textnormal{[from Greek]} \textgreek{συζυγία}
 
 \hfill\textit{yoke, pair, copulation, conjunction}
 \end{quote}
@@ -1384,6 +1806,24 @@ where (for some reason)  \(F_i=\bigoplus_{j}S(-j)^{\beta_{i,j}}\); that is, \(F_
 this is \cite{sys} appendix A2B. Let \(R\) be a local ring with maximal ideal \(\mathfrak{m}\). The \textit{\textbf{zariski cotangent}} is \(\mathfrak{m}/\mathfrak{m}^2\), regarded as a vector space over \(R/\mathfrak{m}\). […] The ring \(R\) is called \textit{\textbf{regular}} if \(\dim R\) is equal to the vector space dimension of the Zariski tangent space; otherwise \(R\) is \textit{\textbf{singular}}.
 
 \section{normalization}
+
+\subsection{rising sea}
+
+after succesfully constructing normalization,
+
+\begin{thing6}{exercise 10.7M}[finiteness of normalization]\leavevmode
+\begin{enumerate}[label=(\alph*)]
+\item Show that if \(X\) is an integral finite type \(k\)-scheme, then its normalization \(\nu:\tilde{X}\to X\) is a finite morphism.
+\item Suppose \(X\) is a locally Noetherian integral scheme. Show that if \(X\) is normal, then the normalization in a \textit{finite} separable field extension is a finite morphism. Show that…
+\end{enumerate}
+\begin{thing6}{Exercise 10.7N}\leavevmode
+Show that if \(X\) is an integral finite type \(k\)-scheme, then the normalization morphism is birational.
+\end{thing6}
+
+now the construction begins truly in algebra so I use \cite{sysy} appendix.
+\end{thing6}
+
+\subsection{a first introduction}
 
 Normalization step-by-step guide.
 \begin{enumerate}
@@ -1764,7 +2204,7 @@ That \(\Omega^{1,0}(M)\) is the \textit{annihilator} of \(T^{0,1}(M)\). So this 
 \end{quotation}
 \textit{then} you take the exterior algebra, \textit{extend} \(\overline{\partial}\) across the layers of the complexified exterior algebra and produce dolbeault cohomology. you may then
 \begin{thing6}{conjecture}\leavevmode
-	\[\overline{\partial}TM \subset \Omega^{0,1}M \qquad \text{and}\qquad  \(\partial TM \subset \Omega^{1,0}M\]
+	\[\overline{\partial}TM \subset \Omega^{0,1}M \qquad \text{and}\qquad  \partial TM \subset \Omega^{1,0}M\]
 and finally say well, perhaps even
 \[\partial\overline{\partial}TM \subset \Omega^{1,1}(M)\]
 the so-called \((1,1)\)-forms---the lair of the complex ricci curvature form
@@ -1901,6 +2341,19 @@ To keep all components real, we must set \( A = C = 0 \), leaving only:
 g = g_{i\bar{j}} \, dz^i d\bar{z}^j, \quad \text{with} \quad g_{i\bar{j}} = \overline{g_{j\bar{i}}}
 \]
 \end{proof}
+
+\subsection{smooth dimension and holomorphic dimension}
+
+\begin{exercise}\leavevmode
+show that the dimension of a complex manifold is the same as the dimension of the scheme. what scheme?
+\end{exercise}
+
+\[\left| \sum \frac{f^{(n)}(0)}{n!}f(z)^n \right|\leq \begin{cases}
+	C|z|^d\qquad & \\
+	\sum \left| \frac{f^{n}(0)}{n!}f(z)^n \right|\leq  \qquad &
+\end{cases} \]
+ \[|f'(0)|\]
+ 
 
 \section{core concepts}
 
@@ -2196,13 +2649,42 @@ but hey, intersection form is linear with respect to taking dual, i.e. multiplyi
 \begin{thing7}{Claim 1}\leavevmode
 The ideal sheaf of  \(C\) defined as the regular functions that vanish on \(C\) is the line bundle  \(L(-C)\).
 \end{thing7}
+
 \begin{proof}\leavevmode
+	I think this works as long as you are effective cartier. Are you? I think this is my claim:
+	\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+	the ideal sheaf of a curve inside a smooth projective surface is locally principal
+	\end{tcolorbox}
+What's a curve? A curve is a codimension-1 subscheme of \(X\). What is that. The \textit{\textbf{codimension of an irreducible subset}} \(Y \subset X\) of a topological space is the supremum of lengths of increasing chains of irreducible closed subsets starting with \(\overline{Y}\).
+
+Then I have to pass to the ideal sheaf. The ideal sheaf is the kernel of the induced map by the inclusion \(S \hookrightarrow X\), the surjection of \(\mathcal{O}_X\)-modules \(\mathcal{O}_X \to i_* \mathcal{O}_S\). But that doesn't help at all.
+
+What I really need is to notice that the codimension 1 condition as a topological space corresponds to a codimension 1 condition on the prime ideals of \(\mathcal{O}_X(U)\) for any open set \(U\). This means that the maximum subchain of prime ideals inside the prime ideal that corresponds to \(S\), which is the ideal given by the ideal sheaf is exactly 1.
+
+Then apply
+\begin{thing7}{lemma}\leavevmode
+in a unique factorization domain, all codimension 1 prime ideals are principal.
+\end{thing7}
+
+Regular local rings are unique factorization domains.
+
+Then I have to pass to the stalks. \textbf{Exercise.} Show that if \(Y\) is an irreducible closed subset of a scheme \(X\), and \(\eta\) is the generic point (?) of \(Y\), then the codimension of \(Y\) is the dimension of the local ring \(\mathcal{O}_{X,\eta}\).
+
+
+	I need to prove that the ideal sheaf is locally generated by a single function. 
+	\begin{itemize}
+\item \(\mathcal{I}_C\) is the sheaf of functions that vanish on \(C\).
+\item \(L(-C)\) is the invertible sheaf associated to the Cartier divisor \(-C\), which is given by \(\{(U,f_i^{-1})\}\) if \(C\) is given by \(\{(U_i,f_i)\}\). But the invertible sheaf associated to any Cartier divisor is generated by the inverses of the defining functions of the Cartier divisor, meaning that \(L(-C)\) is generated by \((f_i^{-1})^{-1}=f_i\).
+\end{itemize}
+\end{proof}
+
+\iffalse\begin{proof}\leavevmode
 If \(C\) is given by the data \(\{(U_i,f_i)\}\), it's immediate that \(L(-C)\) is given by the data  \(\{(U_i,f_i^{-1})\}\) \textbf{because the operation of the group of Weil divisors \(\operatorname{Div}\) ammounts to product of the defining functions of Cartier divisors}. Now if you require \(C\) to be effective, then this is a subsheaf of \(\mathcal{O}_X\), so \textbf{that's why you flip it}: since \(C\) is effective, you get that the defining functions are in \(\mathcal{O}_X\). So, you have an invertible sheaf \(\mathcal{I}\) which gives the ideal generated by \(f_i\) at every \(U_i\).
 
 I want to create a variety as the vanishing locus of the \(f_i\). Who could that be? Now you think let \(Y\) be the support of the \textbf{quotient sheaf} \(\mathcal{O}_X/\mathcal{I}\). That's the place where the all the polynomials that are not \(f_i\) don't vanish. Which sounds terribly similar to the place where the polynomials that are in \(f_i\) vanish. Which is… \(C\) provided that Cartier divisors given by data \(\{(U_i,f_i)\}\) is the same as saying that \(f_i\) vanish on \(U_i \cap C\).
 
 And it turns out YES, IF \(C\) is a Cartier divisor and we do have a Cartier divisor because we are a Curve.
-\end{proof}
+\end{proof}\fi
 
 \subsection{sergey}
 
@@ -2392,7 +2874,42 @@ and apparently this way we obtain a global section of \(\mathcal{M}^*/\mathcal{O
 
 \subsection{cartier divisor}
 
-And it looks like \cite{har} definition of Cartier divisor mathes \cite{gri} definition of sglobal section of \(\mathcal{M}^*/\mathcal{O}^*\).
+a \textit{\textbf{locally principal closed subscheme}} is a closed subscheme \(\pi:X \hookrightarrow  Y\) for which there is an open cover \(U_i\) of \(Y\) for which for each \(i\), \(\pi^{-1}(U_i) \hookrightarrow U_i\) \textit{is} the closed subscheme \(V(s_i)\) of \(U_i\) for some \(s_i \in \Gamma(U_i,\mathcal{O}_X)\). This cover can clearly chosen to be by affine open subsets.
+
+\cite{sea} p. 781.
+\begin{quotation}
+``effective cartier, and hence cut out locally by a singular equation"
+\end{quotation}
+…single, right?
+
+\subsubsection{the road towards cartier divisor: scheme-theoretic image}
+
+All this lies within the chapter of closed embeddings of \cite{sea}.
+
+Set-theoreic images are badly behaved […] For example, there is no reasonable way to impose a scheme structure on the image of \(\mathbb{A}^2 \to \mathbb{A}^2\), \((x,y)\mapsto (x,xy)\).
+
+\begin{defn}[scheme-theoretic image]\leavevmode
+
+\end{defn}
+
+…scheme-theoretic closure of a locally closed subscheme
+
+
+\subsection{cartier divisors in the rising sea}
+
+This is section 9.5
+
+A closed subscheme is \textit{\textbf{locally principal}} if on each open set in a small enough open cover it is cut out by a single equation (i.e. by a principal ideal).
+
+More specifically, a locally principal closed subscheme is a closed subscheme \(\pi:X \hookrightarrow Y\) for which there is an open cover \(\{U_i\}\) of \(Y\) for which for each \(i\), \(\pi^{-1}(U_i) \hookrightarrow U_i\) {\color{2}is} the closed subscheme \(V(s_i)\) of \(U_i\) for some \(s_i \in \Gamma(U_i,\mathcal{O}_X)\).
+
+If the ideal sheaf is locally generated near every point by a function that is not a zerodivisor, we call the closed subscheme an effective cartier divisor.
+
+More precisely: if \(\pi:X \to Y\) is a closed embedding, and there is a cover \(Y\) by affine open subsets \(\operatorname{Spec}A_i \subset Y\) and there exists nonzero divisors \(t_i\in A_i\) with  \(V(t_i)=X|_{\operatorname{Spec}A_i}\) (scheme-theoretically---i.e. the ideal sheaf of \(X\) over \(\operatorname{Spec}A_i\) is generated by \(t_i\), then we say that \(X\) is an \textit{\textbf{effective Cartier divisor}} on \(Y\).
+
+\subsection{in hartshorne}
+
+And it looks like \cite{har} definition of Cartier divisor matches \cite{gri} definition of sglobal section of \(\mathcal{M}^*/\mathcal{O}^*\).
 
 \begin{defn}[\cite{har}, p. 141]\leavevmode
 A \textit{\textbf{Cartier divisor}} on a scheme \(X\) is a global section of the sheaf \(\mathcal{K}^*/\mathcal{O}^*\). Thinking of the properties of quotient sheaves, we see that a Cartier divisor on \(X\) can be described by giving an open cover \(\{U_i\}\) of \(X\), and for each \(i\) an element \(f_i \in \Gamma(U_i,\mathcal{K}^*)\), such that for each \(i,j\), \(\frac{f_i}{f_j}\in \Gamma(U_i \cap U_j, \mathcal{O}^*)\).
@@ -2552,6 +3069,9 @@ Because the dual bundle is, of course, the bundle whose fiber at each point is t
 And if you take a lot of tensor powers? You'll end up with the homogeneous degree \(d\) functions (which you should \textit{not} think as hyperplanes, that's only for \(d=1\)). (But most likely they are irreducible varieties… so is \(\mathcal{O}(d)\) the ``degree-\(d\)-variety bundle"?)
 \end{upshot}
 
+\begin{upshot}[the tautological section]\leavevmode
+\(\mathcal{O}(d)\) is the bundle of degree-\(d\) polynomials. A degree \(d\)-polynomial on \(\mathbb{C}^{n+1}\) can be used to produce a section of \(\mathcal{O}(d)\). Tautologically, this section is itself a degree-\(d\) polynomial.
+\end{upshot}
 And that's why \cite{lec} Example 3.37 works: a homogeneous polynomial \(f: \mathbb{C}^{n+1}\to \mathbb{C}\) gives me \textbf{a section} of \(\mathcal{O}(d)\): at each point \(\xi \in \mathbb{C}P^{n}\) I have the homogeneous degree \(d\) function that \(f\) is when restricted to \(\xi\). (This is also very tautological.) (I would call this the \textit{\textbf{tautological section}}.)
 
 Notice that the tautological section is a section. That is, first you construct the hyperplane bundle saying that at every point you have the functionals on the line that the point is (so, at every point you put all the hyperplanes on the line that the point is). But also there's the tautological section that is itself a hyperplane. But only one hyperplane, you see? Because the section, which actually gives at every point a hyperplane, oh, just so many hyperplanes, can be tautologically and confusingly thought as a single hyperplane only, oh, just a single one, as this hyperplane isn't but a linear function \(f:\mathbb{C}^{n+1}\to \mathbb{C}\) which, when restricted to any line passing through the origin, oh, and lines are points, would give me the hyperplane that the section would give at the point. So yes, \textbf{sections} of the hyperplane bundle are degree 1-polynomials. And degree 1 polynomials are in fact hyperplanes of \(\mathbb{C}P^n\): it's a hyperplane of \(\mathbb{C}^{n+1}\), and then projectivizing you get a hyperplane of \(\mathbb{C}P^n\). So a section of the hyperplane bundle is (also) just a hyperplane.
@@ -2692,6 +3212,12 @@ A bundle \(L\) is very ample iff \(c_1(L)\) is a Kähler class.
 that a line bundle is \textit{\textbf{prequantizable}} if its curvature is symplectic and integral.
 \end{thing7}
 
+\subsection{nakai-moishezon}
+
+\begin{thm}[nakai-moishezon]\leavevmode
+Let \(X\) be a compact projective variety, and \(L\) a line bundle on \(X\). Assume that for any subvariety \(Z \subset X\), \(\dim Z=d\), one has \(\int_Z c_1(L)^d>0\). Then \(L\) is ample.
+\end{thm}
+
 \section{serre duality}
 \begin{thing6}{serre duality}[II.5.32\cite{voi}]\label{thm:5.32}\leavevmode
 The pairing
@@ -2825,6 +3351,20 @@ Here's three things that are not the same:
 \subsection{Kummer}
 
 Take a complex 2-torus \(A\) and consider the involution \(\tau:[z_1,z_2]\mapsto -[z_1,z_2]\). It has 16 fixed points, so the quotient \(A/\tau\) has singularities. Smooth it to obtain \(\hat{A}\) and consider the involution \(\hat{\tau}\). Then \(\hat{A}/\hat{\tau}\) is a K3.
+
+\subsection{demailly-paun}
+A complicated theorem that facilitates the proof of global torelli.
+\begin{thm}[demailly-paun, k3 lec. 21]\leavevmode
+Let \(M\) be a compact kahler manifold,  \(K \subset H^{1,1}(M,\mathbb{R})\) a subset consisting of all classes \(\eta\) such that \(\int_Z \eta^p >0\) for any \(p\)-dimensional complex subvariety \(Z \subset M\). Then the kahler cone of \(M\) is one of the connected components of \(K\).
+\end{thm}
+\begin{proof}\leavevmode
+based on demailly's regularization of positive currents and CY theorem.
+\end{proof}
+compare with
+\begin{thm}[nakai-moishezon]\leavevmode
+Let \(X\) be a compact projective variety, and \(L\) a line bundle on \(X\). Assume that for any subvariety \(Z \subset X\), \(\dim Z=d\), one has \(\int_Z c_1(L)^d>0\). Then \(L\) is ample.
+\end{thm}
+
 
 \section{Fubini-Study}
 It's a metric, it's a symplectic form. \textit{\textbf{Fubini-Study (symplectic) form}} is a closed 2-form defined on \(\mathbb{C}P^{n}\) as the exterior differential of the logarithm of the length functions \(\ell=\sum |z_i|^2\), i.e. \(\omega=dd^c \operatorname{log} \ell\).
@@ -3094,6 +3634,24 @@ Juntando com a discussão anterior obtemos
 \[[w,v]_e=\frac{d}{dt}\Big|_{t=0}\Big(R_{\varphi_{-t}(e)}\Big)_{*,\varphi_t(e)}v_{\varphi_t(e)}.\]
 
 
+\chapter{physics}
+
+\section{a problem}
+is that gravity and qm fail at a very basic observation: vacuum energy
+
+quantization of a simple variational problem, for a scalar field, says that energy of the vacum is infinite. but there's an experiment that says that the cosmological constant (which is energy of the vacuum) is \(\rho_{cc}\approx 5 \times 10 ^{-10}\frac{J}{m^3}\).
+
+The functional is
+\begin{align*}
+S&=\int dt \int d^3x \frac{1}{2}\left\{ \frac{1}{2}\dot\varphi^2-(\nabla \varphi)^2-m^2\varphi^2\right\} 
+\end{align*}
+
+we wish to experimentally find a system that is governed both by quantum mechanics and relativity. Experiment micro g by aspa-mayer shows gravitational laws in a 1-milimeter, i.e. \(10^{-6}\) kg particles. The size of the proton is about \(10^{-27}\) Kg, here you get quantum mechanics. People at puc have experiments with things of sizes \(10^{-18}\) Kg.
+
+gr: the mass determines the metric
+
+
+another problem: gravitational field and quantum superposition. two quantum states give two stress-energy tensors that produce two metrics via Einstein-Hilbert action. but there's some problem with this---
 \bibliography{bib.bib}
 
 \end{document}
