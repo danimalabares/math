@@ -4,7 +4,6 @@
 \title{math}
 \author{\href{https://github.com/danimalabares/math}{github.com/danimalabares/math}}
 
-
 \begin{document}
 \bibliographystyle{alpha}
 
@@ -102,6 +101,25 @@ evidently given by
 
 \section{sheaves}
 
+\subsection{what's a sheaf}
+a functor from \(\operatorname{Open} \to \operatorname{Ab} \).
+
+\subsection{cech cohomology}
+
+the point is that
+
+a \textit{\textbf{0-cech cocycle}} is the assignment of a section \(f_\alpha\) to every open set \(U_\alpha\) of the cover. Every global section gives you a \(0\)-cocycle by restriction, and that turns out to be an isomorphism. So global sections are in fact \(H^0\).
+
+a  \textit{\textbf{1-cech cocycle}} is the assignment of a function \(g_{\alpha \beta}:U_\alpha \cap U_\beta \to k\) satisfying the cocycle property. so it's a line bundle, and \(H^1=\operatorname{Pic}\).
+
+\begin{question}\leavevmode
+\(\mathsf{OK}\) but when we say that a 0-cech cocycle is the assignment of a section \(f_\alpha\) to every open set I think well, that's a divisor, a hypersurface, i think; it's a line bundle; because you define the manifold to be the zero-locus of these functions; haha but no: that's just a random assignment of functions and has no structure a priori.
+
+what gives you a hypersurface is when these two functions can be glued together, and that's the condition that \(f_\alpha/f_\beta \in \mathsf{GL}(U_\alpha \cap U_\beta,k)\). now that's a line bundle. and also: \textbf{it's a {\color{2}1}-cocycle}.
+\end{question}
+
+\subsection{some other stuff i learnt while learning}
+
 \(\mathfrak{m}_x \subset C^\infty(\mathbb{R}^n)\) is the ideal of smooth functions vanishing at \(x \in \mathbb{R}^n\). In \cite{hart} definition of \textit{\textbf{local ring of \(P\) in \(Y\)}}, which is the ring of germs of regular functions of the variety \(Y\) at the point \(P\), that it is a local ring with maximal ideal \(\mathfrak{m}\), the set of germs of regular functions which vanish at \(P\). The residue field is \(k\).
 
 \begin{exercise}\leavevmode
@@ -136,6 +154,65 @@ The \textbf{tangent bundle} $TM$ of a smooth manifold $M$ is a vector bundle who
 
 So, quasicoherent sheaves play the role of vector bundles in algebraic geometry, and in particular, $\mathcal{T}_X$ is the algebraic analogue of the tangent bundle.
 \end{thing6}
+
+\chapter{at algebraic topology}
+
+\section{Cohomology ring of $\mathbb{C} P^n$}
+	\begin{exercise}
+	Show that
+	\[H^\bullet(\mathbb{C} P^n)\cong \mathbb{Z}[\alpha]/(\alpha^{n+1})\]
+	where $\alpha$ has degree 2.
+\end{exercise}
+\begin{proof}
+	The CW structure of $\mathbb{C} P^n$ consists of one cell for every even dimension. This gives us the following chain complex:
+	\[\begin{tikzcd}
+		\mathbb{Z}\arrow[r]&0\arrow[r]&\mathbb{Z}\arrow[r]&\ldots\arrow[r]&\mathbb{Z},\qquad\text{if }n\text{ is even}
+	\end{tikzcd}\]
+	\[\begin{tikzcd}
+		\mathbb{Z}\arrow[r]&0\arrow[r]&\mathbb{Z}\arrow[r]&\ldots\arrow[r]&0,\qquad\text{if }n\text{ is odd}
+	\end{tikzcd}\]
+	which yields the cohomology
+	\[H^i(\mathbb{C} P^n)=\begin{cases}
+		\mathbb{Z},\quad&i=0,2,4,\ldots 2n\\
+		0,\quad&i\text{ otherwise}
+	\end{cases}\]
+	so that
+	\begin{align*}
+		H^\bullet(\mathbb{C} P^n)&=H^0(\mathbb{C} P^n)\oplus H^2(\mathbb{C} P^n)\oplus\ldots\oplus H^{2n}(\mathbb{C} P^{n})
+	\end{align*}
+	This means that the underlying group of the cohomology ring is the same as that of
+	\[\mathbb{Z}[\alpha]/(\alpha^{n+1})\]
+	where $\alpha$ has degree 2. To show that these groups are also isomorphic as algebras we can use Poincar\'e duality as follows.
+	
+	Consider the case $n=2$, where we may immediately multiply the generator of second cohomology group with itself:
+	\begin{align*}
+		H^2(\mathbb{C} P^2)\times H^2(\mathbb{C} P^2)&\to H^4(\mathbb{C} P^2)\\
+		(\alpha,\alpha)\qquad\quad&\mapsto\alpha\smile\alpha =\alpha^2
+	\end{align*}
+	By Poincar\'e duality this map is a nondegenerate symmetric bilinear form, so it must map generator to a generator. {\color{blue-violet}The fact that the product of the generator in degree 2 is the generator of degree 4} yields an homomorphism
+	\iffalse\begin{align*}
+		\varphi:H^\bullet(\mathbb{C} P^n)&\to\mathbb{Z}[\alpha]/(\alpha^{n+1})\\
+		H^2(\mathbb{C} P^n)\ni\alpha&\mapsto\alpha
+	\end{align*}
+	satisfying
+	\[\varphi(\alpha\smile\alpha)=\varphi()\]\fi
+	\begin{align*}
+		\varphi:\mathbb{Z}[\alpha]&\to H^\bullet(\mathbb{C} P^n)\\
+		\alpha&\mapsto\alpha\in H^2(\mathbb{C} P^n)
+	\end{align*}
+	with kernel $(\alpha^{n+1})$ as desired.
+	
+	Now the case of $\mathbb{C} P^3$ is:
+	\begin{align*}
+		H^2(\mathbb{C} P^3)\times H^4(\mathbb{C} P^3)&\to H^6(\mathbb{C} P^3)\\
+		(\alpha,\alpha^2)\qquad\quad&\mapsto\alpha\smile\alpha^2=\alpha^3
+	\end{align*}
+	which also  maps generator to generator, producing the desired algebra isomorphism. Notice we have used the group isomorphism $H^4(\mathbb{C} P^3)\approx H^4(\mathbb{C} P^2)$ when denoting the generator of $H^4(\mathbb{C} P^3)$ as $\alpha^2$. Such an isomorphism is induced by inclusion $\mathbb{C} P^{n-1}\hookrightarrow\mathbb{C} P^n$ via relative cohomology exact sequence.
+	
+	The case for dimension $n$ follows by induction.
+\end{proof}
+
+
 
 \chapter{dt differential topology}
 
@@ -3011,20 +3088,28 @@ Is my singular curve an effective Cartier divisor?
 \subsection{first chern classes}
 
 
-\section{Exponential exact sequence}
+\section{exponential exact sequence}
+
+\subsection{definition}
+
+this may be re-written but it's also nice as a reminder of olden days when i understood less about all this
 
 It's a short exact sequence of sheaves:
 \[\begin{tikzcd}0\arrow[r]&\underline{\mathbb{Z}}\arrow[r]&\mathcal{O}(X)\arrow[r]&\mathcal{O}^*_X\arrow[r]&0\end{tikzcd}\]
-where \(X\) is a complex manifold, \(\mathcal{O}(X)\) the sheaf of holomorphic functions and \(\mathcal{O} ^*(X)\) the sheaf of nowhere-vanishing holomorphic functions. Neither of these two sheaves have cohomologies that match either of \(H^{\bullet}(X,\mathbb{C})\) nor \(H^{\bullet}(X,\mathbb{R})\); however the constant sheaf \(\underline{\mathbb{Z}}\) does give the same cohomology as singular integer cohomology.
+where \(X\) is a complex manifold, \(\mathcal{O}(X)\) the sheaf of holomorphic functions and \(\mathcal{O} ^*(X)\) the sheaf of nowhere-vanishing holomorphic functions. Neither of these two sheaves have cohomologies that match either of \(H^{\bullet}(X,\mathbb{C})\) nor \(H^{\bullet}(X,\mathbb{R})\); however the constant sheaf \(\underline{\mathbb{Z}}\) also does not give the same cohomology as singular integer cohomology.
 
 As exact sequences often do, this ones gives a cohomology long exact sequence
 \[\begin{tikzcd}[column sep=small]
 	\leavevmode&H^{0}(X,\mathbb{Z})\arrow[r]&H^{0}(X,\mathcal{O}_X)\arrow[r]&H^{0}(X,\mathcal{O}_X^*)\arrow[r]&H^{1}(X,\mathbb{Z})\arrow[r]& \leavevmode\\
 	\arrow[r]&H^{1}(X,\mathcal{O}_X)\arrow[r]&H^{1}(X,\mathcal{O}_X^*)\arrow[r,"c_1"]&H^{2}(X,\mathbb{Z})\arrow[r]&H^{2}(X,\mathcal{O}_X)\arrow[r]&\cdots
 \end{tikzcd}\]
-To see it probably you'd have to delve back into \v Cech, but \(H^{1}(X,\mathcal{O}_X^*)\) is the same as \(\operatorname{Pic}(X)\) (see \cite{gri}, p. 133, you take transition functions of the line bundle, this is where the \textit{cocycle condition} comes in with twofold meaning). So in the end a line bundle gets assigned the cohomology class of its curvature w.r.t the Chern connection, or what
+To see it probably you'd have to delve back into \v cech, but \(H^{1}(X,\mathcal{O}_X^*)\) is the same as \(\operatorname{Pic}(X)\) (see \cite{gri}, p. 133, you take transition functions of the line bundle, this is where the \textit{cocycle condition} comes in with twofold meaning). So in the end a line bundle gets assigned the cohomology class of its curvature w.r.t the Chern connection, or what
 
 And not only that but actually the intersection form is cup product of Chern classes
+
+\subsection{the exponential sequence and the line bundles in \(\mathbb{P}^n\)}
+
+
 
 
 
@@ -3061,7 +3146,7 @@ Anyway, we have
 Basically that a line bundle over a compact complex manifold \(M\) is very ample iff \(\mathcal{O}(M;L)\) separates points and \(\mathcal{O}(M;L)\) separates directions. (I think those are the sections.)
 \end{thing4}
 
-\subsection*{the hyperplane bundle}
+\subsection*{the tautological section}
 where should I put this?
 \begin{upshot}[About the hyperplane bundle]\leavevmode
 Because the dual bundle is, of course, the bundle whose fiber at each point is the dual vector space of the original one. So hyperplane is because every \textit{linear}  functional of the dual space (an element of the fiber of the dual) is just a hyperplane.
@@ -3070,7 +3155,7 @@ And if you take a lot of tensor powers? You'll end up with the homogeneous degre
 \end{upshot}
 
 \begin{upshot}[the tautological section]\leavevmode
-\(\mathcal{O}(d)\) is the bundle of degree-\(d\) polynomials. A degree \(d\)-polynomial on \(\mathbb{C}^{n+1}\) can be used to produce a section of \(\mathcal{O}(d)\). Tautologically, this section is itself a degree-\(d\) polynomial.
+\(\mathcal{O}(d)\) is the bundle of degree-\(d\) polynomials. A degree \(d\)-polynomial on \(\mathbb{C}^{n+1}\) can be used to produce a section of \(\mathcal{O}(d)\). Tautologically, this section is itself a degree-\(d\) polynomial. This requires a proof.
 \end{upshot}
 And that's why \cite{lec} Example 3.37 works: a homogeneous polynomial \(f: \mathbb{C}^{n+1}\to \mathbb{C}\) gives me \textbf{a section} of \(\mathcal{O}(d)\): at each point \(\xi \in \mathbb{C}P^{n}\) I have the homogeneous degree \(d\) function that \(f\) is when restricted to \(\xi\). (This is also very tautological.) (I would call this the \textit{\textbf{tautological section}}.)
 
