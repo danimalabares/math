@@ -100,6 +100,28 @@ evidently given by
 
 
 \section{sheaves}
+\begin{table}[h!]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Propriedade do feixe \( \mathcal{F} \)} & \textbf{Pode ser verificada nos stalks?} \\
+\hline
+\( \mathcal{F} = 0 \) & Sim \\
+\( \varphi: \mathcal{F} \to \mathcal{G} \) é mono/epi/iso & Sim \\
+Sequência exata & Sim \\
+\( \operatorname{Supp}(\mathcal{F}) \) & Sim \\
+\( \mathcal{F}_x \) plano/torsion-free & Sim (se feixe quasi-coerente) \\
+Localmente livre de posto \( r \) & Sim \\
+\hline
+Localmente finitamente gerado & \textbf{Não} \\
+Quasi-coerência / coerência & \textbf{Não} \\
+Ser um feixe (vs. pré-feixe) & \textbf{Não} \\
+Geração global por seções & \textbf{Não} \\
+\hline
+\end{tabular}
+\caption{Propriedades de feixes verificáveis nos stalks}
+\end{table}
 
 \subsection{what's a sheaf}
 a functor from \(\operatorname{Open} \to \operatorname{Ab} \).
@@ -2172,7 +2194,11 @@ And then, some time after this in the course, all the way down to second variati
 
 \section{riccati equation}
 
-Take any point and any tangent vector at that point. Take the geodesic and take the geodesic sphere of raduis say \(\varepsilon\) with center in the point. It's a hypersurface. Normal vectors are all multiples of the unit normal vector. But who's that, the unit normal? Ah, it's the speed of the geodesic. So? The normal derivative of any vector field tangent to the sphere w.r.t. the unit normal is…
+Take any point and any tangent vector at that point. Take the geodesic and take the geodesic sphere of raduis say \(\varepsilon\) with center in the point. It's a hypersurface. Normal vectors are all multiples of the unit normal vector. But who's that, the unit normal? Ah, it's the speed of the geodesic.
+
+
+
+So? The normal derivative of any vector field tangent to the sphere w.r.t. the unit normal is…
 \begin{align*}
 0&=X\left<\nu,\nu\right>=2\left<\nabla^\perp_X \nu,\nu\right>
 \end{align*}
@@ -2458,6 +2484,7 @@ use esa fórmula para mostrar que não pode ter \(M \hookrightarrow \mathbb{R}^{
 
 \section{amazing theorems}
 
+\subsection{hopf-rinow}
 \begin{thing6}{hopf-rinow}\leavevmode
 São equivalentes
 \begin{enumerate}[label=(\alph*)]
@@ -2473,123 +2500,12 @@ Além disso, qualquer uma implica
 \end{enumerate}
 \end{thing6}
 
+\subsection{hadamard}
+
 \begin{thing6}{hadamard}\leavevmode
 \(M\) completa, simplesmente conexa e \(K \leq  0\). Então, para todo \(p \in M\), \(\operatorname{exp}_p\) é um difeomorfismo global. Em particular \(M^n \overset{\operatorname{difeo}}{\simeq} \mathbb{R}^n\).
 \end{thing6}
-\begin{proof}\leavevmode
-con puro hopf-rinow
-\end{proof}
 
-\begin{thing6}{amazing theorem 8}\leavevmode
-Seja \(M\) completa, simplemente conexa, com curvatura constante. Então \(M\) é globalmente isométrica a \(\mathbb{Q}^n_c\).
-\end{thing6}
-
-\begin{thing6}{bonnet-myers}\leavevmode
-	\(M\) completa, \(\operatorname{Ric} \geq \frac{1}{r^2}\). Então \(\operatorname{diam}\leq \pi r\). Em particular \(M\) é compacta.
-\end{thing6}
-\begin{proof}\leavevmode
-con pura segunda variación y un campo sinoidal
-\end{proof}
-
-\begin{thing6}{Weinstein theorem}\label{thm:Weinstein theorem}\leavevmode
-Seja \(M^n\) orientada, compacta, \(K>0\) e \(f \in \operatorname{Iso}(M)\).  Suponha que se \(n\) é par, \(f\) preserva orientação e que se \(n\) é ímpar \(f\) reverte orientação. Então \(f\) possui um ponto fixo.
-\end{thing6}
-
-\begin{thing6}{Synge theorem}\leavevmode
-\(M^n\) compact, \(K>0\).
- \begin{enumerate}[label=(\roman*)]
-\item Se \(n\) é par, \(\pi_{1}(M)=\begin{cases}
-	1\qquad &\text{ se \(M\) é orientável}  \\
-	\mathbb{Z}_2\qquad &\text{ se não} 
-\end{cases}\) 
-\item Se \(n\) é ímpar, \(M^n\) é orientável.
-\end{enumerate}
-\end{thing6}
-
-\begin{thing6}{jacobi theorem}\leavevmode
-\(\gamma:I \to M\) geodésica, \(\gamma(a)\) conjugado a \(\gamma(b)\) ao longo de \(\gamma\) \(\implies\) \(\forall \delta>0\), \(I_{a+\delta}\not \geq 0\). ou seja, \(\gamma\) não minimiza depois do primeiro ponto conjugado (cf. teorema do indice de morse).
-\end{thing6}
-\begin{proof}\leavevmode
-con pura segunda variación
-\end{proof}
-
-\begin{thing6}{index lemma}\leavevmode
-Se \(\gamma\) não tem pontos conjugados \(\forall V \in \mathfrak{X}_\gamma\) dif por partes, \(V(0)=0\) então
-	\[\boxed{I_a(J,J) \geq I_a(J,J)}\]
-para \(J \in \mathfrak{X}^J_\gamma\), \(J(0)=0\), \(J(a)=V(a)\). Vale \(=\) \(\iff\) \(V=J\).
-\end{thing6}
-
-\begin{thing6}{sturm}\leavevmode
-	Dos funciones \(f\) y \(\tilde{f}\) definidas en \([0,a] \to \mathbb{R}\).
-	Otras dos funciones \(K\), \(\tilde{K}\) definidas en \([0,a]\). \textbf{Importantemente,} \(\tilde{f}>0\). Ahora las condiciones iniciales son
-	\[f(0)=0, \tilde{f}(0)=0, \qquad f'(0)=\tilde{f}(0)\]
-y bueno
-\[f''+Kf=0, \qquad  \tilde{f}''+\tilde{K}\tilde{f}=0\]
-Se \[\tilde{K} \geq K\], entonces \(f/\tilde{f}\) é não decreciente, que implica que \(\tilde{f} \leq  f\).
-
-Além disso se para algum \(t \in (0,a]\) se satisface que \(f(t)=\tilde{f}(t) \implies  f\equiv\tilde{f}\) e \(K\equiv\tilde{K}\) em \([0,t]\).
-\end{thing6}
-
-\begin{thing6}{rauch}\leavevmode
-	Dos geodésicas creo que unitarias, pero en variedades distintas, y un campo de Jacobi en cada una. \textbf{\(\tilde{\gamma}\) no tiene puntos conjugados}. Los campos de Jacobi son parecidos en cuanto a que
-	\[J(0)=0, \tilde{J}(0)=0, \qquad \left<J,\gamma'\right>=0=\left<\tilde{J},\tilde{\gamma}'\right>,\qquad |J'(0)|=|\tilde{J}'(0)|\]
-Si
-\[K\leq \tilde{K}\]
-entonces
-\[|\tilde{J}|\leq |J|\]
- \begin{align*}
-\begin{aligned}
-	\gamma:[0,a] \longrightarrow M^n \qquad &J\\
-	\tilde{\gamma}:[0,a] \text{ SPC} \longrightarrow \tilde{M}^m \qquad &\tilde{J}
-\end{aligned}\qquad K \leq \tilde{K} \implies \|J\| \geq \|\tilde{J}\|
-\end{align*}
-\[K(\gamma',J) \leq \tilde{K}(\tilde{\gamma};,\cdot)\qquad \frac{\|J\|}{\|\tilde{J}\|}\text{ é crescente} \]
-Além disso, se para algum \(t \in (0,a]\) se satisface que \(\|J(t)\|=\|\tilde{J}(t)\|\) entonces \(\|J\|\equiv\|\tilde{J}\|\), \(K(\gamma',J)\equiv K(\tilde{\gamma}',\tilde{J})\) em \([0,t]\).
-\end{thing6}
-\begin{proof}\leavevmode
-con lema do índice
-\end{proof}
-
-\begin{thing6}{otsuki lemma}\leavevmode
-\end{thing6}
-
-\begin{thing6}{corolário}\leavevmode
-\(M^n \subset \tilde{M}^{n+p}\), \(K < \tilde{K} \implies p \geq n-1\).
-\end{thing6}
-
-\begin{thing6}{moore}\leavevmode
-No contexto do lema de cartan, \(M^n \subset \tilde{M}^{n+p}\) subvariedade compacta, \(\tilde{M}\) hadamard, \(K \leq  \tilde{K} \leq 0 \implies p \geq n\).
-\end{thing6}
-
-\begin{thing6}{superprop}\leavevmode
-seja \(f\) a isometria do lema de cartan. \(K \leq  \tilde{K} \implies \) \(f\) é uma contração, i.e. \(\|f_*\|\leq  1\). Bastará com \(K(\gamma'_v,\cdot)\leq \tilde{K}(\tilde{\gamma}'_{iv},\cdot)\)? Além disso, se \(B\) é convexa então \(f\) é uma contração métrica.
-\end{thing6}
-
-\textbf{explicação:} se \(K \leq  \tilde{K}\) então \(d \geq \tilde{d}\) onde \(d,\tilde{d}\) são os lados opostos de triângulos com mesmo angulo e lados adjacentes do mesmo tamanho/
-
-\begin{thing6}{teorema de hermann}[not in proved]\leavevmode
-\(N \subset M\), \(N\) fechada e \(M\) completa, \(\operatorname{Foc}(N \subset M)=\varnothing\) então \(\operatorname{exp}^\perp\) é aplicação de recobrimento
-\end{thing6}
-
-\begin{thing6}{índice de morse}\leavevmode
-o índice \(i(I_t)\) é finito e igual ao número de pontos conjugados em \([0,t)\) ao longo de \(\gamma\).
-\end{thing6}
-
-\begin{coro}\leavevmode
-as geodésicas não minimizam depois do primeiro ponto conjugado. de fato, \(I_a \not\geq 0\iff\exists t\in[0,a)\) conjugado a \(\gamma(0)\) ao longo de \(\gamma\).
-\end{coro}
-
-\begin{coro}\leavevmode
-pontos conjugados são discretos
-\end{coro}
-
-\begin{thing6}{bishop-gromov}\leavevmode
-\(\operatorname{Ric}\geq k \implies \operatorname{Vol}(B_t(p))/\operatorname{Vol}(B_{t,k})\) decrescente para todo \(0 \leq  t \leq  i(p)\) onde \(i(p) =d(p,C_m(p))\) é o raio de injetividade de \(\operatorname{exp}\).
-\end{thing6}
-
-\subsection{proofs and divagations}
-
-\subsubsection{hadamard}
 \begin{proof}\leavevmode
 by you have a product/i have a product argument any two universal objects are isomorphic. so universal coverings are isomorphic. since \(M\) is simply connected it is its own universal cover. then we only need to show that also \(T_pM\) is a universal cover.
 
@@ -2602,10 +2518,25 @@ If \(f:\tilde{M} \to M\) is a local difeo and \(\tilde{M}\) \textbf{is complete}
 \end{thing6}
 Nice, so the local isometry \(\operatorname{exp}_p\) satisfies that differential condition.
 
-To finally show that \((T_pM, \operatorname{exp}_p ^*g)\) is complete we only notice that a local isometry takes geodesics to geodesics, a local condition, and since \(\operatorname{exp}_p\) takes lines to geodesics, then the geodesics of that space are just lines, and they are defined in all \(\mathbb{R}\) because \(M\) is complete.
+To finally show that \((T_pM, \operatorname{exp}_p ^*g)\) is complete we only notice that a the geodesics of \(T_pM\) with the new metric must be lines: the geodesics of the base are taken to lines and local isometry takes geodesics to geodesics. Lines on \(\mathbb{R}^n\) are curves maximally defined on all \(\mathbb{R}\).
 \end{proof}
 
-\subsubsection{complex ricci}
+\begin{thing7}{lema 2}\leavevmode
+Seja \(f:\tilde{M} \to M\) é um difeomorfismo local, onde \(\tilde{M}\) \textbf{é completo}, e suponha que \(|f_{*,p} v|\geq |v|\) para todo \(v \in T_pM\) e todo \(p \in M\). Então \(f\) levanta curvas e portanto é uma aplicação de recobrimento.
+\end{thing7}
+\begin{proof}[Prova do lema 2]\leavevmode
+Suponha que uma curva \(\alpha:I \to M\) pode ser levantada a uma curva \(\tilde{\alpha}:[0,r) \to \tilde{M}\). Considere uma sequência \(t_n \to r\), e as sequências \(\alpha(t_n)\) e \(\tilde{\alpha}(t_n)\). Note que \(\alpha(t_n)\) é de Cauchy, pois \(\alpha(r)\) está bem definito. Então \(\tilde{\alpha}(t_n)\) também é de Cauchy:
+\[d(\tilde{\alpha}(t_n),\tilde{\alpha}(t_m))\leq \int_{t_n}^{t_m} |\tilde{\alpha}'|\leq \int_{t_n}^{t_m}|f_*\tilde{\alpha}'|=\int_{t_n}^{t_m}|(f \circ\tilde{\alpha})'|=\int_{t_n}^{t_m}|\alpha'|\]
+Quando \(n,m \to \infty\), o número da direita vai pra zero. Como \(\tilde{M}\) é completa, a sequência de Cauchy \(\tilde{\alpha}(t_n)\) é convergente a um ponto \(\tilde{\alpha}(r)\).
+
+Isso mostra que o conjunto de parâmetros tais que \(\alpha\) pode ser levantada é fechado. Mas também é aberto: se \(\alpha(t)\) é levantado, como \(f\) é um difeomorfismo local, podemos levantar um vizinhança pequena de \(\alpha\) definindo-a como a imagem inversa local de \(f\).
+\end{proof}
+
+\begin{thing7}{observation}\leavevmode
+Here's some discussion about why local diffeo is cover map iff it lifts curves: \href{https://math.stackexchange.com/questions/3122251/local-homeomorphism-curve-lifting-property-gives-a-covering-map}{StackExchange}.
+\end{thing7}
+
+\subsubsection*{hadamard for ricci and k3 surfaces}
 
 \begin{exercise}\leavevmode
 Remember Hadamard’s theorem? It says that a simply-connected, complete riemannian manifold with nonpositive sectional curvature is diffeomorphic to \(\mathbb{R}^n\).
@@ -2639,8 +2570,39 @@ So maybe there's another way of showing simply connectedness at least? No super 
 \end{enumerate}
 \end{proof}
 
-\subsubsection{weinstein}
+\subsection{lema de cartan}
+\begin{thing6}{lema de cartan}\leavevmode
+\[\begin{tikzcd}
+	T_pM \arrow[r,"i"]\arrow[d,"\operatorname{exp}_p",swap]&T_p\tilde{M}\arrow[d,"\operatorname{exp}_{\tilde{p}}"]\\
+	M\arrow[r,"f"]& \tilde{M}
+\end{tikzcd}\]
+tenemos una isometria entre los tangentes y queremos construir una isometria entre las variedades tal que \(d_pf=i\), o sea
+\[f=\operatorname{exp}_{\tilde{p}}\circ i \circ \operatorname{exp}_p^{-1}\]
+\textbf{lema} funciona si \(\phi^*\tilde{R}=R\)
 
+	seja \(\phi:TU \to T\tilde{U}\) dado por
+	\[\phi(P_{\gamma_v}(u))=\tilde{P}_{\gamma_{iv}}(iu)\]
+	ou seja
+	\[\phi=\tilde{P}_{\gamma_{iv}}\circ i \circ P_{\gamma_v} \qquad \forall v\]
+	um isomorfismo de fibrados. Se \(\phi^*\tilde{R}=R\) então \(f=\operatorname{exp}_{\tilde{p}}\circ i \circ \operatorname{exp}_p^{-1}\) é uma isometria local.
+\end{thing6}
+
+\subsection{space forms}
+
+\begin{thing6}{amazing theorem 8}\leavevmode
+Seja \(M\) completa, simplemente conexa, com curvatura constante. Então \(M\) é globalmente isométrica a \(\mathbb{Q}^n_c\).
+\end{thing6}
+
+\subsection{bonnet-myers}
+
+\begin{thing6}{bonnet-myers}\leavevmode
+	\(M\) completa, \(\operatorname{Ric} \geq \frac{1}{r^2}\). Então \(\operatorname{diam}\leq \pi r\). Em particular \(M\) é compacta.
+\end{thing6}
+\begin{proof}\leavevmode
+con pura segunda variación y un campo sinoidal
+\end{proof}
+
+\subsection{weinstein}
 \begin{thing6}{Weinstein theorem}\label{thm:Weinstein theorem}\leavevmode
 Seja \(M^n\) orientada, compacta, \(K>0\) e \(f \in \operatorname{Iso}(M)\).  Suponha que se \(n\) é par, \(f\) preserva orientação e que se \(n\) é ímpar \(f\) reverte orientação. Então \(f\) possui um ponto fixo.
 \end{thing6}
@@ -2694,20 +2656,145 @@ Ou seja, os eigenvalores que não são 1 ou \(-1\) não afetam o determinante. D
 E essas são as condições que precisamos para que \(A\) tenha um ponto fixo e tudo funcione. Então bota isso aí na hipótese do teorema.
 \end{proof}
 
-\subsubsection{index theorem}
+\subsection{synge}
+
+\begin{thing6}{Synge theorem}\leavevmode
+\(M^n\) compact, \(K>0\).
+ \begin{enumerate}[label=(\roman*)]
+\item Se \(n\) é par, \(\pi_{1}(M)=\begin{cases}
+	1\qquad &\text{ se \(M\) é orientável}  \\
+	\mathbb{Z}_2\qquad &\text{ se não} 
+\end{cases}\) 
+\item Se \(n\) é ímpar, \(M^n\) é orientável.
+\end{enumerate}
+\end{thing6}
+
+\subsection{jacobi theorem}
+
+\begin{thing6}{jacobi theorem}\leavevmode
+\(\gamma:I \to M\) geodésica, \(\gamma(a)\) conjugado a \(\gamma(b)\) ao longo de \(\gamma\) \(\implies\) \(\forall \delta>0\), \(I_{a+\delta}\not \geq 0\). ou seja, \(\gamma\) não minimiza depois do primeiro ponto conjugado (cf. teorema do indice de morse).
+\end{thing6}
+\begin{proof}\leavevmode
+con pura segunda variación
+\end{proof}
+
+\subsection{index lemma}
 
 \begin{thing6}{index lemma}\leavevmode
 Se \(\gamma\) não tem pontos conjugados \(\forall V \in \mathfrak{X}_\gamma\) dif por partes, \(V(0)=0\) então
-	\[\boxed{I_a(V,V) \geq I_a(J,J)}\]
+	\[\boxed{I_a(J,J) \geq I_a(J,J)}\]
 para \(J \in \mathfrak{X}^J_\gamma\), \(J(0)=0\), \(J(a)=V(a)\). Vale \(=\) \(\iff\) \(V=J\).
 \end{thing6}
-
 \begin{proof}\leavevmode
 the idea is that because there are no conjugate points along \(\gamma\) we can take a basis of jacobi fields. then we get super cumberstone computations
 \end{proof}
 
-\subsection{morse index theorem}
+\subsection{sturm theorem}
 
+\begin{thing6}{sturm}\leavevmode
+	Dos funciones \(f\) y \(\tilde{f}\) definidas en \([0,a] \to \mathbb{R}\).
+	Otras dos funciones \(K\), \(\tilde{K}\) definidas en \([0,a]\). \textbf{Importantemente,} \(\tilde{f}>0\). Ahora las condiciones iniciales son
+	\[f(0)=0, \tilde{f}(0)=0, \qquad f'(0)=\tilde{f}(0)\]
+y bueno
+\[f''+Kf=0, \qquad  \tilde{f}''+\tilde{K}\tilde{f}=0\]
+Se \[\tilde{K} \geq K\], entonces \(f/\tilde{f}\) é não decreciente, que implica que \(\tilde{f} \leq  f\).
+
+Além disso se para algum \(t \in (0,a]\) se satisface que \(f(t)=\tilde{f}(t) \implies  f\equiv\tilde{f}\) e \(K\equiv\tilde{K}\) em \([0,t]\).
+\end{thing6}
+
+\subsection{rauch}
+
+\begin{thing6}{rauch}\leavevmode
+	Dos geodésicas creo que unitarias, pero en variedades distintas, y un campo de Jacobi en cada una. \textbf{\(\tilde{\gamma}\) no tiene puntos conjugados}. Los campos de Jacobi son parecidos en cuanto a que
+	\[J(0)=0, \tilde{J}(0)=0, \qquad \left<J,\gamma'\right>=0=\left<\tilde{J},\tilde{\gamma}'\right>,\qquad |J'(0)|=|\tilde{J}'(0)|\]
+Si
+\[K\leq \tilde{K}\]
+entonces
+\[|\tilde{J}|\leq |J|\]
+ \begin{align*}
+\begin{aligned}
+	\gamma:[0,a] \longrightarrow M^n \qquad &J\\
+	\tilde{\gamma}:[0,a] \text{ SPC} \longrightarrow \tilde{M}^m \qquad &\tilde{J}
+\end{aligned}\qquad K \leq \tilde{K} \implies \|J\| \geq \|\tilde{J}\|
+\end{align*}
+\[K(\gamma',J) \leq \tilde{K}(\tilde{\gamma};,\cdot)\qquad \frac{\|J\|}{\|\tilde{J}\|}\text{ é crescente} \]
+Além disso, se para algum \(t \in (0,a]\) se satisface que \(\|J(t)\|=\|\tilde{J}(t)\|\) entonces \(\|J\|\equiv\|\tilde{J}\|\), \(K(\gamma',J)\equiv K(\tilde{\gamma}',\tilde{J})\) em \([0,t]\).
+\end{thing6}
+\begin{proof}\leavevmode
+con lema do índice
+\end{proof}
+
+\subsection{codimensão em curvatura negativa: otsuki lemma e moore}
+
+\begin{thing6}{otsuki lemma}\leavevmode
+\end{thing6}
+
+\begin{thing6}{corolário}\leavevmode
+\(M^n \subset \tilde{M}^{n+p}\), \(K < \tilde{K} \implies p \geq n-1\).
+\end{thing6}
+
+\begin{thing6}{moore}\leavevmode
+No contexto do lema de cartan, \(M^n \subset \tilde{M}^{n+p}\) subvariedade compacta, \(\tilde{M}\) hadamard, \(K \leq  \tilde{K} \leq 0 \implies p \geq n\).
+\end{thing6}
+
+\subsection{superprop de comparação aka toponogov local}
+
+\begin{thing6}{superprop}\leavevmode
+seja \(f\) a isometria do lema de cartan. \(K \leq  \tilde{K} \implies \) \(f\) é uma contração, i.e. \(\|f_*\|\leq  1\). Bastará com \(K(\gamma'_v,\cdot)\leq \tilde{K}(\tilde{\gamma}'_{iv},\cdot)\)? Além disso, se \(B\) é convexa então \(f\) é uma contração métrica.
+\end{thing6}
+
+\begin{thing7}{toponogov local is when \(B\) is convex}\leavevmode
+you have two hinges. a hinge is just two geodesics \(\gamma_0\), \(\gamma_1\) that emanate from a point, and a number that is the angle \(\alpha\) between them. So really its two vectors and a number. maybe even just  three numbers.
+
+the other hinge is \(\tilde{\gamma}_0\) and \(\tilde{\gamma}_1\) and \(\tilde{\alpha}\), and it is in another manifold \(\tilde{M}\) with \(K \leq  \tilde{K}\).
+
+then for any \(s,t\) 
+\[\tilde{d}(\tilde{\gamma}_0(t),\tilde{\gamma}(s)) \leq d(\gamma_0(t),\gamma_1(s))\]
+\end{thing7}
+
+\textbf{explicação:} se \(K \leq  \tilde{K}\) então \(d \geq \tilde{d}\) onde \(d,\tilde{d}\) são os lados opostos de triângulos com mesmo angulo e lados adjacentes do mesmo tamanho.
+
+\begin{proof}\leavevmode
+the two hinges determine an isometry \(i\) (not uniquely, but there's an isometry) between the tangent spaces. then there's a map, like in cartan theorem but the result and the point of cartan theorem has nothing to do with this,
+ \[f=\operatorname{exp}_{\tilde{p}}\circ i \circ \operatorname{exp}_p^{-1}\]
+coming from
+\[\begin{tikzcd}
+	T_pM \arrow[r,"i"]\arrow[d,"\operatorname{exp}_p",swap]&T_p\tilde{M}\arrow[d,"\operatorname{exp}_{\tilde{p}}"]\\
+	M\arrow[r,"f"]& \tilde{M}
+\end{tikzcd}\]
+now's a good time to notice that the ``differential" version of the toponogov local theorem, i.e. before taking distances, is just the superprop, that is, that \(|f_*w|\leq |w|\).
+
+but whose \(w\)? \(w\) is any vector inside \(B\). lit. and then you just take a random geodesic emanating from \(p\) reaching the point \(w\) is tangent to (ok there's only one such geodesic). and make up a jacobi field with mastery and simplicity
+\[J(t)=d_{tw}\operatorname{exp}_p(tw')\]
+and then you push \(w\) forward using \(f\) and with mastery and simplicity notice you have in your hands a jacobi field on the other side:
+\[f_*w=d_{?}\operatorname{exp}_{\tilde{p}}(\underbrace{di}_{=i}(d_?\operatorname{exp}_p^{-1}w))=d_{iw}\operatorname{exp}_{\tilde{p}}i w'=\tilde{J}\]
+since \(i\) is an isometry you are in position of applying rauch, and conclude that
+\[|f_*w|=|\tilde{J}|\leq |J|=|w|\]
+\hfill and toponogov and the triangles?
+
+ah, you go metric, ie. suppose \(B\) is convex, integrate to get the distances, that's simple, and that's it. what
+
+yes: your hinges gave you an isometry. your isometry gave you a function. \textbf{your function maps the hinge to the other hinge}, so it helps you compare the points on the domain with the points on the codomain. your function is a contraction.\end{proof}
+
+\subsection{pontos focais}
+
+It's a Jacobi field that the curves \(c^s\) arrive perpendicularly at the submanifold \(N\). Also the curve \(\beta(s)=f(s,0)\) is contained in the submanifold \(N\). And \(J(r)=0\) for some \(r\). This is supposed to be equivalent to 
+\[J(0) \in T_p N\qquad  \text{and} \qquad J'(0)+A_{\gamma'(0)}J(0) \in T_p^{\perp}N\]
+Ou seja: \(q \in M\) is a \textit{\textbf{focal point}} de \(N\) (ao longo de \(\gamma\)) se \(\gamma\) é uma geodésica unindo \(N\) e \(q=\gamma(r)\), \(\gamma'(0) \perp N\), existe \(0 \neq  J \in \mathfrak{X}^J_\gamma\) satisfazendo isso que tá na caixa e tal que \(J(r)=0\).
+
+\begin{prop}\leavevmode
+singularidades de \(\operatorname{exp}^\perp:=\operatorname{exp}|_{T^\perp N}\) são os pontos focais de \(N \subset M\).
+\end{prop}
+
+\begin{thing6}{teorema de hermann}[not in proved]\leavevmode
+\(N \subset M\), \(N\) fechada e \(M\) completa, \(\operatorname{Foc}(N \subset M)=\varnothing\) então \(\operatorname{exp}^\perp\) é aplicação de recobrimento
+\end{thing6}
+
+\subsection{morse index}
+
+\begin{thing6}{índice de morse}\leavevmode
+o índice \(i(I_t)\) é finito e igual ao número de pontos conjugados em \([0,t)\) ao longo de \(\gamma\).
+\end{thing6}
 the problem is that the vector spaces of sections of smooth manifolds are infinite-dimensional. we are interested in computing
 \[i(I_a):=\operatorname{sup}\{\dim L \subset \mathfrak{X}_\gamma:I_a |_{L \times L}<0\}\]
 which is just the usual index or signature of a bilinear form. But how to compute that if the vector space is monstrous.
@@ -2729,7 +2816,7 @@ now there are three key observations:
 \item \(\mathcal{V}_t^- \cong \bigoplus_{j=1}^{i-1}T_{\gamma(t_j)}M:=S\). {\color{2}i think} this is because we are in jacobi fields with first initial condition equal to zero. which means that every copy of \(T_{\gamma(t)}M\) is for the other initial condition \(J'(t)\).
 \item \(\ker I_t:=\{V \in \mathcal{V}_t:I_t(V,W)=0 \forall W \in \mathcal{V}_t\}=\mathcal{V}_t \cap \mathfrak{X}_\gamma^J\)
 this one says that \textbf{the kernel of \(I_t\) is the jacobi field part} (it is inside the set of all jacobi fields). that's because second variation formula. so \textbf{the dimension of the kernel is what we call multiplicity} of \(\gamma(t)\) and \(\gamma(0)\) as conjugate points.
-\item \(I_t|_{\mathcal{V}^+_t \times \mathcal{V}^+_t}>0\) because for \(V \in \mathcal{V}^+_t\), \(I_t(V,V)=\sum_{j=1}^{i+1}I_{\gamma|_{t_{j-1},t_j}}(V|_{[t_{j-1},t_j]},V|_{[t_{j-1},t_j]}{\color{2}\geq I(0,0)=0}\).
+\item \(I_t|_{\mathcal{V}^+_t \times \mathcal{V}^+_t}>0\) because for \(V \in \mathcal{V}^+_t\), \(I_t(V,V)=\sum_{j=1}^{i+1}I_{\gamma|_{t_{j-1},t_j}}(V|_{[t_{j-1},t_j]},V|_{[t_{j-1},t_j]}{\color{2}\geq I(0,0)=0}\). This one is by index lemma! twice!
 \item \(I_{t}(\mathcal{V}_t^-,\mathcal{V}_t+)=0\).
 \item so we conclude that
 	\[\begin{array}{c}
@@ -2780,15 +2867,41 @@ so that
 \textbf{why?}
 
 
-\section{pontos focais}
+\begin{coro}\leavevmode
+as geodésicas não minimizam depois do primeiro ponto conjugado. de fato, \(I_a \not\geq 0\iff\exists t\in[0,a)\) conjugado a \(\gamma(0)\) ao longo de \(\gamma\).
+\end{coro}
 
-It's a Jacobi field that the curves \(c^s\) arrive perpendicularly at the submanifold \(N\). Also the curve \(\beta(s)=f(s,0)\) is contained in the submanifold \(N\). And \(J(r)=0\) for some \(r\). This is supposed to be equivalent to 
-\[J(0) \in T_p N\qquad  \text{and} \qquad J'(0)+A_{\gamma'(0)}J(0) \in T_p^{\perp}N\]
-Ou seja: \(q \in M\) is a \textit{\textbf{focal point}} de \(N\) (ao longo de \(\gamma\)) se \(\gamma\) é uma geodésica unindo \(N\) e \(q=\gamma(r)\), \(\gamma'(0) \perp N\), existe \(0 \neq  J \in \mathfrak{X}^J_\gamma\) satisfazendo isso que tá na caixa e tal que \(J(r)=0\).
+\begin{coro}\leavevmode
+pontos conjugados são discretos
+\end{coro}
 
-\begin{prop}\leavevmode
-singularidades de \(\operatorname{exp}^\perp:=\operatorname{exp}|_{T^\perp N}\) são os pontos focais de \(N \subset M\).
-\end{prop}
+\subsection{bishop-gromov}
+
+\begin{thing6}{bishop-gromov}\leavevmode
+\(\operatorname{Ric}\geq k \implies \operatorname{Vol}(B_t(p))/\operatorname{Vol}(B_{t,k})\) decrescente para todo \(0 \leq  t \leq  i(p)\) onde \(i(p) =d(p,C_m(p))\) é o raio de injetividade de \(\operatorname{exp}\).
+\end{thing6}
+
+\begin{proof}\leavevmode
+
+\end{proof}
+
+\subsection{cheng}
+bonnet-myers says: ricci bounded by \(k\) \(\implies \) \(\operatorname{diam}\leq \pi k\). This says
+\begin{thing6}{cheng theorem}\leavevmode
+If \(\operatorname{diam}M^n=\pi k\) then \(M\) is isometric to \(S^n_k\), ou seja espaço de curvatura constante \(1/k^2\).
+\end{thing6}
+
+\begin{proof}\leavevmode
+
+\end{proof}
+
+\subsection{calabi-yau}
+
+\begin{thing6}{calabi-yau, 1975}\leavevmode
+\(M^n\) complete and noncompact, \(\operatorname{Ric}_M \geq 0 \implies\)\[operatorname{Vol}(B_r(p)) \geq r \frac{\operatorname{Vol} B_{r_0}(p)}{2^{n+3}r_0}\qquad \text{if } r\geq 6r_0\]
+that thing is a constant so this just says that \(\operatorname{Vol}B_r(p)\) grows linearly in \(r\).
+\end{thing6}
+
 
 \clearpage
 \chapter{ag algebraic geometry}
@@ -3373,71 +3486,12 @@ Anyway the point is that \(\operatorname{Pic}(X)\cong H^{2}(X,\mathbb{Z})\) for 
 
 \chapter{cg complex geometry}
 
-\section{complex and almost complex structures}
-\vspace{1em}
-\begin{quotation}
-saying ``it's only linear algebra!" doesn't help at all.
+\section{reminder on complex analysis}
 
-	\hfill ---the students
-\end{quotation}
-\vspace{2em}
-
-(Actually it was Gaby from impa who said that.) Right so here's the basic things we use all the time.
-\begin{itemize}
-\item A \textit{\textbf{riemannian metric}} on a vector space over \(\mathbb{R}\) is a bilinear, symmetric and positive definite form. (Positive definite implies non-degenerate.)
-\item A \textit{\textbf{pseudo-riemannian metric}} on a real vector space is bilinear, symmetric and non-degenerate. (can have negative values and can be zero in non-zero vectors.)
-\item A \textit{\textbf{hermitian metric}} on a complex vector space is sesquilinear (takes out conjugate on second factor), conjugate-symmetric (you can swap the entries but put a bar) and positive definite (implies non-degenerate).
-\item A \textit{\textbf{complex structure}} on a real vector space  \(\mathbb{R}\) is an endomorphism \(J:V \to V\) with \(J^2=-\operatorname{Id}\). Why. Because you have \((a+\sqrt{-1}b)v:=a+bJv\) making \(V\) into a \(\mathbb{C}\)-module. \textbf{Exercise.} Show that.  \textbf{Exercise.} There is an isomorphism of that complex vector space and \(V \otimes_{\mathbb{R}}\mathbb{C}\). (So \(V\) is \(\mathbb{C}^{\dim_{\mathbb{R}} V/2}\)).
-\item A \textit{\textbf{hypercomplex structure}} on a real vector space is three complex structures \(I,J,K\) such that \(I J =- J I = K\). Why. Really. Because there are only so many god-given real division algebras and the next one in line is \(\mathbb{H}\). So you define quaternion multiplication by \((a+ib+jc+kd)v:=a+b Iv+c Jv + d Kv\). \textbf{Exercise.} There is an isomorphism of that (\textit{that} is a left \(\mathbb{H}\)-module) and \(V \otimes_{\mathbb{R}}\mathbb{H}\) (so \(V\) is \(\mathbb{H}^{\dim V/4}\)).
-\item You tell me
-\end{itemize}
-Now bundlize!
-\begin{itemize}
-\item A \textit{\textbf{riemannian manifold}} is a smooth manifold with a section of \(\operatorname{Sym}^2_+(TM)\) which is the bundle of positive-definite symmetric 2-forms.
-\item An \textit{\textbf{almost complex-manifold}} is a smooth manifold with \(J \in \operatorname{End}(TM)\) such that \(J^2=-\operatorname{Id}\).
-\item A \textit{\textbf{complex manifold}} is a smooth manifold with \(J \in \operatorname{End}(TM)\) such that \(J^2=-\operatorname{Id}\) and \(N(J)=0\).
-\item A \textit{\textbf{kahler manifold}} is a riemannian manifold that is also a complex manifold and
-	\begin{enumerate}
-	\item \(g(Jv,Jw)=g(v,w)\) for every pair of vector fields \(v,w\). Confusingly, in this case we call \(g\) a \textit{\textbf{hermitian metric}} (terrible). Relationship with hermitian metric definition above? that \(h:=g-\sqrt{-1}\omega\) is hermitian in that other sense.
-	\item the \textit{\textbf{fundamental form}} \(\omega(v,w):=g(Jv,w)\) is closed. (you are symplectic.)
-	\end{enumerate}
-\item A \textit{\textbf{almost hypercomplex manifold}} is a smooth manifold with three complex structures \(I,J,K\) such that \(I J =- J I = K\).
-\item A \textit{\textbf{hypercomplex manifold}} is a hypercomplex manifold such that the three structures are integrable.
-\item A \textit{\textbf{hyperkähler manifold}} is a hypercomplex manifold with a riemannian metric such that \((M,g,I)\), \((M,g,J)\) and \((M,g,K)\) are kahler.
-\end{itemize}
-\(\mathsf{OK}\) there's lots of equivalent definitions but that's a simple enough setting.
-
-\begin{thing8}{Why vector space with complex structure is even dimensional}\leavevmode
-Because on the complexification \(V \otimes_{\mathbb{R}}\mathbb{C}\) \(J\) also acts, and its eigenvalues are elements of the field \(\mathbb{C}\), so you can decompose in eigenspaces. These are both 1-dimensional over \(\mathbb{R}\).
-\end{thing8}
-
-\begin{thing5}{And hypercomplex?}\leavevmode
-What's the decomposition for hypercomplex? What's the decomposition of the exterior algebra??
-\end{thing5}
-
-\begin{thing7}{The \(\mathsf{SU}(2)\) action on hypercomplex}\leavevmode
-It's the analogue of rotating vectors around a circle in a complex manifold. There you have an \(S^1\) action given by \(a Jv\) where \(|a|=1\). Now you have a whole  \(S^3\) to do this. \textbf{Why is this so hard to grasp.} Because rotating vectors around a circle on a differentiable manifold is not something you would do. Like why.
-\end{thing7}
-
-\begin{thing6}{Facts form Sergey class}\leavevmode
-\begin{itemize}
-	\item A local system of coordinates for a 1-complex-dimensional manifold is given by solution of  \(\overline{\partial}f=0\) for nonconstant \(f\).
-	\item In dimension 1 there's no almost complex structures that are not complex: all are integrable! Why right? There's several equivalences for being integrable:
-\begin{itemize}
-\item Neghjouse tensor vanish
-\item involutive \(T^{1,0}\) 
-\item Holomorphic coordinate, so previous item which is solution to CR eq.
-\end{itemize}
-\item Given an almost complex structure on a 1 dimensional complex manifold and define the \textit{\textbf{Laplacian}} to be \(\partial \overline{\partial}\). \textbf{Exercise} If \(J\) and \(g\) are compatible them \(\Delta_J = \Delta_g\overset{\operatorname{def}}{=}\operatorname{tr}(\nabla f)\).
-
-	So maybe you want to use the following \textbf{Claim}: that for \(\lambda \in C^\infty(M,\mathbb{R}^+\) we have \(\Delta_{\lambda g}(f)=\lambda^{-1}\Delta_g(f)\) because \(\sqrt{\lambda g}=\lambda \sqrt{g}  \), and I think this last one only holds in dimension 1 so all this only works in dimension 1.
-
-\item Define \(\overline{V}\) to be the same as the complex vector space \(V\) but with the scalar product \(\alpha\cdot \overline{v}=\overline{\overline{a}v}\).
-\end{itemize}
-\end{thing6}
+\subsection{holomorphic maps}
 
 
-\section{cauchy-riemann in highschool}
+\subsection{cauchy-riemann equations}
 
 \(f:U \subset \mathbb{C} \to \mathbb{C}\) is \textit{\textbf{holomorphic}} at \(z_0\in U\) if
 \[\lim_{z \to z_0} \frac{f(z_0-z)-f(z_0)}{z-z_0}\]
@@ -3484,72 +3538,20 @@ df J&=\begin{pmatrix}u_x&u_y\\ v_x&v_y\end{pmatrix}\begin{pmatrix} 0& -1\\ 1&0\e
 \fi
 That is, if \(f\) is holomorphic then \(df J=J df\). And then there's the converse…
 
-\section{complexification}
+\subsection{cuachy integral formula}
 
-complexification of \(\mathbb{R}\) is \(\mathbb{C}\). Complexification of \(\mathbb{R}^2\) is \(\mathbb{C}^2\). complexification of an \(n\)-dimensional real vector space gives an \(n\)-dimensional complex vector space
-\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
-the real dimension of the complexification is twice the original real dimension
-\end{tcolorbox}
-when someone tells ``complexification of the tangent bundle" of a real manifold, you get e new bundle whose real dimension is \(2n\). \textbf{What am I going to do with a rank 4 vector bundle on a real surface?}
+\subsection{power series expansion}
 
-What we expected with the so-called complexification is just to put a complex structure on the tangent bundle. At some point we were convinced that this would only work if the manifold is of even dimension, so it makes sense to somehow introduce a complex multiplication or something in these even dimensional vector spaces at once.
+any holomorphic function \(f\) defined on an open set \(W \subset \mathbb{C}\) has a small disk \(D_r(a)\) about every point \(a \in W\) where \(f|_{D_r(a)}\) equals a power series in \((z-a)\).
 
-but that's not what actually happens--- complexification goes to a bundle that is twice the original dimension, and then you split that in two halves. and that's the beginning of a never ending story about splitting the vector space
+\subsection{zeroes are isolated and have finite order}
 
-one half is the holomorphic half, which is… well the \(\sqrt{-1}\)-eigenspace of \(J\) but I didn't tell what is \(J\) so far. I'm an even dimensional real manifold, I complexify the tangent bundle which is to consider \(TM \otimes_\mathbb{R} \varepsilon^1\), and what's the ``holomorphic half"? And \textbf{what's \(J\)}?
+if \(f(a)=0\) for \(a \in W\), \(W \subset \mathbb{C}\) open, and \(f\) is not identically zero, then there is a disk \(D_r(a)\) where \(f(z)=(z-a)^mg(z)\) for some holomorphic \(g\) such that \(g(a)\neq 0\). \(m\), the smallest order of a derivative  of \(f\) that does not vanish at \(a\), i.e. \(f^{(m)}(a)\neq 0\) is the order of the zero. 
 
-Answer: there's no ``holomorphic half" and there's no \(J\).
+\section{complex analysis in several variables}
 
-In the section you forgot all we had said about complex manifolds, started with an even dimensional real manifold and complexified it's tangent bundle. It's a big bundle but there's no canonical choice of complex structure on it. There is a complex structure
-\begin{thm}\leavevmode
-there is a complex structure
-\end{thm}
-but you have to choose it.
+\subsection{holomorphic functions of several variables}
 
-BUT if you go back the previous section and say well my manifold already has complex coordinates. Then yes:
-\begin{thing6}{plan}[to invent the holomorphic half when you are already complex]\leavevmode
-\begin{enumerate}[label=\textbf{Step \arabic*}]
-\item introduce \(J:TM \to TM\) locally by
-\[J \partial_{x^i}=\partial_{y^i} \qquad J\partial_{y^i}=-\partial_{x^i}\]
-(anticlockwise rotation). Notice \(J^2 =-1\). \textbf{Thm.} \(J\) is global. \textbf{Pf.} The jacobian of the coordinate change \(A\) commutes with \(J\) because that's cauchy-riemann. Then \(J_{\operatorname{new}}=A J A=J\).
-\item extend \(J\) to \(J^\mathbb{C}:=J \otimes \operatorname{id}_\mathbb{C}\in \operatorname{End}(TM \otimes \varepsilon^1)\).
-\item Now you can define the holomorphic half of the complexified tangent bundle
-\end{enumerate}
-\end{thing6}
-
-But here's an alternative plan:
-\begin{thing6}{alternative plan}\leavevmode
-\begin{enumerate}[label=\textbf{Step \arabic*}]
-\item complexify first
-\item now you can multiply vectors times imaginary numbers so you can define this two guys (\textbf{baptism}):
-	\[\partial_z:=\frac{1}{2}(\partial_x-\sqrt{-1}\partial_y),\qquad \partial_{\bar{z}}\frac{1}{2}(\partial_x+\sqrt{-1}\partial_y)\]
-	why? there's a whole story that makes it have sense, next section. but those are a basis of the complexified tangent space.
-\item define \(J\):
-	\[J\partial_z=\sqrt{-1}\partial_z,\qquad J\partial_{\overline{z}}=-\sqrt{-1}\partial_{\overline{z}}\]
-\textbf{claim.} \(J\) is global. \textbf{Pf.} I think I need \(\bar\partial\). Or not? gpt-idea: ``because coordinate changes preserve \(T^{1,0}\) and \(T^{0,1}\)".
-\end{enumerate}
-\end{thing6}
-
-\iffalse\begin{thing6}{holomorphic map}\label{prop:holomorphic map}\leavevmode
-a map is holomorphic iff…
-\begin{itemize}
-\item \(J \circ df = df \circ J\) 
-
-	When you extend complex linearly \(df\) to the complexified tangent bundle…
-\item \(d_pf T_p^{1,0}M \subset T_{f(p)}^{1,0}\tilde{M}\)
-\item \(d_pf T_p^{0,0}M \subset T_{f(p)}^{0,1}\tilde{M}\)
-\item \(\overline{\partial}f=0\)
-\end{itemize}
-\end{thing6}\fi
-So what is \(\overline{\partial}\)? Why is it so that \(f:\mathbb{C} \to \mathbb{C}\) is holomorphic iff cauchy-riemann iff comutes with \(J\) iff \(\overline{\partial}f=0\)?
-
-And what in the earthly grounds is a \(\partial\bar\partial\)
-
-\begin{thing6}{final section remark for now}\leavevmode
-the two plans for introducing a complex structure depend on the fact that the manifold is already complex and yes, if the manifold is already complex that's the canonical choice of a complex structure. But you can also put others. And of course you wonder dani must prove that given a complex structure you get a holomorphic atlas but NO! because that's such a hard theorem that nobody every proves it, namley that an \textit{integrable} complex structure gives a holomorphic atlas, so I'm excused on that one yay. Anyway the point is: you can introduce many holomorphic structures that are give non-biholomorphic manifolds and guess what that's the whole story about twistors: what's the space of different complex structures (!)
-\end{thing6}
-
-\section{complex coordinates and dbar}
 
 if you put
 \[z=x+\sqrt{-1}y,\qquad \overline{z}=x-\sqrt{-1}y\]
@@ -3628,8 +3630,156 @@ Motivated by this calculation, we define $2n$ smooth complex vector fields $\par
 \end{equation*}
 In the special case in which $f$ is a holomorphic function on an open subset of $\mathbb{C}^n$, you will notice that we had already defined the expression $\partial f/\partial z^j$ by equation (1.2); now we seem to have introduced a different meaning for the same expression. The next proposition ensures that the two definitions are equivalent for holomorphic functions.
 
+
+\subsection{weierstrass preparation theorem}
+
+\begin{coro}\leavevmode
+\(\mathcal{O}_{\mathbb{C}^n,0}\) is a UFD. so stalks of analytic varieties are ufds.
+\end{coro}
+
+\begin{thing7}{epiphany}\leavevmode
+so gaga should say this somehow.
+\end{thing7}
+
+\subsection{hartog's theorem}
+
+a holomorphic fun
+
+\subsection{generalized cauchy integral formula}
+
+
+
+\section{complex and almost complex structures}
+\vspace{1em}
+\begin{quotation}
+saying ``it's only linear algebra!" doesn't help at all.
+
+	\hfill ---the students
+\end{quotation}
+\vspace{2em}
+
+(Actually it was Gaby from impa who said that.) Right so here's the basic things we use all the time.
+\begin{itemize}
+\item A \textit{\textbf{riemannian metric}} on a vector space over \(\mathbb{R}\) is a bilinear, symmetric and positive definite form. (Positive definite implies non-degenerate.)
+\item A \textit{\textbf{pseudo-riemannian metric}} on a real vector space is bilinear, symmetric and non-degenerate. (can have negative values and can be zero in non-zero vectors.)
+\item A \textit{\textbf{hermitian metric}} on a complex vector space is sesquilinear (takes out conjugate on second factor), conjugate-symmetric (you can swap the entries but put a bar) and positive definite (implies non-degenerate).
+\item A \textit{\textbf{complex structure}} on a real vector space  \(\mathbb{R}\) is an endomorphism \(J:V \to V\) with \(J^2=-\operatorname{Id}\). Why. Because you have \((a+\sqrt{-1}b)v:=a+bJv\) making \(V\) into a \(\mathbb{C}\)-module. \textbf{Exercise.} Show that.  \textbf{Exercise.} There is an isomorphism of that complex vector space and \(V \otimes_{\mathbb{R}}\mathbb{C}\). (So \(V\) is \(\mathbb{C}^{\dim_{\mathbb{R}} V/2}\)).
+\item A \textit{\textbf{hypercomplex structure}} on a real vector space is three complex structures \(I,J,K\) such that \(I J =- J I = K\). Why. Really. Because there are only so many god-given real division algebras and the next one in line is \(\mathbb{H}\). So you define quaternion multiplication by \((a+ib+jc+kd)v:=a+b Iv+c Jv + d Kv\). \textbf{Exercise.} There is an isomorphism of that (\textit{that} is a left \(\mathbb{H}\)-module) and \(V \otimes_{\mathbb{R}}\mathbb{H}\) (so \(V\) is \(\mathbb{H}^{\dim V/4}\)).
+\item You tell me
+\end{itemize}
+Now bundlize!
+\begin{itemize}
+\item A \textit{\textbf{riemannian manifold}} is a smooth manifold with a section of \(\operatorname{Sym}^2_+(TM)\) which is the bundle of positive-definite symmetric 2-forms.
+\item An \textit{\textbf{almost complex-manifold}} is a smooth manifold with \(J \in \operatorname{End}(TM)\) such that \(J^2=-\operatorname{Id}\).
+\item A \textit{\textbf{complex manifold}} is a smooth manifold with \(J \in \operatorname{End}(TM)\) such that \(J^2=-\operatorname{Id}\) and \(N(J)=0\).
+\item A \textit{\textbf{kahler manifold}} is a riemannian manifold that is also a complex manifold and
+	\begin{enumerate}
+	\item \(g(Jv,Jw)=g(v,w)\) for every pair of vector fields \(v,w\). Confusingly, in this case we call \(g\) a \textit{\textbf{hermitian metric}} (terrible). Relationship with hermitian metric definition above? that \(h:=g-\sqrt{-1}\omega\) is hermitian in that other sense.
+	\item the \textit{\textbf{fundamental form}} \(\omega(v,w):=g(Jv,w)\) is closed. (you are symplectic.)
+	\end{enumerate}
+\item A \textit{\textbf{almost hypercomplex manifold}} is a smooth manifold with three complex structures \(I,J,K\) such that \(I J =- J I = K\).
+\item A \textit{\textbf{hypercomplex manifold}} is a hypercomplex manifold such that the three structures are integrable.
+\item A \textit{\textbf{hyperkähler manifold}} is a hypercomplex manifold with a riemannian metric such that \((M,g,I)\), \((M,g,J)\) and \((M,g,K)\) are kahler.
+\end{itemize}
+\(\mathsf{OK}\) there's lots of equivalent definitions but that's a simple enough setting.
+
+\begin{thing8}{Why vector space with complex structure is even dimensional}\leavevmode
+Because on the complexification \(V \otimes_{\mathbb{R}}\mathbb{C}\) \(J\) also acts, and its eigenvalues are elements of the field \(\mathbb{C}\), so you can decompose in eigenspaces. These are both 1-dimensional over \(\mathbb{R}\).
+\end{thing8}
+
+\begin{thing5}{And hypercomplex?}\leavevmode
+What's the decomposition for hypercomplex? What's the decomposition of the exterior algebra??
+\end{thing5}
+
+\begin{thing7}{The \(\mathsf{SU}(2)\) action on hypercomplex}\leavevmode
+It's the analogue of rotating vectors around a circle in a complex manifold. There you have an \(S^1\) action given by \(a Jv\) where \(|a|=1\). Now you have a whole  \(S^3\) to do this. \textbf{Why is this so hard to grasp.} Because rotating vectors around a circle on a differentiable manifold is not something you would do. Like why.
+\end{thing7}
+
+\begin{thing6}{Facts form Sergey class}\leavevmode
+\begin{itemize}
+	\item A local system of coordinates for a 1-complex-dimensional manifold is given by solution of  \(\overline{\partial}f=0\) for nonconstant \(f\).
+	\item In dimension 1 there's no almost complex structures that are not complex: all are integrable! Why right? There's several equivalences for being integrable:
+\begin{itemize}
+\item Neghjouse tensor vanish
+\item involutive \(T^{1,0}\) 
+\item Holomorphic coordinate, so previous item which is solution to CR eq.
+\end{itemize}
+\item Given an almost complex structure on a 1 dimensional complex manifold and define the \textit{\textbf{Laplacian}} to be \(\partial \overline{\partial}\). \textbf{Exercise} If \(J\) and \(g\) are compatible them \(\Delta_J = \Delta_g\overset{\operatorname{def}}{=}\operatorname{tr}(\nabla f)\).
+
+	So maybe you want to use the following \textbf{Claim}: that for \(\lambda \in C^\infty(M,\mathbb{R}^+\) we have \(\Delta_{\lambda g}(f)=\lambda^{-1}\Delta_g(f)\) because \(\sqrt{\lambda g}=\lambda \sqrt{g}  \), and I think this last one only holds in dimension 1 so all this only works in dimension 1.
+
+\item Define \(\overline{V}\) to be the same as the complex vector space \(V\) but with the scalar product \(\alpha\cdot \overline{v}=\overline{\overline{a}v}\).
+\end{itemize}
+\end{thing6}
+
+
+\section{complexification}
+
+complexification of \(\mathbb{R}\) is \(\mathbb{C}\). Complexification of \(\mathbb{R}^2\) is \(\mathbb{C}^2\). complexification of an \(n\)-dimensional real vector space gives an \(n\)-dimensional complex vector space
+\begin{tcolorbox}[colback=white,colframe=black,boxrule=0.5pt,sharp corners]
+the real dimension of the complexification is twice the original real dimension
+\end{tcolorbox}
+when someone tells ``complexification of the tangent bundle" of a real manifold, you get e new bundle whose real dimension is \(2n\). \textbf{What am I going to do with a rank 4 vector bundle on a real surface?}
+
+What we expected with the so-called complexification is just to put a complex structure on the tangent bundle. At some point we were convinced that this would only work if the manifold is of even dimension, so it makes sense to somehow introduce a complex multiplication or something in these even dimensional vector spaces at once.
+
+but that's not what actually happens--- complexification goes to a bundle that is twice the original dimension, and then you split that in two halves. and that's the beginning of a never ending story about splitting the vector space
+
+one half is the holomorphic half, which is… well the \(\sqrt{-1}\)-eigenspace of \(J\) but I didn't tell what is \(J\) so far. I'm an even dimensional real manifold, I complexify the tangent bundle which is to consider \(TM \otimes_\mathbb{R} \varepsilon^1\), and what's the ``holomorphic half"? And \textbf{what's \(J\)}?
+
+Answer: there's no ``holomorphic half" and there's no \(J\).
+
+In the section you forgot all we had said about complex manifolds, started with an even dimensional real manifold and complexified it's tangent bundle. It's a big bundle but there's no canonical choice of complex structure on it. There is a complex structure
+\begin{thm}\leavevmode
+there is a complex structure
+\end{thm}
+but you have to choose it.
+
+BUT if you go back the previous section and say well my manifold already has complex coordinates. Then yes:
+\begin{thing6}{plan}[to invent the holomorphic half when you are already complex]\leavevmode
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+\item introduce \(J:TM \to TM\) locally by
+\[J \partial_{x^i}=\partial_{y^i} \qquad J\partial_{y^i}=-\partial_{x^i}\]
+(anticlockwise rotation). Notice \(J^2 =-1\). \textbf{Thm.} \(J\) is global. \textbf{Pf.} The jacobian of the coordinate change \(A\) commutes with \(J\) because that's cauchy-riemann. Then \(J_{\operatorname{new}}=A J A=J\).
+\item extend \(J\) to \(J^\mathbb{C}:=J \otimes \operatorname{id}_\mathbb{C}\in \operatorname{End}(TM \otimes \varepsilon^1)\).
+\item Now you can define the holomorphic half of the complexified tangent bundle
+\end{enumerate}
+\end{thing6}
+
+But here's an alternative plan:
+\begin{thing6}{alternative plan}\leavevmode
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+\item complexify first
+\item now you can multiply vectors times imaginary numbers so you can define this two guys (\textbf{baptism}):
+	\[\partial_z:=\frac{1}{2}(\partial_x-\sqrt{-1}\partial_y),\qquad \partial_{\bar{z}}\frac{1}{2}(\partial_x+\sqrt{-1}\partial_y)\]
+	why? there's a whole story that makes it have sense, next section. but those are a basis of the complexified tangent space.
+\item define \(J\):
+	\[J\partial_z=\sqrt{-1}\partial_z,\qquad J\partial_{\overline{z}}=-\sqrt{-1}\partial_{\overline{z}}\]
+\textbf{claim.} \(J\) is global. \textbf{Pf.} I think I need \(\bar\partial\). Or not? gpt-idea: ``because coordinate changes preserve \(T^{1,0}\) and \(T^{0,1}\)".
+\end{enumerate}
+\end{thing6}
+
+\iffalse\begin{thing6}{holomorphic map}\label{prop:holomorphic map}\leavevmode
+a map is holomorphic iff…
+\begin{itemize}
+\item \(J \circ df = df \circ J\) 
+
+	When you extend complex linearly \(df\) to the complexified tangent bundle…
+\item \(d_pf T_p^{1,0}M \subset T_{f(p)}^{1,0}\tilde{M}\)
+\item \(d_pf T_p^{0,0}M \subset T_{f(p)}^{0,1}\tilde{M}\)
+\item \(\overline{\partial}f=0\)
+\end{itemize}
+\end{thing6}\fi
+So what is \(\overline{\partial}\)? Why is it so that \(f:\mathbb{C} \to \mathbb{C}\) is holomorphic iff cauchy-riemann iff comutes with \(J\) iff \(\overline{\partial}f=0\)?
+
+And what in the earthly grounds is a \(\partial\bar\partial\)
+
+\begin{thing6}{final section remark for now}\leavevmode
+the two plans for introducing a complex structure depend on the fact that the manifold is already complex and yes, if the manifold is already complex that's the canonical choice of a complex structure. But you can also put others. And of course you wonder dani must prove that given a complex structure you get a holomorphic atlas but NO! because that's such a hard theorem that nobody every proves it, namley that an \textit{integrable} complex structure gives a holomorphic atlas, so I'm excused on that one yay. Anyway the point is: you can introduce many holomorphic structures that are give non-biholomorphic manifolds and guess what that's the whole story about twistors: what's the space of different complex structures (!)
+\end{thing6}
+
 \section{dolbeault complex}
-now that you now what is \(\bar\partial\) you may be wondering is the image of \(\overline{\partial}\) in some sort of half of \(\Omega^1(M)\)? ok maybe nobody got to this point before reading somewhere that the decomposition of the tangent bundle into holomorphic and antiholomorphic parts give a decomposition of all the exterior algebra
+now that you know what is \(\bar\partial\) you may be wondering is the image of \(\overline{\partial}\) in some sort of half of \(\Omega^1(M)\)? ok maybe nobody got to this point before reading somewhere that the decomposition of the tangent bundle into holomorphic and antiholomorphic parts give a decomposition of all the exterior algebra
 
 right so what is that decomposition.
 
@@ -3790,11 +3940,6 @@ g = g_{i\bar{j}} \, dz^i d\bar{z}^j, \quad \text{with} \quad g_{i\bar{j}} = \ove
 show that the dimension of a complex manifold is the same as the dimension of the scheme. what scheme?
 \end{exercise}
 
-\[\left| \sum \frac{f^{(n)}(0)}{n!}f(z)^n \right|\leq \begin{cases}
-	C|z|^d\qquad & \\
-	\sum \left| \frac{f^{n}(0)}{n!}f(z)^n \right|\leq  \qquad &
-\end{cases} \]
- \[|f'(0)|\]
  
 
 \section{core concepts}
@@ -4745,6 +4890,63 @@ by the connected component of the Picard variety \(\operatorname{Pic}(X)\), i.e.
 \[\operatorname{Num}(X):=\operatorname{Pic}(X)/\operatorname{Pic}^\tau(X)\]
 where \(\operatorname{Pic}^\tau(X)\) is the subgroup of \textit{numerically trivial} line bundles, i.e. line bundles \(L\) such that \((L.L')=0\) for all line bundles \(L'\). (E.g. any  \(L \in \operatorname{Pic}^0\) is numerically trivial.) 
 \end{thing4}
+
+\section{chow theorem}
+
+\begin{thing6}{chow for complex submanifolds of codimension 1}\leavevmode
+every complex codimension-1 submanifold of \(\mathbb{C}P^n\) is an algebraic variety
+\end{thing6}
+
+\begin{proof}\leavevmode
+\begin{enumerate}[label=\textbf{Step \arabic*}]
+	\item[Step 0] \textbf{general fact} every complex codimension-\(p\) submanifold of any complex \(n\)-manifold has slice charts, i.e. for any \(p \in M\) there's a neighbourhood chart \(U \ni p\) such that the points of \(M\) have coordinates \((z_1,\ldots,z_n,0,\ldots,0)\). This may be either taken as the definition of a submanifold or as an application of (complex) inverse function theorem. Notice the projection to the first \(n\) coordinates is submersion onto \(\mathbb{C}^{n}\)
+\item apply step 1 to \(p=1\). we have an open cover along with nonsingular functions that vanish identically on \(M\).
+\item \textbf{general fact} (\cite{lec} lem. 3.38) for any codimension-1 complex submanifold there exist holomorphic \(g\) that do not vanish at \(M\) and such that \(f_\alpha=g_{\alpha \beta}f_\beta\) at the intersections of our cover.
+
+	\textbf{rk.} so \cite{gri} also know this and they have a more algebraic way to show it, i think, via weierstrass preparation theorem, which implies that the stalks of analytic varieties are ufds. but unfortunately it's ufds, not pids, so the result is not immediate (as i originally thought). i cannot understand exactly when and how they prove this. \textbf{now i know!} codimension 1-prime ideals in ufds are principal by supersimple lemma 12.1.7 in \cite{sea}! so it works for irreducible analytic varieties---almost certain because, how different could irreducibility \(\leftrightsquigarrow\) prime ideal correspondence for analytic sheaves?
+
+	I'll do it only for \(n=2\). write the taylor series of one of our functions as \(f(z_1,z_n)=\sum_{i,j}a_{ij}z_1^iz_2^j\). Evaluate at \(M\): \(f(z_1,0)=\sum_i a_{i 0}z^i_1\). Remember: that gives zero. So every  monomial of \(f\) must have  \(z_2\):
+	\[f(z_1,z_2)=\cancelto{0}{\sum_{\substack{i \geq 0 \\ j=0}} a_{i 0}z_1^i}+\sum_{\substack{i\geq 0 \\ j>0}}a_{ij}z_1^iz_2^j=z_2\cdot \sum_{\substack{i\geq 0 \\ j>0}}a_{ij}z_1^iz_2^{j-1}\]
+so you factored \(z_2\) out. the sum you are left with is \(g\). \(g\) at \(M\) is
+\[g(z_1,0)=\sum_{i,j>0}a_{ij}z_1^i\underbrace{z_2^{j-1}}_{=0}=\sum_{\substack{i>0 \\ j=1}}a_{i1}z_1^i\]
+Now since \(df \neq 0\), \(\partial_{z_2}f=g \neq 0\) at \(M\). [computation missing but just differentiation]
+
+\item a line bundle is given by \(g_{\alpha\beta}:=g_\alpha/g_\beta\). [computation missing, just write cocycle condition and it works. also if you are super techincal, you'd show uniqueness, independence of the cover, etc. \cite{lec} thm. 3.39]
+\item \(M\) is the vanishing locus of a section of the line bundle. the section is given by taking al local basis of sections (well, only one) at every open set of the cover and multiplying by our functions: \(s(p):=f_\alpha(p)s_\alpha(p)\).
+\item \textbf{general fact} the line bundles of \(\mathbb{P}^n\) are \(\mathcal{O}(d)\). proof not ready; uses Dolbeault theorem, Hodge numbers of \(\mathbb{P}^n\), the fact that line bundles are classified by their degree, and some other things (\cite{lec} prop. 9.51).
+\item \textbf{general fact} sections of \(\mathcal{O}(d)\) are in bijection with homogeneous degree-\(d\) polynomials defined on \(\mathbb{C}P^{n+1}\). (\cite{lec} thm 3.36, and \cite{gri} p. 165, and also in telegram above)
+	\begin{proof}\leavevmode
+first recall: the tautological bundle assigns to every point the line that the point is. So it's a line, that is, a linear subspace of \(\mathbb{C}^4\). Then \(\mathcal{O}(1)\) assigns to every point the linear functionals on the line that the point is. Then \(\mathcal{O}(d)\) assigns to every point the vector space that is the \(d\)-tensor product of the space of linear functionals on the line that the point is.
+
+This says that a section of \(\mathcal{O}(d)\) gives to every point a finite linear combination of the tensor product of \(d\) linear functionals on the line that the point is. That's a homogeneous degree-\(d\) polynomial defined on the line that the point is.
+
+now we start the proof with the backward implication. this is \cite{lec} example 3.37, a thing i've been systematically calling the \textit{\textbf{tautological section}}. a degree \(d\)-polynomial defined on \(\mathbb{C}^{n+1}\) gives via restriction a degree-\(d\) polynomial defined on any line, so that's it.
+
+now the forward implication  define\[f(z):=s([z])(z)\]It's a very tautological function. Take a point \(z \in \mathbb{C}^{n+1}\). Take the line spanned by that point, \([z] \in \mathbb{P}^n\). Take the your section \(s\) evaluated at that point/line: \(\sigma([z])\). That's a degree \(d\) homogeneous polynomial defined on the line \([z]\). Guess who's in \([z]\)? \(z\). So evaluate your degree-\(d\) polynomial in \(z\). That's just a complex number called \(f(z)\).
+
+\(f\) is holomorphic because \(s\) is, and defined in all \(\mathbb{C}^{n+1}\) except \(0\). so by Hartogs theorem we define in it on zero too---and it's clearly (take the limit) homogeneous of degree \(d\); though not obviously a polynomial.
+
+we show it is a polynomial. so far we know it's homogeneous, i.e. \(f(\lambda z)=\lambda^df(z)\). so write for nonzero \(z\),
+\[|f(z)|=\left| f\left(|z|\frac{z}{|z|}\right) \right| =|z|^df\left(\frac{z}{|z|}\right)\leq  C |z|^d\]
+for the sup of \(f\) in the ball of radius 1. This means the taylor series of \(f\) (holomorphic multivariable functions have taylor series) has no terms of order less than \(d\), because if we took the quotient \(\|f(z)/z^d\|\), it would go to infinity as we get closer to zero, and we're saying it's bounded.
+
+now define \(p\) to be the terms of \(f\) that have degree \(d\) and let \(r=f-d\), the terms that don't have degree \(d\). if we show \(r \equiv 0\) we're done. \(r\) is \(d\)-homogeneous because \(f\) and \(p\) are. and also the taylor series of \(r\) starts with terms of degree \(d+1\). so we can factor \(z^{d+1}\) out of that taylor series and realise that inside the unit ball
+\[|r(z)| \leq  C' |z|^{d+1}\]
+for \(C'\) the supremum over the unit ball of what's left after we factorized \(z^{d+1}\).
+
+then pick any \(z \in \mathbb{C}^{n+1}\) and put it inside the unit ball via multiplying by a small \(\varepsilon\). then
+\[|r(z)|=\varepsilon^{-d}\left|r\left(\varepsilon z\right)\right|\leq \varepsilon^{-d} C' \left| \varepsilon z\right|^{d+1}= \varepsilon C'\]
+which is zero as \(\varepsilon \to 0\).
+	\end{proof}
+\item conclude: we have shown \(M\) is the vanishing set of a section of \(\mathcal{O}(d)\), and shown that a strange function \(f(z):=s([z])(z)\) is a homogeneous degree-\(d\) polynomial defined on \(\mathbb{C}^{n+1}\). so \(M=V(f)\subset\mathbb{P}^n\)
+\end{enumerate}
+\end{proof}
+
+\begin{thing6}{chow theorem}\leavevmode
+chow theorem holds for any analytic subvariety of \(\mathbb{P}^n\). analytic varieties are defined to be locally the vanishing locus of holomorphic functions, not necessarily nonsingular as complex submanifolds which have the whole inverse function/slice charts story.
+
+the point of serre's gaga is exactly giving a greneralization of this fact. i cannot tell what's the statement.
+\end{thing6}
 
 \section{K3 surfaces}
 \begin{defn}[dani]\leavevmode
